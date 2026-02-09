@@ -18,12 +18,12 @@ namespace Pb
             PingXXX = 11,
             EnterScene = 20,
             TestEnter = 21,
-            SyncLoginFast = 40000,
-            SyncLoginData = 40001,
-            SyncServerMaintain = 40002,
-            SyncKickRole = 40003,
-            SyncPreparedEnterScene = 40004,
-            SyncTest = 40005,
+            LoginFast = 40000,
+            LoginData = 40001,
+            ServerMaintain = 40002,
+            KickRole = 40003,
+            PreparedEnterScene = 40004,
+            Test = 40005,
         }
     }
 }
@@ -71,18 +71,6 @@ namespace Pb
                     return typeof(RspEnterScene);
                 case EKey.TestEnter:
                     return typeof(RspTestEnter);
-                case EKey.SyncLoginFast:
-                    return typeof(RspSyncLoginFast);
-                case EKey.SyncLoginData:
-                    return typeof(RspSyncLoginData);
-                case EKey.SyncServerMaintain:
-                    return typeof(RspSyncServerMaintain);
-                case EKey.SyncKickRole:
-                    return typeof(RspSyncKickRole);
-                case EKey.SyncPreparedEnterScene:
-                    return typeof(RspSyncPreparedEnterScene);
-                case EKey.SyncTest:
-                    return typeof(RspSyncTest);
                 default:
                     return null;
             }
@@ -172,36 +160,6 @@ namespace Pb
         public static Cmd.EKey GetKey(this RspTestEnter msg)
         {
             return Cmd.EKey.TestEnter;
-        }
-
-        public static Cmd.EKey GetKey(this RspSyncLoginFast msg)
-        {
-            return Cmd.EKey.SyncLoginFast;
-        }
-
-        public static Cmd.EKey GetKey(this RspSyncLoginData msg)
-        {
-            return Cmd.EKey.SyncLoginData;
-        }
-
-        public static Cmd.EKey GetKey(this RspSyncServerMaintain msg)
-        {
-            return Cmd.EKey.SyncServerMaintain;
-        }
-
-        public static Cmd.EKey GetKey(this RspSyncKickRole msg)
-        {
-            return Cmd.EKey.SyncKickRole;
-        }
-
-        public static Cmd.EKey GetKey(this RspSyncPreparedEnterScene msg)
-        {
-            return Cmd.EKey.SyncPreparedEnterScene;
-        }
-
-        public static Cmd.EKey GetKey(this RspSyncTest msg)
-        {
-            return Cmd.EKey.SyncTest;
         }
 
     }

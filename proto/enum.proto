@@ -1,0 +1,119 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "server/pb";
+
+
+// 统一返回状态
+message EErrorCode {
+  enum T {
+    Ok                                                           = 0; // 成功
+    Failed                                                       = 1; // 通用服务器错误
+    ServerNotFound                                               = 3;
+    RoleIllegal                                                  = 5;
+    PlayerRoleForbid                                             = 6;
+    RoleSignInTimeout                                            = 7;
+    RoleInvalidCid                                               = 8;
+    RoleNameIllegal                                              = 9;
+    RoleDuplicate                                                = 10;
+    RoleNameLen                                                  = 11;
+    RoleNewTimeout                                               = 12;
+    RoleHasDeleted                                               = 13;
+    RoleDelTimeout                                               = 14;
+    RoleNumLimit                                                 = 15;
+    RoleNotFound                                                 = 16;
+    ServerMaintain                                               = 17;
+    ServerBusy                                                   = 18;
+    PlayerSignInTimeout                                          = 19;
+    PlayerTokenTimeOut                                          = 21;
+    PlayerTokenInvalid                                          = 22;
+    PlayerTokenAlreadyUsed                                       = 23;
+    PlayerVersionError                                           = 24;
+  }
+}
+
+
+
+// 提下线类型
+message EKickType {
+  enum T {
+    Invalid                                                      = 0; // 未知，关闭连接
+    OtherLogin                                                   = 1; // 账号在其他地方登录，关闭连接
+    GMKick                                                       = 2; // GM 强制下线，关闭连接
+    ServerShutdown                                               = 3; // 服务器关闭，关闭连接
+    Young                                                        = 6; // 防沉迷踢人下线，关闭连接
+    Disconnect                                                   = 7; // 心跳断开或消息满，关闭连接
+    MessageOverflow                                              = 8; // 每秒消息超过服务器允许上限，关闭连接
+    InternalError                                                = 10; // 内部错误，关闭连接
+    SceneLoadMax                                                 = 12; // 场景负载满，关闭连接
+    SceneEnterFailed                                             = 13; // 进入场景时客户端发送了过多的消息，不断连接
+  }
+}
+
+message ERoleType {
+  enum T {
+    Normal                                                       = 0; //普通玩家
+    GM                                                           = 1; // GM
+  }
+}
+
+message EForbiddenType {
+  enum T {
+    Invalid                                                      = 0; //占位
+    Chat                                                         = 1; //禁言
+    Account                                                      = 2; //封号
+    Undo                                                         = 3; //解封
+    Mac                                                          = 4; //根据mac封号
+    IP                                                           = 5; //根据ip封号
+  }
+}
+
+message EObjType {
+  enum T {
+    None                                                         = 0; // 无
+    Item                                                         = 1; // 道具
+  }
+}
+
+// 重登类型
+message ESignInFastType {
+  enum T {
+    Invalid                                                      = 0; // 无效
+    Player                                                       = 1; // 账号登录
+    Role                                                         = 2; // 角色登录
+  }
+}
+
+message ECondType {
+  enum T {
+    Invalid                                                      = 0;
+    LoginDay                                                     = 1; // 累计上线天数(condtype = 2)
+  }
+}
+
+message EAttrType {
+  enum T {
+    Invalid                                                      = 0;
+  }
+}
+
+message EEntityType {
+  enum T {
+    None                                                         = 0; // 无效的实体类型
+    Role                                                         = 1; // 角色
+    Npc                                                          = 2; // NPC
+    Bullet                                                       = 4; // 子弹
+    Monster                                                      = 8; // 怪
+    Max                                                          = 8191; // 全部
+  }
+}
+
+message ESceneType {
+  enum T {
+    Login                                                        = 0; // 登录场景
+    Role                                                         = 1; // 选角场景
+    MapBase                                                      = 2; // 地图基础场景
+    Main                                                         = 3; // 主场景
+  }
+}

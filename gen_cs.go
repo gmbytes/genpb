@@ -10,10 +10,11 @@ import (
 	"strings"
 )
 
-// EKeyInfo holds information about an EKey enum value
+// CSEnumInfo holds information about an EKey enum value
 type CSEnumInfo struct {
 	Name  string
 	Value int32
+	IsDsp bool // Whether this is a dispatch (dsp) key
 }
 
 // GenerateCSharp generates C# code
@@ -44,10 +45,10 @@ func GenerateCSharp(cfg *Config) error {
 		return fmt.Errorf("protoc csharp: %w", err)
 	}
 
-	// Generate CmdExt.cs (same directory as protoc C# output)
-	outputPath := filepath.Join(cfg.CsOutDir, "CmdExt.cs")
+	// Generate CmdExt.Pb (same directory as protoc C# output)
+	outputPath := filepath.Join(cfg.CsOutDir, "CmdExt.Pb")
 	if err := writeCSCmd(outputPath, enumMap, reqMessages, rspMessages, dspMessages); err != nil {
-		return fmt.Errorf("write CmdExt.cs: %w", err)
+		return fmt.Errorf("write CmdExt.Pb: %w", err)
 	}
 
 	fmt.Printf("Generated: %s\n", outputPath)
@@ -66,6 +67,9 @@ func generateProtocCSharp(cfg *Config) error {
 		return fmt.Errorf("list proto files: %w", err)
 	}
 
+	// Filter proto files based on flag
+	protoFiles = filterCSProtoFiles(protoFiles, cfg.Flag)
+
 	args = append(args, protoFiles...)
 
 	cmd := exec.Command(cfg.ProtocPath, args...)
@@ -77,23 +81,63 @@ func generateProtocCSharp(cfg *Config) error {
 	return cmd.Run()
 }
 
+// filterCSProtoFiles filters proto files based on flag
+// server: export all files
+// client: exclude data_srv.proto and data_fwd.proto
+func filterCSProtoFiles(files []string, flag string) []string {
+	if flag == "server" {
+		return files
+	}
+
+	// client mode: exclude server-only files
+	excludeFiles := map[string]bool{
+		"data_srv.proto": true,
+		"data_fwd.proto": true,
+	}
+
+	var filtered []string
+	for _, f := range files {
+		baseName := filepath.Base(f)
+		if !excludeFiles[baseName] {
+			filtered = append(filtered, f)
+		}
+	}
+	return filtered
+}
+
 // parseCSEKeyEnum parses cmd.proto to extract EKey enum values
+// Keys between "// dsp start" and "// dsp end" are marked as IsDsp=true
 func parseCSEKeyEnum(path string) (map[int32]CSEnumInfo, error) {
 	content, err := os.ReadFile(path)
 	if err != nil {
 		return nil, err
 	}
 
+	contentStr := string(content)
 	result := make(map[int32]CSEnumInfo)
+
+	// Find dsp section boundaries
+	dspStartIdx := strings.Index(contentStr, "// dsp start")
+	dspEndIdx := strings.Index(contentStr, "// dsp end")
+
 	pattern := regexp.MustCompile(`(\w+)\s*=\s*(\d+)\s*;`)
-	matches := pattern.FindAllStringSubmatch(string(content), -1)
+	matches := pattern.FindAllStringSubmatchIndex(contentStr, -1)
 
 	for _, match := range matches {
-		if len(match) == 3 {
-			name := match[1]
+		if len(match) >= 6 {
+			name := contentStr[match[2]:match[3]]
+			valueStr := contentStr[match[4]:match[5]]
 			var value int32
-			fmt.Sscanf(match[2], "%d", &value)
-			result[value] = CSEnumInfo{Name: name, Value: value}
+			fmt.Sscanf(valueStr, "%d", &value)
+
+			// Check if this key is in the dsp section
+			isDsp := false
+			if dspStartIdx >= 0 && dspEndIdx > dspStartIdx {
+				keyPos := match[0]
+				isDsp = keyPos > dspStartIdx && keyPos < dspEndIdx
+			}
+
+			result[value] = CSEnumInfo{Name: name, Value: value, IsDsp: isDsp}
 		}
 	}
 
@@ -120,7 +164,7 @@ func parseCSMessages(path string) ([]string, error) {
 	return messages, nil
 }
 
-// writeCSCmd generates Cmd.cs for C#
+// writeCSCmd generates Cmd.Pb for C#
 func writeCSCmd(path string, enumMap map[int32]CSEnumInfo, reqMessages, rspMessages, dspMessages []string) error {
 	var buf bytes.Buffer
 
@@ -206,15 +250,15 @@ func writeCSCmd(path string, enumMap map[int32]CSEnumInfo, reqMessages, rspMessa
 		}
 	}
 
-	// Server dispatch/sync messages
+	// Server dispatch/sync messages (Dsp prefix)
 	for _, msgName := range dspMessages {
-		if !strings.HasPrefix(msgName, "RspSync") {
+		if !strings.HasPrefix(msgName, "Dsp") {
 			continue
 		}
-		// enumName = "Sync" + name after "RspSync"
-		enumName := "Sync" + strings.TrimPrefix(msgName, "RspSync")
+		// enumName = name after "Dsp" (e.g., DspLoginFast -> LoginFast)
+		enumName := strings.TrimPrefix(msgName, "Dsp")
 		for _, info := range enumMap {
-			if info.Name == enumName {
+			if info.Name == enumName && info.IsDsp {
 				buf.WriteString(fmt.Sprintf("                case EKey.%s:\n", info.Name))
 				buf.WriteString(fmt.Sprintf("                    return typeof(%s);\n", msgName))
 				break
@@ -266,15 +310,15 @@ func writeCSCmd(path string, enumMap map[int32]CSEnumInfo, reqMessages, rspMessa
 		}
 	}
 
-	// Server dispatch/sync messages
+	// Server dispatch/sync messages (Dsp prefix)
 	for _, msgName := range dspMessages {
-		if !strings.HasPrefix(msgName, "RspSync") {
+		if !strings.HasPrefix(msgName, "Dsp") {
 			continue
 		}
-		// enumName = "Sync" + name after "RspSync"
-		enumName := "Sync" + strings.TrimPrefix(msgName, "RspSync")
+		// enumName = name after "Dsp" (e.g., DspLoginFast -> LoginFast)
+		enumName := strings.TrimPrefix(msgName, "Dsp")
 		for _, info := range enumMap {
-			if info.Name == enumName {
+			if info.Name == enumName && info.IsDsp {
 				buf.WriteString(fmt.Sprintf("        public static Cmd.EKey GetKey(this %s msg)\n", msgName))
 				buf.WriteString("        {\n")
 				buf.WriteString(fmt.Sprintf("            return Cmd.EKey.%s;\n", info.Name))

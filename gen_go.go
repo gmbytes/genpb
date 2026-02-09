@@ -14,6 +14,7 @@ import (
 type EKeyInfo struct {
 	Name  string
 	Value int32
+	IsDsp bool // Whether this is a dispatch (dsp) key
 }
 
 // GenerateGo generates Go code
@@ -70,6 +71,9 @@ func generateProtocGo(cfg *Config) error {
 		return fmt.Errorf("list proto files: %w", err)
 	}
 
+	// Filter proto files based on flag
+	protoFiles = filterProtoFiles(protoFiles, cfg.Flag)
+
 	args = append(args, protoFiles...)
 
 	cmd := exec.Command(cfg.ProtocPath, args...)
@@ -81,6 +85,30 @@ func generateProtocGo(cfg *Config) error {
 	return cmd.Run()
 }
 
+// filterProtoFiles filters proto files based on flag
+// server: export all files
+// client: exclude data_srv.proto and data_fwd.proto
+func filterProtoFiles(files []string, flag string) []string {
+	if flag == "server" {
+		return files
+	}
+
+	// client mode: exclude server-only files
+	excludeFiles := map[string]bool{
+		"data_srv.proto": true,
+		"data_fwd.proto": true,
+	}
+
+	var filtered []string
+	for _, f := range files {
+		baseName := filepath.Base(f)
+		if !excludeFiles[baseName] {
+			filtered = append(filtered, f)
+		}
+	}
+	return filtered
+}
+
 // writeGoCmdExt generates cmd.ext.go for Go
 func writeGoCmdExt(path string, enumMap map[int32]EKeyInfo, reqMessages, rspMessages, dspMessages []string) error {
 	var buf bytes.Buffer
@@ -89,9 +117,7 @@ func writeGoCmdExt(path string, enumMap map[int32]EKeyInfo, reqMessages, rspMess
 	buf.WriteString("// source: cmd.proto, cmd_req.proto, cmd_rsp.proto, cmd_dsp.proto\n\n")
 	buf.WriteString("package pb\n\n")
 	buf.WriteString("import (\n")
-	buf.WriteString("\t\"genpb/pb\"\n\n")
 	buf.WriteString("\t\"google.golang.org/protobuf/proto\"\n")
-	buf.WriteString("\t\"google.golang.org/protobuf/reflect/protoreflect\"\n")
 	buf.WriteString(")\n\n")
 
 	// Global parser instance
@@ -106,34 +132,28 @@ func writeGoCmdExt(path string, enumMap map[int32]EKeyInfo, reqMessages, rspMess
 	// Parser struct
 	buf.WriteString("// parser handles protobuf message parsing by EKey\n")
 	buf.WriteString("type parser struct {\n")
-	buf.WriteString("\ttypes map[EKey_T]protoreflect.Type\n")
+	buf.WriteString("\ttypes map[EKey_T]func() proto.Message\n")
 	buf.WriteString("}\n\n")
 
 	buf.WriteString("// NewParser creates a new Parser instance\n")
 	buf.WriteString("func NewParser() *parser {\n")
 	buf.WriteString("\treturn &parser{\n")
-	buf.WriteString("\t\ttypes: make(map[EKey_T]protoreflect.Type),\n")
+	buf.WriteString("\t\ttypes: make(map[EKey_T]func() proto.Message),\n")
 	buf.WriteString("\t}\n")
 	buf.WriteString("}\n\n")
 
-	buf.WriteString("// Register registers a message type for a given EKey\n")
-	buf.WriteString("func (p *parser) Register(key EKey_T, msg proto.Message) {\n")
-	buf.WriteString("\tp.types[key] = msg.ProtoReflect().Type()\n")
-	buf.WriteString("}\n\n")
-
-	buf.WriteString("// GetType returns the message type for the given EKey\n")
-	buf.WriteString("func (p *parser) GetType(key EKey_T) (protoreflect.Type, bool) {\n")
-	buf.WriteString("\ttyp, ok := p.types[key]\n")
-	buf.WriteString("\treturn typ, ok\n")
+	buf.WriteString("// Register registers a message factory for a given EKey\n")
+	buf.WriteString("func (p *parser) Register(key EKey_T, factory func() proto.Message) {\n")
+	buf.WriteString("\tp.types[key] = factory\n")
 	buf.WriteString("}\n\n")
 
 	buf.WriteString("// New creates a new message instance for the given EKey\n")
 	buf.WriteString("func (p *parser) New(key EKey_T) proto.Message {\n")
-	buf.WriteString("\ttyp, ok := p.GetType(key)\n")
+	buf.WriteString("\tfactory, ok := p.types[key]\n")
 	buf.WriteString("\tif !ok {\n")
 	buf.WriteString("\t\treturn nil\n")
 	buf.WriteString("\t}\n")
-	buf.WriteString("\treturn proto.New(typ).Interface()\n")
+	buf.WriteString("\treturn factory()\n")
 	buf.WriteString("}\n\n")
 
 	buf.WriteString("// Unmarshal unmarshals binary data into a new message instance\n")
@@ -157,7 +177,7 @@ func writeGoCmdExt(path string, enumMap map[int32]EKeyInfo, reqMessages, rspMess
 		enumName := strings.TrimPrefix(msgName, "Req")
 		for _, info := range enumMap {
 			if info.Name == enumName {
-				buf.WriteString(fmt.Sprintf("\tp.Register(EKey_%s, &%s{})\n", info.Name, msgName))
+				buf.WriteString(fmt.Sprintf("\tp.Register(EKey_%s, func() proto.Message { return &%s{} })\n", info.Name, msgName))
 				break
 			}
 		}
@@ -171,22 +191,22 @@ func writeGoCmdExt(path string, enumMap map[int32]EKeyInfo, reqMessages, rspMess
 		enumName := strings.TrimPrefix(msgName, "Rsp")
 		for _, info := range enumMap {
 			if info.Name == enumName {
-				buf.WriteString(fmt.Sprintf("\tp.Register(EKey_%s, &%s{})\n", info.Name, msgName))
+				buf.WriteString(fmt.Sprintf("\tp.Register(EKey_%s, func() proto.Message { return &%s{} })\n", info.Name, msgName))
 				break
 			}
 		}
 	}
 
-	// Server dispatch/sync messages
+	// Server dispatch/sync messages (Dsp prefix)
 	for _, msgName := range dspMessages {
-		if !strings.HasPrefix(msgName, "RspSync") {
+		if !strings.HasPrefix(msgName, "Dsp") {
 			continue
 		}
-		// enumName = "Sync" + name after "RspSync"
-		enumName := "Sync" + strings.TrimPrefix(msgName, "RspSync")
+		// enumName = name after "Dsp" (e.g., DspLoginFast -> LoginFast)
+		enumName := strings.TrimPrefix(msgName, "Dsp")
 		for _, info := range enumMap {
-			if info.Name == enumName {
-				buf.WriteString(fmt.Sprintf("\tp.Register(EKey_%s, &%s{})\n", info.Name, msgName))
+			if info.Name == enumName && info.IsDsp {
+				buf.WriteString(fmt.Sprintf("\tp.Register(EKey_%s, func() proto.Message { return &%s{} })\n", info.Name, msgName))
 				break
 			}
 		}
@@ -199,9 +219,9 @@ func writeGoCmdExt(path string, enumMap map[int32]EKeyInfo, reqMessages, rspMess
 	for _, msgName := range reqMessages {
 		enumName := strings.TrimPrefix(msgName, "Req")
 		for _, info := range enumMap {
-			if info.Name == enumName {
-				buf.WriteString(fmt.Sprintf("func (msg *%s) Key() pb.EKey {\n", msgName))
-				buf.WriteString(fmt.Sprintf("\treturn pb.EKey_%s\n", info.Name))
+			if info.Name == enumName && !info.IsDsp {
+				buf.WriteString(fmt.Sprintf("func (msg *%s) Key() EKey_T {\n", msgName))
+				buf.WriteString(fmt.Sprintf("\treturn EKey_%s\n", info.Name))
 				buf.WriteString("}\n\n")
 				break
 			}
@@ -212,26 +232,26 @@ func writeGoCmdExt(path string, enumMap map[int32]EKeyInfo, reqMessages, rspMess
 	for _, msgName := range rspMessages {
 		enumName := strings.TrimPrefix(msgName, "Rsp")
 		for _, info := range enumMap {
-			if info.Name == enumName {
-				buf.WriteString(fmt.Sprintf("func (msg *%s) Key() pb.EKey {\n", msgName))
-				buf.WriteString(fmt.Sprintf("\treturn pb.EKey_%s\n", info.Name))
+			if info.Name == enumName && !info.IsDsp {
+				buf.WriteString(fmt.Sprintf("func (msg *%s) Key() EKey_T {\n", msgName))
+				buf.WriteString(fmt.Sprintf("\treturn EKey_%s\n", info.Name))
 				buf.WriteString("}\n\n")
 				break
 			}
 		}
 	}
 
-	// Server dispatch/sync messages
+	// Server dispatch/sync messages (Dsp prefix)
 	for _, msgName := range dspMessages {
-		if !strings.HasPrefix(msgName, "RspSync") {
+		if !strings.HasPrefix(msgName, "Dsp") {
 			continue
 		}
-		// enumName = "Sync" + name after "RspSync"
-		enumName := "Sync" + strings.TrimPrefix(msgName, "RspSync")
+		// enumName = name after "Dsp" (e.g., DspLoginFast -> LoginFast)
+		enumName := strings.TrimPrefix(msgName, "Dsp")
 		for _, info := range enumMap {
-			if info.Name == enumName {
-				buf.WriteString(fmt.Sprintf("func (msg *%s) Key() pb.EKey {\n", msgName))
-				buf.WriteString(fmt.Sprintf("\treturn pb.EKey_%s\n", info.Name))
+			if info.Name == enumName && info.IsDsp {
+				buf.WriteString(fmt.Sprintf("func (msg *%s) Key() EKey_T {\n", msgName))
+				buf.WriteString(fmt.Sprintf("\treturn EKey_%s\n", info.Name))
 				buf.WriteString("}\n\n")
 				break
 			}
@@ -242,22 +262,38 @@ func writeGoCmdExt(path string, enumMap map[int32]EKeyInfo, reqMessages, rspMess
 }
 
 // parseEKeyEnum parses cmd.proto to extract EKey enum values
+// Keys between "// dsp start" and "// dsp end" are marked as IsDsp=true
 func parseEKeyEnum(path string) (map[int32]EKeyInfo, error) {
 	content, err := os.ReadFile(path)
 	if err != nil {
 		return nil, err
 	}
 
+	contentStr := string(content)
 	result := make(map[int32]EKeyInfo)
+
+	// Find dsp section boundaries
+	dspStartIdx := strings.Index(contentStr, "// dsp start")
+	dspEndIdx := strings.Index(contentStr, "// dsp end")
+
 	pattern := regexp.MustCompile(`(\w+)\s*=\s*(\d+)\s*;`)
-	matches := pattern.FindAllStringSubmatch(string(content), -1)
+	matches := pattern.FindAllStringSubmatchIndex(contentStr, -1)
 
 	for _, match := range matches {
-		if len(match) == 3 {
-			name := match[1]
+		if len(match) >= 6 {
+			name := contentStr[match[2]:match[3]]
+			valueStr := contentStr[match[4]:match[5]]
 			var value int32
-			fmt.Sscanf(match[2], "%d", &value)
-			result[value] = EKeyInfo{Name: name, Value: value}
+			fmt.Sscanf(valueStr, "%d", &value)
+
+			// Check if this key is in the dsp section
+			isDsp := false
+			if dspStartIdx >= 0 && dspEndIdx > dspStartIdx {
+				keyPos := match[0]
+				isDsp = keyPos > dspStartIdx && keyPos < dspEndIdx
+			}
+
+			result[value] = EKeyInfo{Name: name, Value: value, IsDsp: isDsp}
 		}
 	}
 

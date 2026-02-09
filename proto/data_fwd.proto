@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "server/pb";
+
+import    "enum.proto";
+
+
+message SFwdCheckDistance {
+  sint64                                   mark_cid             = 1;
+  bool                                     arrive               = 2;
+}
+
+message SFwdNewOrder {}
+
+message SFwdKick {
+  EKickType.T                              ty                   = 1;
+}

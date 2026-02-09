@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "server/pb";
+
+message ReqLogin {
+  bool   fast        = 1; // 是否快速登陆
+  sint64 magic       = 2; // 魔数，快速登陆使用
+  sint64 timestamp   = 3; // 当前时间
+  sint64 s_id        = 4; // 服务器 id
+  sint64 role_id     = 5; // 角色id，快速登陆使用
+  string account     = 6; // uid
+  string username    = 7; // sdk用户名
+  string channel_id  = 8; // 渠道
+  string channel_uid = 9; // 渠道用户id
+  string platform    = 10; // 平台
+  string appid       = 11; // appid
+  string token       = 12; // token
+  string version     = 13; // 版本号
+  bool   isadult     = 14; // 是否成年
+  string iemi        = 15; // IMEI原始值
+  string mac         = 16; // MAC原始值(转大写)
+  string idfa        = 17; // IDFA原始值(IOS)
+  string android     = 18; // Android原始值（Android)
+  string dvbrand     = 19; // 设备品牌
+  string dvtype      = 20; // 设备型号
+  string ip          = 21; // ip地址（客户端不用传）
+}
+
+message ReqCreateRole {
+  sint64 cid  = 1; // 要创建的配置cid
+  string name = 2; // 名字
+}
+
+message ReqDeleteRole {
+  sint64 role_id = 1;
+}
+
+message ReqLoginRole {
+  sint64 role_id = 1; // 要登录的角色id
+}
+
+// 心跳
+message ReqPing {}
+
+// 心跳(客户端切换后台发送该消息)
+message ReqPingXXX {}
+
+message ReqEnterScene {}
+
+message ReqTestEnter {
+
+}

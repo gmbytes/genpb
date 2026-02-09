@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"runtime"
 )
 
 // Config holds the configuration for the generator
@@ -15,29 +16,46 @@ type Config struct {
 	GoPkg       string // Go package name for generated files
 	ProtocPath  string // Path to protoc executable
 	ProtocGenGo string // Path to protoc-gen-go executable
-	Language    string // Output language: go, cs, all
+	Language    string // Output language: go, Pb, all
+	Flag        string // Export flag: server (all files), client (exclude data_srv.proto, data_fwd.proto)
 }
 
 func main() {
 	// Parse command line flags
-	lang := flag.String("lang", "all", "Language: go, cs, all")
+	lang := flag.String("lang", "all", "Language: go, Pb, all")
 	goOut := flag.String("go_out", "./pb", "Go output directory")
-	csOut := flag.String("cs_out", "./pb/cs", "C# output directory")
+	csOut := flag.String("cs_out", "./pb/Pb", "C# output directory")
+	protoIn := flag.String("proto_in", "./proto", "Proto input directory")
+	toolsDir := flag.String("tools_dir", "", "Directory containing protoc and protoc-gen-go (default: ../proto)")
+	flagType := flag.String("flag", "server", "Export flag: server (all files), client (exclude data_srv.proto, data_fwd.proto)")
 	flag.Parse()
 
-	// Get absolute paths
-	exeDir, _ := filepath.Abs("../proto")
-	protoDir, _ := filepath.Abs("../proto")
+	// Resolve tools directory
+	toolsPath := *toolsDir
+	if toolsPath == "" {
+		toolsPath = "../proto"
+	}
+	toolsPath, _ = filepath.Abs(toolsPath)
 
-	// Default paths
+	// Protoc executable name by platform
+	protocExe := "protoc"
+	protocGenGoExe := "protoc-gen-go"
+	if runtime.GOOS == "windows" {
+		protocExe = "protoc.exe"
+		protocGenGoExe = "protoc-gen-go.exe"
+	}
+
+	protoDir, _ := filepath.Abs(*protoIn)
+
 	cfg := &Config{
 		ProtoDir:    protoDir,
 		GoOutDir:    *goOut,
 		CsOutDir:    *csOut,
 		GoPkg:       "server/pb",
-		ProtocPath:  filepath.Join(exeDir, "protoc.exe"),
-		ProtocGenGo: filepath.Join(exeDir, "protoc-gen-go.exe"),
+		ProtocPath:  filepath.Join(toolsPath, protocExe),
+		ProtocGenGo: filepath.Join(toolsPath, protocGenGoExe),
 		Language:    *lang,
+		Flag:        *flagType,
 	}
 
 	if err := Run(cfg); err != nil {
@@ -63,7 +81,7 @@ func Run(cfg *Config) error {
 	}
 
 	// Generate C# code
-	if cfg.Language == "cs" || cfg.Language == "all" {
+	if cfg.Language == "Pb" || cfg.Language == "all" {
 		// Ensure C# output directory exists
 		csOutDir, _ := filepath.Abs(cfg.CsOutDir)
 		if err := os.MkdirAll(csOutDir, 0755); err != nil {

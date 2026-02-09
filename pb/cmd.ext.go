@@ -4,10 +4,7 @@
 package pb
 
 import (
-	"genpb/pb"
-
 	"google.golang.org/protobuf/proto"
-	"google.golang.org/protobuf/reflect/protoreflect"
 )
 
 var _parser = NewParser()
@@ -22,34 +19,28 @@ func Unmarshal(key EKey_T, data []byte) proto.Message {
 
 // parser handles protobuf message parsing by EKey
 type parser struct {
-	types map[EKey_T]protoreflect.Type
+	types map[EKey_T]func() proto.Message
 }
 
 // NewParser creates a new Parser instance
 func NewParser() *parser {
 	return &parser{
-		types: make(map[EKey_T]protoreflect.Type),
+		types: make(map[EKey_T]func() proto.Message),
 	}
 }
 
-// Register registers a message type for a given EKey
-func (p *parser) Register(key EKey_T, msg proto.Message) {
-	p.types[key] = msg.ProtoReflect().Type()
-}
-
-// GetType returns the message type for the given EKey
-func (p *parser) GetType(key EKey_T) (protoreflect.Type, bool) {
-	typ, ok := p.types[key]
-	return typ, ok
+// Register registers a message factory for a given EKey
+func (p *parser) Register(key EKey_T, factory func() proto.Message) {
+	p.types[key] = factory
 }
 
 // New creates a new message instance for the given EKey
 func (p *parser) New(key EKey_T) proto.Message {
-	typ, ok := p.GetType(key)
+	factory, ok := p.types[key]
 	if !ok {
 		return nil
 	}
-	return proto.New(typ).Interface()
+	return factory()
 }
 
 // Unmarshal unmarshals binary data into a new message instance
@@ -66,115 +57,115 @@ func (p *parser) Unmarshal(key EKey_T, data []byte) proto.Message {
 
 // Load registers all message types
 func (p *parser) Load() {
-	p.Register(EKey_Login, &ReqLogin{})
-	p.Register(EKey_CreateRole, &ReqCreateRole{})
-	p.Register(EKey_DeleteRole, &ReqDeleteRole{})
-	p.Register(EKey_LoginRole, &ReqLoginRole{})
-	p.Register(EKey_Ping, &ReqPing{})
-	p.Register(EKey_PingXXX, &ReqPingXXX{})
-	p.Register(EKey_EnterScene, &ReqEnterScene{})
-	p.Register(EKey_TestEnter, &ReqTestEnter{})
-	p.Register(EKey_Login, &RspLogin{})
-	p.Register(EKey_CreateRole, &RspCreateRole{})
-	p.Register(EKey_DeleteRole, &RspDeleteRole{})
-	p.Register(EKey_LoginRole, &RspLoginRole{})
-	p.Register(EKey_Ping, &RspPing{})
-	p.Register(EKey_PingXXX, &RspPingXXX{})
-	p.Register(EKey_EnterScene, &RspEnterScene{})
-	p.Register(EKey_TestEnter, &RspTestEnter{})
-	p.Register(EKey_SyncLoginFast, &RspSyncLoginFast{})
-	p.Register(EKey_SyncLoginData, &RspSyncLoginData{})
-	p.Register(EKey_SyncServerMaintain, &RspSyncServerMaintain{})
-	p.Register(EKey_SyncKickRole, &RspSyncKickRole{})
-	p.Register(EKey_SyncPreparedEnterScene, &RspSyncPreparedEnterScene{})
-	p.Register(EKey_SyncTest, &RspSyncTest{})
+	p.Register(EKey_Login, func() proto.Message { return &ReqLogin{} })
+	p.Register(EKey_CreateRole, func() proto.Message { return &ReqCreateRole{} })
+	p.Register(EKey_DeleteRole, func() proto.Message { return &ReqDeleteRole{} })
+	p.Register(EKey_LoginRole, func() proto.Message { return &ReqLoginRole{} })
+	p.Register(EKey_Ping, func() proto.Message { return &ReqPing{} })
+	p.Register(EKey_PingXXX, func() proto.Message { return &ReqPingXXX{} })
+	p.Register(EKey_EnterScene, func() proto.Message { return &ReqEnterScene{} })
+	p.Register(EKey_TestEnter, func() proto.Message { return &ReqTestEnter{} })
+	p.Register(EKey_Login, func() proto.Message { return &RspLogin{} })
+	p.Register(EKey_CreateRole, func() proto.Message { return &RspCreateRole{} })
+	p.Register(EKey_DeleteRole, func() proto.Message { return &RspDeleteRole{} })
+	p.Register(EKey_LoginRole, func() proto.Message { return &RspLoginRole{} })
+	p.Register(EKey_Ping, func() proto.Message { return &RspPing{} })
+	p.Register(EKey_PingXXX, func() proto.Message { return &RspPingXXX{} })
+	p.Register(EKey_EnterScene, func() proto.Message { return &RspEnterScene{} })
+	p.Register(EKey_TestEnter, func() proto.Message { return &RspTestEnter{} })
+	p.Register(EKey_LoginFast, func() proto.Message { return &DspLoginFast{} })
+	p.Register(EKey_LoginData, func() proto.Message { return &DspLoginData{} })
+	p.Register(EKey_ServerMaintain, func() proto.Message { return &DspServerMaintain{} })
+	p.Register(EKey_KickRole, func() proto.Message { return &DspKickRole{} })
+	p.Register(EKey_PreparedEnterScene, func() proto.Message { return &DspPreparedEnterScene{} })
+	p.Register(EKey_Test, func() proto.Message { return &DspTest{} })
 }
 
-func (msg *ReqLogin) Key() pb.EKey {
-	return pb.EKey_Login
+func (msg *ReqLogin) Key() EKey_T {
+	return EKey_Login
 }
 
-func (msg *ReqCreateRole) Key() pb.EKey {
-	return pb.EKey_CreateRole
+func (msg *ReqCreateRole) Key() EKey_T {
+	return EKey_CreateRole
 }
 
-func (msg *ReqDeleteRole) Key() pb.EKey {
-	return pb.EKey_DeleteRole
+func (msg *ReqDeleteRole) Key() EKey_T {
+	return EKey_DeleteRole
 }
 
-func (msg *ReqLoginRole) Key() pb.EKey {
-	return pb.EKey_LoginRole
+func (msg *ReqLoginRole) Key() EKey_T {
+	return EKey_LoginRole
 }
 
-func (msg *ReqPing) Key() pb.EKey {
-	return pb.EKey_Ping
+func (msg *ReqPing) Key() EKey_T {
+	return EKey_Ping
 }
 
-func (msg *ReqPingXXX) Key() pb.EKey {
-	return pb.EKey_PingXXX
+func (msg *ReqPingXXX) Key() EKey_T {
+	return EKey_PingXXX
 }
 
-func (msg *ReqEnterScene) Key() pb.EKey {
-	return pb.EKey_EnterScene
+func (msg *ReqEnterScene) Key() EKey_T {
+	return EKey_EnterScene
 }
 
-func (msg *ReqTestEnter) Key() pb.EKey {
-	return pb.EKey_TestEnter
+func (msg *ReqTestEnter) Key() EKey_T {
+	return EKey_TestEnter
 }
 
-func (msg *RspLogin) Key() pb.EKey {
-	return pb.EKey_Login
+func (msg *RspLogin) Key() EKey_T {
+	return EKey_Login
 }
 
-func (msg *RspCreateRole) Key() pb.EKey {
-	return pb.EKey_CreateRole
+func (msg *RspCreateRole) Key() EKey_T {
+	return EKey_CreateRole
 }
 
-func (msg *RspDeleteRole) Key() pb.EKey {
-	return pb.EKey_DeleteRole
+func (msg *RspDeleteRole) Key() EKey_T {
+	return EKey_DeleteRole
 }
 
-func (msg *RspLoginRole) Key() pb.EKey {
-	return pb.EKey_LoginRole
+func (msg *RspLoginRole) Key() EKey_T {
+	return EKey_LoginRole
 }
 
-func (msg *RspPing) Key() pb.EKey {
-	return pb.EKey_Ping
+func (msg *RspPing) Key() EKey_T {
+	return EKey_Ping
 }
 
-func (msg *RspPingXXX) Key() pb.EKey {
-	return pb.EKey_PingXXX
+func (msg *RspPingXXX) Key() EKey_T {
+	return EKey_PingXXX
 }
 
-func (msg *RspEnterScene) Key() pb.EKey {
-	return pb.EKey_EnterScene
+func (msg *RspEnterScene) Key() EKey_T {
+	return EKey_EnterScene
 }
 
-func (msg *RspTestEnter) Key() pb.EKey {
-	return pb.EKey_TestEnter
+func (msg *RspTestEnter) Key() EKey_T {
+	return EKey_TestEnter
 }
 
-func (msg *RspSyncLoginFast) Key() pb.EKey {
-	return pb.EKey_SyncLoginFast
+func (msg *DspLoginFast) Key() EKey_T {
+	return EKey_LoginFast
 }
 
-func (msg *RspSyncLoginData) Key() pb.EKey {
-	return pb.EKey_SyncLoginData
+func (msg *DspLoginData) Key() EKey_T {
+	return EKey_LoginData
 }
 
-func (msg *RspSyncServerMaintain) Key() pb.EKey {
-	return pb.EKey_SyncServerMaintain
+func (msg *DspServerMaintain) Key() EKey_T {
+	return EKey_ServerMaintain
 }
 
-func (msg *RspSyncKickRole) Key() pb.EKey {
-	return pb.EKey_SyncKickRole
+func (msg *DspKickRole) Key() EKey_T {
+	return EKey_KickRole
 }
 
-func (msg *RspSyncPreparedEnterScene) Key() pb.EKey {
-	return pb.EKey_SyncPreparedEnterScene
+func (msg *DspPreparedEnterScene) Key() EKey_T {
+	return EKey_PreparedEnterScene
 }
 
-func (msg *RspSyncTest) Key() pb.EKey {
-	return pb.EKey_SyncTest
+func (msg *DspTest) Key() EKey_T {
+	return EKey_Test
 }
 

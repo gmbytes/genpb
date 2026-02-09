@@ -34,13 +34,13 @@ const (
 	EKey_PingXXX    EKey_T = 11 // 心跳(客户端切换后台发送该消息)
 	EKey_EnterScene EKey_T = 20 // 通知服务器已经进入场景
 	EKey_TestEnter  EKey_T = 21 // ceshi
-	// sync
-	EKey_SyncLoginFast          EKey_T = 40000 // 同步快速重登 token
-	EKey_SyncLoginData          EKey_T = 40001 // 同步玩家登录数据
-	EKey_SyncServerMaintain     EKey_T = 40002 // 同步玩家登录数据
-	EKey_SyncKickRole           EKey_T = 40003 // 踢玩家下线
-	EKey_SyncPreparedEnterScene EKey_T = 40004 // 准备进入场景
-	EKey_SyncTest               EKey_T = 40005 // 测试
+	// dsp start
+	EKey_LoginFast          EKey_T = 40000 // 同步快速重登 token
+	EKey_LoginData          EKey_T = 40001 // 同步玩家登录数据
+	EKey_ServerMaintain     EKey_T = 40002 // 同步玩家登录数据
+	EKey_KickRole           EKey_T = 40003 // 踢玩家下线
+	EKey_PreparedEnterScene EKey_T = 40004 // 准备进入场景
+	EKey_Test               EKey_T = 40005 // 测试
 	// 0xF000 及以上为服务器保留用
 	EKey_Max EKey_T = 65535
 )
@@ -57,31 +57,31 @@ var (
 		11:    "PingXXX",
 		20:    "EnterScene",
 		21:    "TestEnter",
-		40000: "SyncLoginFast",
-		40001: "SyncLoginData",
-		40002: "SyncServerMaintain",
-		40003: "SyncKickRole",
-		40004: "SyncPreparedEnterScene",
-		40005: "SyncTest",
+		40000: "LoginFast",
+		40001: "LoginData",
+		40002: "ServerMaintain",
+		40003: "KickRole",
+		40004: "PreparedEnterScene",
+		40005: "Test",
 		65535: "Max",
 	}
 	EKey_T_value = map[string]int32{
-		"Invalid":                0,
-		"Login":                  1,
-		"CreateRole":             2,
-		"DeleteRole":             3,
-		"LoginRole":              4,
-		"Ping":                   10,
-		"PingXXX":                11,
-		"EnterScene":             20,
-		"TestEnter":              21,
-		"SyncLoginFast":          40000,
-		"SyncLoginData":          40001,
-		"SyncServerMaintain":     40002,
-		"SyncKickRole":           40003,
-		"SyncPreparedEnterScene": 40004,
-		"SyncTest":               40005,
-		"Max":                    65535,
+		"Invalid":            0,
+		"Login":              1,
+		"CreateRole":         2,
+		"DeleteRole":         3,
+		"LoginRole":          4,
+		"Ping":               10,
+		"PingXXX":            11,
+		"EnterScene":         20,
+		"TestEnter":          21,
+		"LoginFast":          40000,
+		"LoginData":          40001,
+		"ServerMaintain":     40002,
+		"KickRole":           40003,
+		"PreparedEnterScene": 40004,
+		"Test":               40005,
+		"Max":                65535,
 	}
 )
 
@@ -152,8 +152,8 @@ var File_cmd_proto protoreflect.FileDescriptor
 
 const file_cmd_proto_rawDesc = "" +
 	"\n" +
-	"\tcmd.proto\x12\x02pb\"\x9a\x02\n" +
-	"\x04EKey\"\x91\x02\n" +
+	"\tcmd.proto\x12\x02pb\"\x82\x02\n" +
+	"\x04EKey\"\xf9\x01\n" +
 	"\x01T\x12\v\n" +
 	"\aInvalid\x10\x00\x12\t\n" +
 	"\x05Login\x10\x01\x12\x0e\n" +
@@ -167,13 +167,14 @@ const file_cmd_proto_rawDesc = "" +
 	"\aPingXXX\x10\v\x12\x0e\n" +
 	"\n" +
 	"EnterScene\x10\x14\x12\r\n" +
-	"\tTestEnter\x10\x15\x12\x13\n" +
-	"\rSyncLoginFast\x10\xc0\xb8\x02\x12\x13\n" +
-	"\rSyncLoginData\x10\xc1\xb8\x02\x12\x18\n" +
-	"\x12SyncServerMaintain\x10¸\x02\x12\x12\n" +
-	"\fSyncKickRole\x10ø\x02\x12\x1c\n" +
-	"\x16SyncPreparedEnterScene\x10ĸ\x02\x12\x0e\n" +
-	"\bSyncTest\x10Ÿ\x02\x12\t\n" +
+	"\tTestEnter\x10\x15\x12\x0f\n" +
+	"\tLoginFast\x10\xc0\xb8\x02\x12\x0f\n" +
+	"\tLoginData\x10\xc1\xb8\x02\x12\x14\n" +
+	"\x0eServerMaintain\x10¸\x02\x12\x0e\n" +
+	"\bKickRole\x10ø\x02\x12\x18\n" +
+	"\x12PreparedEnterScene\x10ĸ\x02\x12\n" +
+	"\n" +
+	"\x04Test\x10Ÿ\x02\x12\t\n" +
 	"\x03Max\x10\xff\xff\x03B\vZ\tserver/pbb\x06proto3"
 
 var (

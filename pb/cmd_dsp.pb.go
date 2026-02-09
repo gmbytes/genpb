@@ -22,7 +22,7 @@ const (
 )
 
 // 同步快速重登 token
-type RspSyncLoginFast struct {
+type DspLoginFast struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Ty            ESignInFastType_T      `protobuf:"varint,1,opt,name=ty,proto3,enum=pb.ESignInFastType_T" json:"ty,omitempty"` // 可快速重登的类型
 	Timestamp     int64                  `protobuf:"zigzag64,2,opt,name=timestamp,proto3" json:"timestamp,omitempty"`           // 时间戳
@@ -32,20 +32,20 @@ type RspSyncLoginFast struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RspSyncLoginFast) Reset() {
-	*x = RspSyncLoginFast{}
+func (x *DspLoginFast) Reset() {
+	*x = DspLoginFast{}
 	mi := &file_cmd_dsp_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RspSyncLoginFast) String() string {
+func (x *DspLoginFast) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RspSyncLoginFast) ProtoMessage() {}
+func (*DspLoginFast) ProtoMessage() {}
 
-func (x *RspSyncLoginFast) ProtoReflect() protoreflect.Message {
+func (x *DspLoginFast) ProtoReflect() protoreflect.Message {
 	mi := &file_cmd_dsp_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -57,60 +57,60 @@ func (x *RspSyncLoginFast) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RspSyncLoginFast.ProtoReflect.Descriptor instead.
-func (*RspSyncLoginFast) Descriptor() ([]byte, []int) {
+// Deprecated: Use DspLoginFast.ProtoReflect.Descriptor instead.
+func (*DspLoginFast) Descriptor() ([]byte, []int) {
 	return file_cmd_dsp_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *RspSyncLoginFast) GetTy() ESignInFastType_T {
+func (x *DspLoginFast) GetTy() ESignInFastType_T {
 	if x != nil {
 		return x.Ty
 	}
 	return ESignInFastType_Invalid
 }
 
-func (x *RspSyncLoginFast) GetTimestamp() int64 {
+func (x *DspLoginFast) GetTimestamp() int64 {
 	if x != nil {
 		return x.Timestamp
 	}
 	return 0
 }
 
-func (x *RspSyncLoginFast) GetToken() string {
+func (x *DspLoginFast) GetToken() string {
 	if x != nil {
 		return x.Token
 	}
 	return ""
 }
 
-func (x *RspSyncLoginFast) GetMagic() int64 {
+func (x *DspLoginFast) GetMagic() int64 {
 	if x != nil {
 		return x.Magic
 	}
 	return 0
 }
 
-type RspSyncLoginData struct {
+type DspLoginData struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Data          *SLoginData            `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"` // 登录必要数据
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RspSyncLoginData) Reset() {
-	*x = RspSyncLoginData{}
+func (x *DspLoginData) Reset() {
+	*x = DspLoginData{}
 	mi := &file_cmd_dsp_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RspSyncLoginData) String() string {
+func (x *DspLoginData) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RspSyncLoginData) ProtoMessage() {}
+func (*DspLoginData) ProtoMessage() {}
 
-func (x *RspSyncLoginData) ProtoReflect() protoreflect.Message {
+func (x *DspLoginData) ProtoReflect() protoreflect.Message {
 	mi := &file_cmd_dsp_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -122,12 +122,12 @@ func (x *RspSyncLoginData) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RspSyncLoginData.ProtoReflect.Descriptor instead.
-func (*RspSyncLoginData) Descriptor() ([]byte, []int) {
+// Deprecated: Use DspLoginData.ProtoReflect.Descriptor instead.
+func (*DspLoginData) Descriptor() ([]byte, []int) {
 	return file_cmd_dsp_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *RspSyncLoginData) GetData() *SLoginData {
+func (x *DspLoginData) GetData() *SLoginData {
 	if x != nil {
 		return x.Data
 	}
@@ -135,7 +135,7 @@ func (x *RspSyncLoginData) GetData() *SLoginData {
 }
 
 // 服务器维护
-type RspSyncServerMaintain struct {
+type DspServerMaintain struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	RebootTime    int64                  `protobuf:"zigzag64,1,opt,name=reboot_time,json=rebootTime,proto3" json:"reboot_time,omitempty"`       // 预计开服时间戳，为 0 代表未知
 	ShutdownTime  int64                  `protobuf:"zigzag64,2,opt,name=shutdown_time,json=shutdownTime,proto3" json:"shutdown_time,omitempty"` // 关服时间戳
@@ -143,20 +143,20 @@ type RspSyncServerMaintain struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RspSyncServerMaintain) Reset() {
-	*x = RspSyncServerMaintain{}
+func (x *DspServerMaintain) Reset() {
+	*x = DspServerMaintain{}
 	mi := &file_cmd_dsp_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RspSyncServerMaintain) String() string {
+func (x *DspServerMaintain) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RspSyncServerMaintain) ProtoMessage() {}
+func (*DspServerMaintain) ProtoMessage() {}
 
-func (x *RspSyncServerMaintain) ProtoReflect() protoreflect.Message {
+func (x *DspServerMaintain) ProtoReflect() protoreflect.Message {
 	mi := &file_cmd_dsp_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -168,19 +168,19 @@ func (x *RspSyncServerMaintain) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RspSyncServerMaintain.ProtoReflect.Descriptor instead.
-func (*RspSyncServerMaintain) Descriptor() ([]byte, []int) {
+// Deprecated: Use DspServerMaintain.ProtoReflect.Descriptor instead.
+func (*DspServerMaintain) Descriptor() ([]byte, []int) {
 	return file_cmd_dsp_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *RspSyncServerMaintain) GetRebootTime() int64 {
+func (x *DspServerMaintain) GetRebootTime() int64 {
 	if x != nil {
 		return x.RebootTime
 	}
 	return 0
 }
 
-func (x *RspSyncServerMaintain) GetShutdownTime() int64 {
+func (x *DspServerMaintain) GetShutdownTime() int64 {
 	if x != nil {
 		return x.ShutdownTime
 	}
@@ -188,7 +188,7 @@ func (x *RspSyncServerMaintain) GetShutdownTime() int64 {
 }
 
 // 踢玩家下线
-type RspSyncKickRole struct {
+type DspKickRole struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Ty            EKickType_T            `protobuf:"varint,1,opt,name=ty,proto3,enum=pb.EKickType_T" json:"ty,omitempty"`     // 踢下线类型
 	SessId        int64                  `protobuf:"zigzag64,2,opt,name=sess_id,json=sessId,proto3" json:"sess_id,omitempty"` // sess id，服务器使用
@@ -196,20 +196,20 @@ type RspSyncKickRole struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RspSyncKickRole) Reset() {
-	*x = RspSyncKickRole{}
+func (x *DspKickRole) Reset() {
+	*x = DspKickRole{}
 	mi := &file_cmd_dsp_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RspSyncKickRole) String() string {
+func (x *DspKickRole) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RspSyncKickRole) ProtoMessage() {}
+func (*DspKickRole) ProtoMessage() {}
 
-func (x *RspSyncKickRole) ProtoReflect() protoreflect.Message {
+func (x *DspKickRole) ProtoReflect() protoreflect.Message {
 	mi := &file_cmd_dsp_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -221,19 +221,19 @@ func (x *RspSyncKickRole) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RspSyncKickRole.ProtoReflect.Descriptor instead.
-func (*RspSyncKickRole) Descriptor() ([]byte, []int) {
+// Deprecated: Use DspKickRole.ProtoReflect.Descriptor instead.
+func (*DspKickRole) Descriptor() ([]byte, []int) {
 	return file_cmd_dsp_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *RspSyncKickRole) GetTy() EKickType_T {
+func (x *DspKickRole) GetTy() EKickType_T {
 	if x != nil {
 		return x.Ty
 	}
 	return EKickType_Invalid
 }
 
-func (x *RspSyncKickRole) GetSessId() int64 {
+func (x *DspKickRole) GetSessId() int64 {
 	if x != nil {
 		return x.SessId
 	}
@@ -241,26 +241,26 @@ func (x *RspSyncKickRole) GetSessId() int64 {
 }
 
 // 更新邮件
-type RspSyncPreparedEnterScene struct {
+type DspPreparedEnterScene struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RspSyncPreparedEnterScene) Reset() {
-	*x = RspSyncPreparedEnterScene{}
+func (x *DspPreparedEnterScene) Reset() {
+	*x = DspPreparedEnterScene{}
 	mi := &file_cmd_dsp_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RspSyncPreparedEnterScene) String() string {
+func (x *DspPreparedEnterScene) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RspSyncPreparedEnterScene) ProtoMessage() {}
+func (*DspPreparedEnterScene) ProtoMessage() {}
 
-func (x *RspSyncPreparedEnterScene) ProtoReflect() protoreflect.Message {
+func (x *DspPreparedEnterScene) ProtoReflect() protoreflect.Message {
 	mi := &file_cmd_dsp_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -272,31 +272,31 @@ func (x *RspSyncPreparedEnterScene) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RspSyncPreparedEnterScene.ProtoReflect.Descriptor instead.
-func (*RspSyncPreparedEnterScene) Descriptor() ([]byte, []int) {
+// Deprecated: Use DspPreparedEnterScene.ProtoReflect.Descriptor instead.
+func (*DspPreparedEnterScene) Descriptor() ([]byte, []int) {
 	return file_cmd_dsp_proto_rawDescGZIP(), []int{4}
 }
 
-type RspSyncTest struct {
+type DspTest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RspSyncTest) Reset() {
-	*x = RspSyncTest{}
+func (x *DspTest) Reset() {
+	*x = DspTest{}
 	mi := &file_cmd_dsp_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RspSyncTest) String() string {
+func (x *DspTest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RspSyncTest) ProtoMessage() {}
+func (*DspTest) ProtoMessage() {}
 
-func (x *RspSyncTest) ProtoReflect() protoreflect.Message {
+func (x *DspTest) ProtoReflect() protoreflect.Message {
 	mi := &file_cmd_dsp_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -308,8 +308,8 @@ func (x *RspSyncTest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RspSyncTest.ProtoReflect.Descriptor instead.
-func (*RspSyncTest) Descriptor() ([]byte, []int) {
+// Deprecated: Use DspTest.ProtoReflect.Descriptor instead.
+func (*DspTest) Descriptor() ([]byte, []int) {
 	return file_cmd_dsp_proto_rawDescGZIP(), []int{5}
 }
 
@@ -319,23 +319,23 @@ const file_cmd_dsp_proto_rawDesc = "" +
 	"\n" +
 	"\rcmd_dsp.proto\x12\x02pb\x1a\n" +
 	"data.proto\x1a\n" +
-	"enum.proto\"\x83\x01\n" +
-	"\x10RspSyncLoginFast\x12%\n" +
+	"enum.proto\"\x7f\n" +
+	"\fDspLoginFast\x12%\n" +
 	"\x02ty\x18\x01 \x01(\x0e2\x15.pb.ESignInFastType.TR\x02ty\x12\x1c\n" +
 	"\ttimestamp\x18\x02 \x01(\x12R\ttimestamp\x12\x14\n" +
 	"\x05token\x18\x03 \x01(\tR\x05token\x12\x14\n" +
-	"\x05magic\x18\x04 \x01(\x12R\x05magic\"6\n" +
-	"\x10RspSyncLoginData\x12\"\n" +
-	"\x04data\x18\x01 \x01(\v2\x0e.pb.SLoginDataR\x04data\"]\n" +
-	"\x15RspSyncServerMaintain\x12\x1f\n" +
+	"\x05magic\x18\x04 \x01(\x12R\x05magic\"2\n" +
+	"\fDspLoginData\x12\"\n" +
+	"\x04data\x18\x01 \x01(\v2\x0e.pb.SLoginDataR\x04data\"Y\n" +
+	"\x11DspServerMaintain\x12\x1f\n" +
 	"\vreboot_time\x18\x01 \x01(\x12R\n" +
 	"rebootTime\x12#\n" +
-	"\rshutdown_time\x18\x02 \x01(\x12R\fshutdownTime\"K\n" +
-	"\x0fRspSyncKickRole\x12\x1f\n" +
+	"\rshutdown_time\x18\x02 \x01(\x12R\fshutdownTime\"G\n" +
+	"\vDspKickRole\x12\x1f\n" +
 	"\x02ty\x18\x01 \x01(\x0e2\x0f.pb.EKickType.TR\x02ty\x12\x17\n" +
-	"\asess_id\x18\x02 \x01(\x12R\x06sessId\"\x1b\n" +
-	"\x19RspSyncPreparedEnterScene\"\r\n" +
-	"\vRspSyncTestB\vZ\tserver/pbb\x06proto3"
+	"\asess_id\x18\x02 \x01(\x12R\x06sessId\"\x17\n" +
+	"\x15DspPreparedEnterScene\"\t\n" +
+	"\aDspTestB\vZ\tserver/pbb\x06proto3"
 
 var (
 	file_cmd_dsp_proto_rawDescOnce sync.Once
@@ -351,20 +351,20 @@ func file_cmd_dsp_proto_rawDescGZIP() []byte {
 
 var file_cmd_dsp_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_cmd_dsp_proto_goTypes = []any{
-	(*RspSyncLoginFast)(nil),          // 0: pb.RspSyncLoginFast
-	(*RspSyncLoginData)(nil),          // 1: pb.RspSyncLoginData
-	(*RspSyncServerMaintain)(nil),     // 2: pb.RspSyncServerMaintain
-	(*RspSyncKickRole)(nil),           // 3: pb.RspSyncKickRole
-	(*RspSyncPreparedEnterScene)(nil), // 4: pb.RspSyncPreparedEnterScene
-	(*RspSyncTest)(nil),               // 5: pb.RspSyncTest
-	(ESignInFastType_T)(0),            // 6: pb.ESignInFastType.T
-	(*SLoginData)(nil),                // 7: pb.SLoginData
-	(EKickType_T)(0),                  // 8: pb.EKickType.T
+	(*DspLoginFast)(nil),          // 0: pb.DspLoginFast
+	(*DspLoginData)(nil),          // 1: pb.DspLoginData
+	(*DspServerMaintain)(nil),     // 2: pb.DspServerMaintain
+	(*DspKickRole)(nil),           // 3: pb.DspKickRole
+	(*DspPreparedEnterScene)(nil), // 4: pb.DspPreparedEnterScene
+	(*DspTest)(nil),               // 5: pb.DspTest
+	(ESignInFastType_T)(0),        // 6: pb.ESignInFastType.T
+	(*SLoginData)(nil),            // 7: pb.SLoginData
+	(EKickType_T)(0),              // 8: pb.EKickType.T
 }
 var file_cmd_dsp_proto_depIdxs = []int32{
-	6, // 0: pb.RspSyncLoginFast.ty:type_name -> pb.ESignInFastType.T
-	7, // 1: pb.RspSyncLoginData.data:type_name -> pb.SLoginData
-	8, // 2: pb.RspSyncKickRole.ty:type_name -> pb.EKickType.T
+	6, // 0: pb.DspLoginFast.ty:type_name -> pb.ESignInFastType.T
+	7, // 1: pb.DspLoginData.data:type_name -> pb.SLoginData
+	8, // 2: pb.DspKickRole.ty:type_name -> pb.EKickType.T
 	3, // [3:3] is the sub-list for method output_type
 	3, // [3:3] is the sub-list for method input_type
 	3, // [3:3] is the sub-list for extension type_name

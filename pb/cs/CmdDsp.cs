@@ -24,24 +24,24 @@ namespace Pb {
     static CmdDspReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Cg1jbWRfZHNwLnByb3RvEgJwYhoKZGF0YS5wcm90bxoKZW51bS5wcm90byJm",
-            "ChBSc3BTeW5jTG9naW5GYXN0EiEKAnR5GAEgASgOMhUucGIuRVNpZ25JbkZh",
-            "c3RUeXBlLlQSEQoJdGltZXN0YW1wGAIgASgSEg0KBXRva2VuGAMgASgJEg0K",
-            "BW1hZ2ljGAQgASgSIjAKEFJzcFN5bmNMb2dpbkRhdGESHAoEZGF0YRgBIAEo",
-            "CzIOLnBiLlNMb2dpbkRhdGEiQwoVUnNwU3luY1NlcnZlck1haW50YWluEhMK",
-            "C3JlYm9vdF90aW1lGAEgASgSEhUKDXNodXRkb3duX3RpbWUYAiABKBIiPwoP",
-            "UnNwU3luY0tpY2tSb2xlEhsKAnR5GAEgASgOMg8ucGIuRUtpY2tUeXBlLlQS",
-            "DwoHc2Vzc19pZBgCIAEoEiIbChlSc3BTeW5jUHJlcGFyZWRFbnRlclNjZW5l",
-            "Ig0KC1JzcFN5bmNUZXN0QgtaCXNlcnZlci9wYmIGcHJvdG8z"));
+            "Cg1jbWRfZHNwLnByb3RvEgJwYhoKZGF0YS5wcm90bxoKZW51bS5wcm90byJi",
+            "CgxEc3BMb2dpbkZhc3QSIQoCdHkYASABKA4yFS5wYi5FU2lnbkluRmFzdFR5",
+            "cGUuVBIRCgl0aW1lc3RhbXAYAiABKBISDQoFdG9rZW4YAyABKAkSDQoFbWFn",
+            "aWMYBCABKBIiLAoMRHNwTG9naW5EYXRhEhwKBGRhdGEYASABKAsyDi5wYi5T",
+            "TG9naW5EYXRhIj8KEURzcFNlcnZlck1haW50YWluEhMKC3JlYm9vdF90aW1l",
+            "GAEgASgSEhUKDXNodXRkb3duX3RpbWUYAiABKBIiOwoLRHNwS2lja1JvbGUS",
+            "GwoCdHkYASABKA4yDy5wYi5FS2lja1R5cGUuVBIPCgdzZXNzX2lkGAIgASgS",
+            "IhcKFURzcFByZXBhcmVkRW50ZXJTY2VuZSIJCgdEc3BUZXN0QgtaCXNlcnZl",
+            "ci9wYmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Pb.DataReflection.Descriptor, global::Pb.EnumReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.RspSyncLoginFast), global::Pb.RspSyncLoginFast.Parser, new[]{ "Ty", "Timestamp", "Token", "Magic" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.RspSyncLoginData), global::Pb.RspSyncLoginData.Parser, new[]{ "Data" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.RspSyncServerMaintain), global::Pb.RspSyncServerMaintain.Parser, new[]{ "RebootTime", "ShutdownTime" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.RspSyncKickRole), global::Pb.RspSyncKickRole.Parser, new[]{ "Ty", "SessId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.RspSyncPreparedEnterScene), global::Pb.RspSyncPreparedEnterScene.Parser, null, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.RspSyncTest), global::Pb.RspSyncTest.Parser, null, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.DspLoginFast), global::Pb.DspLoginFast.Parser, new[]{ "Ty", "Timestamp", "Token", "Magic" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.DspLoginData), global::Pb.DspLoginData.Parser, new[]{ "Data" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.DspServerMaintain), global::Pb.DspServerMaintain.Parser, new[]{ "RebootTime", "ShutdownTime" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.DspKickRole), global::Pb.DspKickRole.Parser, new[]{ "Ty", "SessId" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.DspPreparedEnterScene), global::Pb.DspPreparedEnterScene.Parser, null, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.DspTest), global::Pb.DspTest.Parser, null, null, null, null, null)
           }));
     }
     #endregion
@@ -51,16 +51,16 @@ namespace Pb {
   /// <summary>
   /// 同步快速重登 token
   /// </summary>
-  public sealed partial class RspSyncLoginFast : pb::IMessage<RspSyncLoginFast>
+  public sealed partial class DspLoginFast : pb::IMessage<DspLoginFast>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<RspSyncLoginFast> _parser = new pb::MessageParser<RspSyncLoginFast>(() => new RspSyncLoginFast());
+    private static readonly pb::MessageParser<DspLoginFast> _parser = new pb::MessageParser<DspLoginFast>(() => new DspLoginFast());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<RspSyncLoginFast> Parser { get { return _parser; } }
+    public static pb::MessageParser<DspLoginFast> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -76,7 +76,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public RspSyncLoginFast() {
+    public DspLoginFast() {
       OnConstruction();
     }
 
@@ -84,7 +84,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public RspSyncLoginFast(RspSyncLoginFast other) : this() {
+    public DspLoginFast(DspLoginFast other) : this() {
       ty_ = other.ty_;
       timestamp_ = other.timestamp_;
       token_ = other.token_;
@@ -94,8 +94,8 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public RspSyncLoginFast Clone() {
-      return new RspSyncLoginFast(this);
+    public DspLoginFast Clone() {
+      return new DspLoginFast(this);
     }
 
     /// <summary>Field number for the "ty" field.</summary>
@@ -161,12 +161,12 @@ namespace Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as RspSyncLoginFast);
+      return Equals(other as DspLoginFast);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(RspSyncLoginFast other) {
+    public bool Equals(DspLoginFast other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -278,7 +278,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(RspSyncLoginFast other) {
+    public void MergeFrom(DspLoginFast other) {
       if (other == null) {
         return;
       }
@@ -363,16 +363,16 @@ namespace Pb {
 
   }
 
-  public sealed partial class RspSyncLoginData : pb::IMessage<RspSyncLoginData>
+  public sealed partial class DspLoginData : pb::IMessage<DspLoginData>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<RspSyncLoginData> _parser = new pb::MessageParser<RspSyncLoginData>(() => new RspSyncLoginData());
+    private static readonly pb::MessageParser<DspLoginData> _parser = new pb::MessageParser<DspLoginData>(() => new DspLoginData());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<RspSyncLoginData> Parser { get { return _parser; } }
+    public static pb::MessageParser<DspLoginData> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -388,7 +388,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public RspSyncLoginData() {
+    public DspLoginData() {
       OnConstruction();
     }
 
@@ -396,15 +396,15 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public RspSyncLoginData(RspSyncLoginData other) : this() {
+    public DspLoginData(DspLoginData other) : this() {
       data_ = other.data_ != null ? other.data_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public RspSyncLoginData Clone() {
-      return new RspSyncLoginData(this);
+    public DspLoginData Clone() {
+      return new DspLoginData(this);
     }
 
     /// <summary>Field number for the "data" field.</summary>
@@ -425,12 +425,12 @@ namespace Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as RspSyncLoginData);
+      return Equals(other as DspLoginData);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(RspSyncLoginData other) {
+    public bool Equals(DspLoginData other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -503,7 +503,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(RspSyncLoginData other) {
+    public void MergeFrom(DspLoginData other) {
       if (other == null) {
         return;
       }
@@ -567,16 +567,16 @@ namespace Pb {
   /// <summary>
   /// 服务器维护
   /// </summary>
-  public sealed partial class RspSyncServerMaintain : pb::IMessage<RspSyncServerMaintain>
+  public sealed partial class DspServerMaintain : pb::IMessage<DspServerMaintain>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<RspSyncServerMaintain> _parser = new pb::MessageParser<RspSyncServerMaintain>(() => new RspSyncServerMaintain());
+    private static readonly pb::MessageParser<DspServerMaintain> _parser = new pb::MessageParser<DspServerMaintain>(() => new DspServerMaintain());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<RspSyncServerMaintain> Parser { get { return _parser; } }
+    public static pb::MessageParser<DspServerMaintain> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -592,7 +592,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public RspSyncServerMaintain() {
+    public DspServerMaintain() {
       OnConstruction();
     }
 
@@ -600,7 +600,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public RspSyncServerMaintain(RspSyncServerMaintain other) : this() {
+    public DspServerMaintain(DspServerMaintain other) : this() {
       rebootTime_ = other.rebootTime_;
       shutdownTime_ = other.shutdownTime_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -608,8 +608,8 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public RspSyncServerMaintain Clone() {
-      return new RspSyncServerMaintain(this);
+    public DspServerMaintain Clone() {
+      return new DspServerMaintain(this);
     }
 
     /// <summary>Field number for the "reboot_time" field.</summary>
@@ -645,12 +645,12 @@ namespace Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as RspSyncServerMaintain);
+      return Equals(other as DspServerMaintain);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(RspSyncServerMaintain other) {
+    public bool Equals(DspServerMaintain other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -736,7 +736,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(RspSyncServerMaintain other) {
+    public void MergeFrom(DspServerMaintain other) {
       if (other == null) {
         return;
       }
@@ -802,16 +802,16 @@ namespace Pb {
   /// <summary>
   /// 踢玩家下线
   /// </summary>
-  public sealed partial class RspSyncKickRole : pb::IMessage<RspSyncKickRole>
+  public sealed partial class DspKickRole : pb::IMessage<DspKickRole>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<RspSyncKickRole> _parser = new pb::MessageParser<RspSyncKickRole>(() => new RspSyncKickRole());
+    private static readonly pb::MessageParser<DspKickRole> _parser = new pb::MessageParser<DspKickRole>(() => new DspKickRole());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<RspSyncKickRole> Parser { get { return _parser; } }
+    public static pb::MessageParser<DspKickRole> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -827,7 +827,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public RspSyncKickRole() {
+    public DspKickRole() {
       OnConstruction();
     }
 
@@ -835,7 +835,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public RspSyncKickRole(RspSyncKickRole other) : this() {
+    public DspKickRole(DspKickRole other) : this() {
       ty_ = other.ty_;
       sessId_ = other.sessId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -843,8 +843,8 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public RspSyncKickRole Clone() {
-      return new RspSyncKickRole(this);
+    public DspKickRole Clone() {
+      return new DspKickRole(this);
     }
 
     /// <summary>Field number for the "ty" field.</summary>
@@ -880,12 +880,12 @@ namespace Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as RspSyncKickRole);
+      return Equals(other as DspKickRole);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(RspSyncKickRole other) {
+    public bool Equals(DspKickRole other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -971,7 +971,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(RspSyncKickRole other) {
+    public void MergeFrom(DspKickRole other) {
       if (other == null) {
         return;
       }
@@ -1037,16 +1037,16 @@ namespace Pb {
   /// <summary>
   /// 更新邮件
   /// </summary>
-  public sealed partial class RspSyncPreparedEnterScene : pb::IMessage<RspSyncPreparedEnterScene>
+  public sealed partial class DspPreparedEnterScene : pb::IMessage<DspPreparedEnterScene>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<RspSyncPreparedEnterScene> _parser = new pb::MessageParser<RspSyncPreparedEnterScene>(() => new RspSyncPreparedEnterScene());
+    private static readonly pb::MessageParser<DspPreparedEnterScene> _parser = new pb::MessageParser<DspPreparedEnterScene>(() => new DspPreparedEnterScene());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<RspSyncPreparedEnterScene> Parser { get { return _parser; } }
+    public static pb::MessageParser<DspPreparedEnterScene> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -1062,7 +1062,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public RspSyncPreparedEnterScene() {
+    public DspPreparedEnterScene() {
       OnConstruction();
     }
 
@@ -1070,25 +1070,25 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public RspSyncPreparedEnterScene(RspSyncPreparedEnterScene other) : this() {
+    public DspPreparedEnterScene(DspPreparedEnterScene other) : this() {
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public RspSyncPreparedEnterScene Clone() {
-      return new RspSyncPreparedEnterScene(this);
+    public DspPreparedEnterScene Clone() {
+      return new DspPreparedEnterScene(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as RspSyncPreparedEnterScene);
+      return Equals(other as DspPreparedEnterScene);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(RspSyncPreparedEnterScene other) {
+    public bool Equals(DspPreparedEnterScene other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -1148,7 +1148,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(RspSyncPreparedEnterScene other) {
+    public void MergeFrom(DspPreparedEnterScene other) {
       if (other == null) {
         return;
       }
@@ -1189,16 +1189,16 @@ namespace Pb {
 
   }
 
-  public sealed partial class RspSyncTest : pb::IMessage<RspSyncTest>
+  public sealed partial class DspTest : pb::IMessage<DspTest>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<RspSyncTest> _parser = new pb::MessageParser<RspSyncTest>(() => new RspSyncTest());
+    private static readonly pb::MessageParser<DspTest> _parser = new pb::MessageParser<DspTest>(() => new DspTest());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<RspSyncTest> Parser { get { return _parser; } }
+    public static pb::MessageParser<DspTest> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -1214,7 +1214,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public RspSyncTest() {
+    public DspTest() {
       OnConstruction();
     }
 
@@ -1222,25 +1222,25 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public RspSyncTest(RspSyncTest other) : this() {
+    public DspTest(DspTest other) : this() {
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public RspSyncTest Clone() {
-      return new RspSyncTest(this);
+    public DspTest Clone() {
+      return new DspTest(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as RspSyncTest);
+      return Equals(other as DspTest);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(RspSyncTest other) {
+    public bool Equals(DspTest other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -1300,7 +1300,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(RspSyncTest other) {
+    public void MergeFrom(DspTest other) {
       if (other == null) {
         return;
       }

@@ -24,14 +24,13 @@ namespace Pb {
     static CmdReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgljbWQucHJvdG8SAnBiIpoCCgRFS2V5IpECCgFUEgsKB0ludmFsaWQQABIJ",
+            "CgljbWQucHJvdG8SAnBiIoICCgRFS2V5IvkBCgFUEgsKB0ludmFsaWQQABIJ",
             "CgVMb2dpbhABEg4KCkNyZWF0ZVJvbGUQAhIOCgpEZWxldGVSb2xlEAMSDQoJ",
             "TG9naW5Sb2xlEAQSCAoEUGluZxAKEgsKB1BpbmdYWFgQCxIOCgpFbnRlclNj",
-            "ZW5lEBQSDQoJVGVzdEVudGVyEBUSEwoNU3luY0xvZ2luRmFzdBDAuAISEwoN",
-            "U3luY0xvZ2luRGF0YRDBuAISGAoSU3luY1NlcnZlck1haW50YWluEMK4AhIS",
-            "CgxTeW5jS2lja1JvbGUQw7gCEhwKFlN5bmNQcmVwYXJlZEVudGVyU2NlbmUQ",
-            "xLgCEg4KCFN5bmNUZXN0EMW4AhIJCgNNYXgQ//8DQgtaCXNlcnZlci9wYmIG",
-            "cHJvdG8z"));
+            "ZW5lEBQSDQoJVGVzdEVudGVyEBUSDwoJTG9naW5GYXN0EMC4AhIPCglMb2dp",
+            "bkRhdGEQwbgCEhQKDlNlcnZlck1haW50YWluEMK4AhIOCghLaWNrUm9sZRDD",
+            "uAISGAoSUHJlcGFyZWRFbnRlclNjZW5lEMS4AhIKCgRUZXN0EMW4AhIJCgNN",
+            "YXgQ//8DQgtaCXNlcnZlci9wYmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -225,27 +224,27 @@ namespace Pb {
         /// <summary>
         /// sync
         /// </summary>
-        [pbr::OriginalName("SyncLoginFast")] SyncLoginFast = 40000,
+        [pbr::OriginalName("LoginFast")] LoginFast = 40000,
         /// <summary>
         /// 同步玩家登录数据
         /// </summary>
-        [pbr::OriginalName("SyncLoginData")] SyncLoginData = 40001,
+        [pbr::OriginalName("LoginData")] LoginData = 40001,
         /// <summary>
         /// 同步玩家登录数据
         /// </summary>
-        [pbr::OriginalName("SyncServerMaintain")] SyncServerMaintain = 40002,
+        [pbr::OriginalName("ServerMaintain")] ServerMaintain = 40002,
         /// <summary>
         /// 踢玩家下线
         /// </summary>
-        [pbr::OriginalName("SyncKickRole")] SyncKickRole = 40003,
+        [pbr::OriginalName("KickRole")] KickRole = 40003,
         /// <summary>
         /// 准备进入场景
         /// </summary>
-        [pbr::OriginalName("SyncPreparedEnterScene")] SyncPreparedEnterScene = 40004,
+        [pbr::OriginalName("PreparedEnterScene")] PreparedEnterScene = 40004,
         /// <summary>
         /// 测试
         /// </summary>
-        [pbr::OriginalName("SyncTest")] SyncTest = 40005,
+        [pbr::OriginalName("Test")] Est = 40005,
         /// <summary>
         /// 0xF000 及以上为服务器保留用
         /// </summary>
