@@ -13,14 +13,14 @@ message RspLogin {
   sint64                    reboot_time   = 3; // 预计开服时间戳，为 0 代表未知
   sint64                    shutdown_time = 4; // 关服时间戳
   bool                      devmod        = 5; // 是否为开发模式
-  repeated SRoleSummaryData roles         = 6; // 角色数组
+  repeated RoleSummaryData roles         = 6; // 角色数组
   string                    account       = 7; // 账号 id
   sint64                    server_time   = 8; // 服务器时间（毫秒）
 }
 
 message RspCreateRole {
   EErrorCode.T     err  = 1;
-  SRoleSummaryData role = 2; // 角色
+  RoleSummaryData role = 2; // 角色
 }
 
 message RspDeleteRole {
@@ -31,7 +31,7 @@ message RspDeleteRole {
 // 角色进入游戏
 message RspLoginRole {
   EErrorCode.T err  = 1;
-  SLoginData   data = 2; // 登录必要数据
+  LoginData   data = 2; // 登录必要数据
 }
 
 // 心跳

@@ -71,6 +71,18 @@ namespace Pb
                     return typeof(RspEnterScene);
                 case EKey.TestEnter:
                     return typeof(RspTestEnter);
+                case EKey.LoginFast:
+                    return typeof(DspLoginFast);
+                case EKey.LoginData:
+                    return typeof(DspLoginData);
+                case EKey.ServerMaintain:
+                    return typeof(DspServerMaintain);
+                case EKey.KickRole:
+                    return typeof(DspKickRole);
+                case EKey.PreparedEnterScene:
+                    return typeof(DspPreparedEnterScene);
+                case EKey.Test:
+                    return typeof(DspTest);
                 default:
                     return null;
             }
@@ -160,6 +172,36 @@ namespace Pb
         public static Cmd.EKey GetKey(this RspTestEnter msg)
         {
             return Cmd.EKey.TestEnter;
+        }
+
+        public static Cmd.EKey GetKey(this DspLoginFast msg)
+        {
+            return Cmd.EKey.LoginFast;
+        }
+
+        public static Cmd.EKey GetKey(this DspLoginData msg)
+        {
+            return Cmd.EKey.LoginData;
+        }
+
+        public static Cmd.EKey GetKey(this DspServerMaintain msg)
+        {
+            return Cmd.EKey.ServerMaintain;
+        }
+
+        public static Cmd.EKey GetKey(this DspKickRole msg)
+        {
+            return Cmd.EKey.KickRole;
+        }
+
+        public static Cmd.EKey GetKey(this DspPreparedEnterScene msg)
+        {
+            return Cmd.EKey.PreparedEnterScene;
+        }
+
+        public static Cmd.EKey GetKey(this DspTest msg)
+        {
+            return Cmd.EKey.Test;
         }
 
     }

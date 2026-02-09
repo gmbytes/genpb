@@ -1,14 +1,15 @@
 @echo off
+chcp 65001 >nul 2>&1
 setlocal
 cd /d "%~dp0"
 
-REM 参数: [flag] [proto_in] [go_out] [cs_out] [lang] [tools_dir]
-REM  flag: server | client (默认 server)
-REM  proto_in: 输入 proto 目录 (默认 ./proto)
-REM  go_out: Go 输出目录 (默认 ./pb)
-REM  cs_out: C# 输出目录 (默认 ./pb/Pb)
-REM  lang: go | Pb | all (默认 all)
-REM  tools_dir: 存放 protoc.exe 和 protoc-gen-go.exe 的目录 (默认 ../proto)
+REM Parameters: [flag] [proto_in] [go_out] [cs_out] [lang] [tools_dir]
+REM   flag: server | client (default: server)
+REM   proto_in: Input proto directory (default: ./proto)
+REM   go_out: Go output directory (default: ./pb)
+REM   cs_out: C# output directory (default: ./pb/Pb)
+REM   lang: go | Pb | all (default: all)
+REM   tools_dir: Directory containing protoc.exe and protoc-gen-go.exe (default: ../proto)
 
 set FLAG=server
 set PROTO_IN=./proto

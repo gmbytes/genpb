@@ -16,7 +16,7 @@ message DspLoginFast {
 }
 
 message DspLoginData {
-  SLoginData data = 1; // 登录必要数据
+  LoginData data = 1; // 登录必要数据
 }
 
 // 服务器维护

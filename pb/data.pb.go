@@ -21,7 +21,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type SRoleSummaryData struct {
+type RoleSummaryData struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"zigzag64,1,opt,name=id,proto3" json:"id,omitempty"`                             // id
 	Cid           int64                  `protobuf:"zigzag64,2,opt,name=cid,proto3" json:"cid,omitempty"`                           // 配置cid
@@ -34,20 +34,20 @@ type SRoleSummaryData struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SRoleSummaryData) Reset() {
-	*x = SRoleSummaryData{}
+func (x *RoleSummaryData) Reset() {
+	*x = RoleSummaryData{}
 	mi := &file_data_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SRoleSummaryData) String() string {
+func (x *RoleSummaryData) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SRoleSummaryData) ProtoMessage() {}
+func (*RoleSummaryData) ProtoMessage() {}
 
-func (x *SRoleSummaryData) ProtoReflect() protoreflect.Message {
+func (x *RoleSummaryData) ProtoReflect() protoreflect.Message {
 	mi := &file_data_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -59,54 +59,54 @@ func (x *SRoleSummaryData) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SRoleSummaryData.ProtoReflect.Descriptor instead.
-func (*SRoleSummaryData) Descriptor() ([]byte, []int) {
+// Deprecated: Use RoleSummaryData.ProtoReflect.Descriptor instead.
+func (*RoleSummaryData) Descriptor() ([]byte, []int) {
 	return file_data_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *SRoleSummaryData) GetId() int64 {
+func (x *RoleSummaryData) GetId() int64 {
 	if x != nil {
 		return x.Id
 	}
 	return 0
 }
 
-func (x *SRoleSummaryData) GetCid() int64 {
+func (x *RoleSummaryData) GetCid() int64 {
 	if x != nil {
 		return x.Cid
 	}
 	return 0
 }
 
-func (x *SRoleSummaryData) GetLv() int64 {
+func (x *RoleSummaryData) GetLv() int64 {
 	if x != nil {
 		return x.Lv
 	}
 	return 0
 }
 
-func (x *SRoleSummaryData) GetName() string {
+func (x *RoleSummaryData) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-func (x *SRoleSummaryData) GetIcon() int64 {
+func (x *RoleSummaryData) GetIcon() int64 {
 	if x != nil {
 		return x.Icon
 	}
 	return 0
 }
 
-func (x *SRoleSummaryData) GetYoungTs() int64 {
+func (x *RoleSummaryData) GetYoungTs() int64 {
 	if x != nil {
 		return x.YoungTs
 	}
 	return 0
 }
 
-func (x *SRoleSummaryData) GetCreateTs() int64 {
+func (x *RoleSummaryData) GetCreateTs() int64 {
 	if x != nil {
 		return x.CreateTs
 	}
@@ -114,28 +114,28 @@ func (x *SRoleSummaryData) GetCreateTs() int64 {
 }
 
 // 登陆必要数据
-type SLoginData struct {
+type LoginData struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Regain        bool                   `protobuf:"varint,1,opt,name=regain,proto3" json:"regain,omitempty"` // true-有可以找回的资源
-	Time          *STime                 `protobuf:"bytes,2,opt,name=time,proto3" json:"time,omitempty"`
+	Time          *Time                  `protobuf:"bytes,2,opt,name=time,proto3" json:"time,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SLoginData) Reset() {
-	*x = SLoginData{}
+func (x *LoginData) Reset() {
+	*x = LoginData{}
 	mi := &file_data_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SLoginData) String() string {
+func (x *LoginData) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SLoginData) ProtoMessage() {}
+func (*LoginData) ProtoMessage() {}
 
-func (x *SLoginData) ProtoReflect() protoreflect.Message {
+func (x *LoginData) ProtoReflect() protoreflect.Message {
 	mi := &file_data_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -147,19 +147,19 @@ func (x *SLoginData) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SLoginData.ProtoReflect.Descriptor instead.
-func (*SLoginData) Descriptor() ([]byte, []int) {
+// Deprecated: Use LoginData.ProtoReflect.Descriptor instead.
+func (*LoginData) Descriptor() ([]byte, []int) {
 	return file_data_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *SLoginData) GetRegain() bool {
+func (x *LoginData) GetRegain() bool {
 	if x != nil {
 		return x.Regain
 	}
 	return false
 }
 
-func (x *SLoginData) GetTime() *STime {
+func (x *LoginData) GetTime() *Time {
 	if x != nil {
 		return x.Time
 	}
@@ -167,7 +167,7 @@ func (x *SLoginData) GetTime() *STime {
 }
 
 // 统一对象
-type SObject struct {
+type Object struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ObjType       EObjType_T             `protobuf:"varint,1,opt,name=objType,proto3,enum=pb.EObjType_T" json:"objType,omitempty"` // 主类型
 	SubType       int64                  `protobuf:"zigzag64,2,opt,name=subType,proto3" json:"subType,omitempty"`                  // 子类型
@@ -176,20 +176,20 @@ type SObject struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SObject) Reset() {
-	*x = SObject{}
+func (x *Object) Reset() {
+	*x = Object{}
 	mi := &file_data_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SObject) String() string {
+func (x *Object) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SObject) ProtoMessage() {}
+func (*Object) ProtoMessage() {}
 
-func (x *SObject) ProtoReflect() protoreflect.Message {
+func (x *Object) ProtoReflect() protoreflect.Message {
 	mi := &file_data_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -201,58 +201,58 @@ func (x *SObject) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SObject.ProtoReflect.Descriptor instead.
-func (*SObject) Descriptor() ([]byte, []int) {
+// Deprecated: Use Object.ProtoReflect.Descriptor instead.
+func (*Object) Descriptor() ([]byte, []int) {
 	return file_data_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *SObject) GetObjType() EObjType_T {
+func (x *Object) GetObjType() EObjType_T {
 	if x != nil {
 		return x.ObjType
 	}
 	return EObjType_None
 }
 
-func (x *SObject) GetSubType() int64 {
+func (x *Object) GetSubType() int64 {
 	if x != nil {
 		return x.SubType
 	}
 	return 0
 }
 
-func (x *SObject) GetCount() int64 {
+func (x *Object) GetCount() int64 {
 	if x != nil {
 		return x.Count
 	}
 	return 0
 }
 
-type SAward struct {
+type Award struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Batch         int64                  `protobuf:"zigzag64,1,opt,name=batch,proto3" json:"batch,omitempty"`
 	Bind          int64                  `protobuf:"zigzag64,2,opt,name=bind,proto3" json:"bind,omitempty"`
 	Weight        int64                  `protobuf:"zigzag64,3,opt,name=weight,proto3" json:"weight,omitempty"`
 	Job           int64                  `protobuf:"zigzag64,4,opt,name=job,proto3" json:"job,omitempty"`
-	Object        *SObject               `protobuf:"bytes,5,opt,name=object,proto3" json:"object,omitempty"`
+	Object        *Object                `protobuf:"bytes,5,opt,name=object,proto3" json:"object,omitempty"`
 	Due           int64                  `protobuf:"zigzag64,6,opt,name=due,proto3" json:"due,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SAward) Reset() {
-	*x = SAward{}
+func (x *Award) Reset() {
+	*x = Award{}
 	mi := &file_data_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SAward) String() string {
+func (x *Award) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SAward) ProtoMessage() {}
+func (*Award) ProtoMessage() {}
 
-func (x *SAward) ProtoReflect() protoreflect.Message {
+func (x *Award) ProtoReflect() protoreflect.Message {
 	mi := &file_data_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -264,54 +264,54 @@ func (x *SAward) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SAward.ProtoReflect.Descriptor instead.
-func (*SAward) Descriptor() ([]byte, []int) {
+// Deprecated: Use Award.ProtoReflect.Descriptor instead.
+func (*Award) Descriptor() ([]byte, []int) {
 	return file_data_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *SAward) GetBatch() int64 {
+func (x *Award) GetBatch() int64 {
 	if x != nil {
 		return x.Batch
 	}
 	return 0
 }
 
-func (x *SAward) GetBind() int64 {
+func (x *Award) GetBind() int64 {
 	if x != nil {
 		return x.Bind
 	}
 	return 0
 }
 
-func (x *SAward) GetWeight() int64 {
+func (x *Award) GetWeight() int64 {
 	if x != nil {
 		return x.Weight
 	}
 	return 0
 }
 
-func (x *SAward) GetJob() int64 {
+func (x *Award) GetJob() int64 {
 	if x != nil {
 		return x.Job
 	}
 	return 0
 }
 
-func (x *SAward) GetObject() *SObject {
+func (x *Award) GetObject() *Object {
 	if x != nil {
 		return x.Object
 	}
 	return nil
 }
 
-func (x *SAward) GetDue() int64 {
+func (x *Award) GetDue() int64 {
 	if x != nil {
 		return x.Due
 	}
 	return 0
 }
 
-type SItem struct {
+type Item struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Idx           int64                  `protobuf:"zigzag64,1,opt,name=idx,proto3" json:"idx,omitempty"`     // 编号
 	Id            int64                  `protobuf:"zigzag64,2,opt,name=id,proto3" json:"id,omitempty"`       // 唯一id
@@ -323,20 +323,20 @@ type SItem struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SItem) Reset() {
-	*x = SItem{}
+func (x *Item) Reset() {
+	*x = Item{}
 	mi := &file_data_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SItem) String() string {
+func (x *Item) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SItem) ProtoMessage() {}
+func (*Item) ProtoMessage() {}
 
-func (x *SItem) ProtoReflect() protoreflect.Message {
+func (x *Item) ProtoReflect() protoreflect.Message {
 	mi := &file_data_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -348,54 +348,54 @@ func (x *SItem) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SItem.ProtoReflect.Descriptor instead.
-func (*SItem) Descriptor() ([]byte, []int) {
+// Deprecated: Use Item.ProtoReflect.Descriptor instead.
+func (*Item) Descriptor() ([]byte, []int) {
 	return file_data_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *SItem) GetIdx() int64 {
+func (x *Item) GetIdx() int64 {
 	if x != nil {
 		return x.Idx
 	}
 	return 0
 }
 
-func (x *SItem) GetId() int64 {
+func (x *Item) GetId() int64 {
 	if x != nil {
 		return x.Id
 	}
 	return 0
 }
 
-func (x *SItem) GetCid() int64 {
+func (x *Item) GetCid() int64 {
 	if x != nil {
 		return x.Cid
 	}
 	return 0
 }
 
-func (x *SItem) GetCount() int64 {
+func (x *Item) GetCount() int64 {
 	if x != nil {
 		return x.Count
 	}
 	return 0
 }
 
-func (x *SItem) GetBind() int64 {
+func (x *Item) GetBind() int64 {
 	if x != nil {
 		return x.Bind
 	}
 	return 0
 }
 
-func (x *SItem) GetDue() int64 {
+func (x *Item) GetDue() int64 {
 	if x != nil {
 		return x.Due
 	}
 	return 0
 }
 
-type STime struct {
+type Time struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Dsec          int64                  `protobuf:"zigzag64,1,opt,name=dsec,proto3" json:"dsec,omitempty"`                            // 今日在线时间 秒
 	Wsec          int64                  `protobuf:"zigzag64,2,opt,name=wsec,proto3" json:"wsec,omitempty"`                            // 本周在线时间 秒
@@ -409,20 +409,20 @@ type STime struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *STime) Reset() {
-	*x = STime{}
+func (x *Time) Reset() {
+	*x = Time{}
 	mi := &file_data_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *STime) String() string {
+func (x *Time) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*STime) ProtoMessage() {}
+func (*Time) ProtoMessage() {}
 
-func (x *STime) ProtoReflect() protoreflect.Message {
+func (x *Time) ProtoReflect() protoreflect.Message {
 	mi := &file_data_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -434,68 +434,68 @@ func (x *STime) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use STime.ProtoReflect.Descriptor instead.
-func (*STime) Descriptor() ([]byte, []int) {
+// Deprecated: Use Time.ProtoReflect.Descriptor instead.
+func (*Time) Descriptor() ([]byte, []int) {
 	return file_data_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *STime) GetDsec() int64 {
+func (x *Time) GetDsec() int64 {
 	if x != nil {
 		return x.Dsec
 	}
 	return 0
 }
 
-func (x *STime) GetWsec() int64 {
+func (x *Time) GetWsec() int64 {
 	if x != nil {
 		return x.Wsec
 	}
 	return 0
 }
 
-func (x *STime) GetWday() int64 {
+func (x *Time) GetWday() int64 {
 	if x != nil {
 		return x.Wday
 	}
 	return 0
 }
 
-func (x *STime) GetSec() int64 {
+func (x *Time) GetSec() int64 {
 	if x != nil {
 		return x.Sec
 	}
 	return 0
 }
 
-func (x *STime) GetYoung() int64 {
+func (x *Time) GetYoung() int64 {
 	if x != nil {
 		return x.Young
 	}
 	return 0
 }
 
-func (x *STime) GetLoginTime() int64 {
+func (x *Time) GetLoginTime() int64 {
 	if x != nil {
 		return x.LoginTime
 	}
 	return 0
 }
 
-func (x *STime) GetOpenDay() int64 {
+func (x *Time) GetOpenDay() int64 {
 	if x != nil {
 		return x.OpenDay
 	}
 	return 0
 }
 
-func (x *STime) GetMergeDay() int64 {
+func (x *Time) GetMergeDay() int64 {
 	if x != nil {
 		return x.MergeDay
 	}
 	return 0
 }
 
-type SAttr struct {
+type Attr struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Ty            EAttrType_T            `protobuf:"varint,1,opt,name=ty,proto3,enum=pb.EAttrType_T" json:"ty,omitempty"` // 类型
 	Val           int64                  `protobuf:"zigzag64,2,opt,name=val,proto3" json:"val,omitempty"`                 // 值
@@ -504,20 +504,20 @@ type SAttr struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SAttr) Reset() {
-	*x = SAttr{}
+func (x *Attr) Reset() {
+	*x = Attr{}
 	mi := &file_data_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SAttr) String() string {
+func (x *Attr) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SAttr) ProtoMessage() {}
+func (*Attr) ProtoMessage() {}
 
-func (x *SAttr) ProtoReflect() protoreflect.Message {
+func (x *Attr) ProtoReflect() protoreflect.Message {
 	mi := &file_data_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -529,33 +529,33 @@ func (x *SAttr) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SAttr.ProtoReflect.Descriptor instead.
-func (*SAttr) Descriptor() ([]byte, []int) {
+// Deprecated: Use Attr.ProtoReflect.Descriptor instead.
+func (*Attr) Descriptor() ([]byte, []int) {
 	return file_data_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *SAttr) GetTy() EAttrType_T {
+func (x *Attr) GetTy() EAttrType_T {
 	if x != nil {
 		return x.Ty
 	}
 	return EAttrType_Invalid
 }
 
-func (x *SAttr) GetVal() int64 {
+func (x *Attr) GetVal() int64 {
 	if x != nil {
 		return x.Val
 	}
 	return 0
 }
 
-func (x *SAttr) GetRate() int64 {
+func (x *Attr) GetRate() int64 {
 	if x != nil {
 		return x.Rate
 	}
 	return 0
 }
 
-type SVector struct {
+type Vector struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	X             int64                  `protobuf:"zigzag64,1,opt,name=x,proto3" json:"x,omitempty"`
 	Y             int64                  `protobuf:"zigzag64,2,opt,name=y,proto3" json:"y,omitempty"`
@@ -564,20 +564,20 @@ type SVector struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SVector) Reset() {
-	*x = SVector{}
+func (x *Vector) Reset() {
+	*x = Vector{}
 	mi := &file_data_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SVector) String() string {
+func (x *Vector) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SVector) ProtoMessage() {}
+func (*Vector) ProtoMessage() {}
 
-func (x *SVector) ProtoReflect() protoreflect.Message {
+func (x *Vector) ProtoReflect() protoreflect.Message {
 	mi := &file_data_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -589,26 +589,26 @@ func (x *SVector) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SVector.ProtoReflect.Descriptor instead.
-func (*SVector) Descriptor() ([]byte, []int) {
+// Deprecated: Use Vector.ProtoReflect.Descriptor instead.
+func (*Vector) Descriptor() ([]byte, []int) {
 	return file_data_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *SVector) GetX() int64 {
+func (x *Vector) GetX() int64 {
 	if x != nil {
 		return x.X
 	}
 	return 0
 }
 
-func (x *SVector) GetY() int64 {
+func (x *Vector) GetY() int64 {
 	if x != nil {
 		return x.Y
 	}
 	return 0
 }
 
-func (x *SVector) GetZ() int64 {
+func (x *Vector) GetZ() int64 {
 	if x != nil {
 		return x.Z
 	}
@@ -621,38 +621,38 @@ const file_data_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
 	"data.proto\x12\x02pb\x1a\n" +
-	"enum.proto\"\xa4\x01\n" +
-	"\x10SRoleSummaryData\x12\x0e\n" +
+	"enum.proto\"\xa3\x01\n" +
+	"\x0fRoleSummaryData\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x12R\x02id\x12\x10\n" +
 	"\x03cid\x18\x02 \x01(\x12R\x03cid\x12\x0e\n" +
 	"\x02lv\x18\x03 \x01(\x12R\x02lv\x12\x12\n" +
 	"\x04name\x18\x04 \x01(\tR\x04name\x12\x12\n" +
 	"\x04icon\x18\x05 \x01(\x12R\x04icon\x12\x19\n" +
 	"\byoung_ts\x18\x06 \x01(\x12R\ayoungTs\x12\x1b\n" +
-	"\tcreate_ts\x18\a \x01(\x12R\bcreateTs\"C\n" +
-	"\n" +
-	"SLoginData\x12\x16\n" +
-	"\x06regain\x18\x01 \x01(\bR\x06regain\x12\x1d\n" +
-	"\x04time\x18\x02 \x01(\v2\t.pb.STimeR\x04time\"c\n" +
-	"\aSObject\x12(\n" +
+	"\tcreate_ts\x18\a \x01(\x12R\bcreateTs\"A\n" +
+	"\tLoginData\x12\x16\n" +
+	"\x06regain\x18\x01 \x01(\bR\x06regain\x12\x1c\n" +
+	"\x04time\x18\x02 \x01(\v2\b.pb.TimeR\x04time\"b\n" +
+	"\x06Object\x12(\n" +
 	"\aobjType\x18\x01 \x01(\x0e2\x0e.pb.EObjType.TR\aobjType\x12\x18\n" +
 	"\asubType\x18\x02 \x01(\x12R\asubType\x12\x14\n" +
-	"\x05count\x18\x03 \x01(\x12R\x05count\"\x93\x01\n" +
-	"\x06SAward\x12\x14\n" +
+	"\x05count\x18\x03 \x01(\x12R\x05count\"\x91\x01\n" +
+	"\x05Award\x12\x14\n" +
 	"\x05batch\x18\x01 \x01(\x12R\x05batch\x12\x12\n" +
 	"\x04bind\x18\x02 \x01(\x12R\x04bind\x12\x16\n" +
 	"\x06weight\x18\x03 \x01(\x12R\x06weight\x12\x10\n" +
-	"\x03job\x18\x04 \x01(\x12R\x03job\x12#\n" +
-	"\x06object\x18\x05 \x01(\v2\v.pb.SObjectR\x06object\x12\x10\n" +
-	"\x03due\x18\x06 \x01(\x12R\x03due\"w\n" +
-	"\x05SItem\x12\x10\n" +
+	"\x03job\x18\x04 \x01(\x12R\x03job\x12\"\n" +
+	"\x06object\x18\x05 \x01(\v2\n" +
+	".pb.ObjectR\x06object\x12\x10\n" +
+	"\x03due\x18\x06 \x01(\x12R\x03due\"v\n" +
+	"\x04Item\x12\x10\n" +
 	"\x03idx\x18\x01 \x01(\x12R\x03idx\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\x12R\x02id\x12\x10\n" +
 	"\x03cid\x18\x03 \x01(\x12R\x03cid\x12\x14\n" +
 	"\x05count\x18\x04 \x01(\x12R\x05count\x12\x12\n" +
 	"\x04bind\x18\x05 \x01(\x12R\x04bind\x12\x10\n" +
-	"\x03due\x18\x06 \x01(\x12R\x03due\"\xc2\x01\n" +
-	"\x05STime\x12\x12\n" +
+	"\x03due\x18\x06 \x01(\x12R\x03due\"\xc1\x01\n" +
+	"\x04Time\x12\x12\n" +
 	"\x04dsec\x18\x01 \x01(\x12R\x04dsec\x12\x12\n" +
 	"\x04wsec\x18\x02 \x01(\x12R\x04wsec\x12\x12\n" +
 	"\x04wday\x18\x03 \x01(\x12R\x04wday\x12\x10\n" +
@@ -661,12 +661,12 @@ const file_data_proto_rawDesc = "" +
 	"\n" +
 	"login_time\x18\x06 \x01(\x12R\tloginTime\x12\x19\n" +
 	"\bopen_day\x18\a \x01(\x12R\aopenDay\x12\x1b\n" +
-	"\tmerge_day\x18\b \x01(\x12R\bmergeDay\"N\n" +
-	"\x05SAttr\x12\x1f\n" +
+	"\tmerge_day\x18\b \x01(\x12R\bmergeDay\"M\n" +
+	"\x04Attr\x12\x1f\n" +
 	"\x02ty\x18\x01 \x01(\x0e2\x0f.pb.EAttrType.TR\x02ty\x12\x10\n" +
 	"\x03val\x18\x02 \x01(\x12R\x03val\x12\x12\n" +
-	"\x04rate\x18\x03 \x01(\x12R\x04rate\"3\n" +
-	"\aSVector\x12\f\n" +
+	"\x04rate\x18\x03 \x01(\x12R\x04rate\"2\n" +
+	"\x06Vector\x12\f\n" +
 	"\x01x\x18\x01 \x01(\x12R\x01x\x12\f\n" +
 	"\x01y\x18\x02 \x01(\x12R\x01y\x12\f\n" +
 	"\x01z\x18\x03 \x01(\x12R\x01zB\vZ\tserver/pbb\x06proto3"
@@ -685,22 +685,22 @@ func file_data_proto_rawDescGZIP() []byte {
 
 var file_data_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_data_proto_goTypes = []any{
-	(*SRoleSummaryData)(nil), // 0: pb.SRoleSummaryData
-	(*SLoginData)(nil),       // 1: pb.SLoginData
-	(*SObject)(nil),          // 2: pb.SObject
-	(*SAward)(nil),           // 3: pb.SAward
-	(*SItem)(nil),            // 4: pb.SItem
-	(*STime)(nil),            // 5: pb.STime
-	(*SAttr)(nil),            // 6: pb.SAttr
-	(*SVector)(nil),          // 7: pb.SVector
-	(EObjType_T)(0),          // 8: pb.EObjType.T
-	(EAttrType_T)(0),         // 9: pb.EAttrType.T
+	(*RoleSummaryData)(nil), // 0: pb.RoleSummaryData
+	(*LoginData)(nil),       // 1: pb.LoginData
+	(*Object)(nil),          // 2: pb.Object
+	(*Award)(nil),           // 3: pb.Award
+	(*Item)(nil),            // 4: pb.Item
+	(*Time)(nil),            // 5: pb.Time
+	(*Attr)(nil),            // 6: pb.Attr
+	(*Vector)(nil),          // 7: pb.Vector
+	(EObjType_T)(0),         // 8: pb.EObjType.T
+	(EAttrType_T)(0),        // 9: pb.EAttrType.T
 }
 var file_data_proto_depIdxs = []int32{
-	5, // 0: pb.SLoginData.time:type_name -> pb.STime
-	8, // 1: pb.SObject.objType:type_name -> pb.EObjType.T
-	2, // 2: pb.SAward.object:type_name -> pb.SObject
-	9, // 3: pb.SAttr.ty:type_name -> pb.EAttrType.T
+	5, // 0: pb.LoginData.time:type_name -> pb.Time
+	8, // 1: pb.Object.objType:type_name -> pb.EObjType.T
+	2, // 2: pb.Award.object:type_name -> pb.Object
+	9, // 3: pb.Attr.ty:type_name -> pb.EAttrType.T
 	4, // [4:4] is the sub-list for method output_type
 	4, // [4:4] is the sub-list for method input_type
 	4, // [4:4] is the sub-list for extension type_name

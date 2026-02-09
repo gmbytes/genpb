@@ -22,7 +22,7 @@ const (
 )
 
 // 订单请求
-type SOrderInfo struct {
+type OrderInfo struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Account       string                 `protobuf:"bytes,1,opt,name=account,proto3" json:"account,omitempty"`                             // account_id
 	ProductId     int64                  `protobuf:"varint,2,opt,name=product_id,json=productId,proto3" json:"product_id,omitempty"`       // 商品 ID
@@ -43,20 +43,20 @@ type SOrderInfo struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SOrderInfo) Reset() {
-	*x = SOrderInfo{}
+func (x *OrderInfo) Reset() {
+	*x = OrderInfo{}
 	mi := &file_data_srv_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SOrderInfo) String() string {
+func (x *OrderInfo) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SOrderInfo) ProtoMessage() {}
+func (*OrderInfo) ProtoMessage() {}
 
-func (x *SOrderInfo) ProtoReflect() protoreflect.Message {
+func (x *OrderInfo) ProtoReflect() protoreflect.Message {
 	mi := &file_data_srv_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -68,110 +68,110 @@ func (x *SOrderInfo) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SOrderInfo.ProtoReflect.Descriptor instead.
-func (*SOrderInfo) Descriptor() ([]byte, []int) {
+// Deprecated: Use OrderInfo.ProtoReflect.Descriptor instead.
+func (*OrderInfo) Descriptor() ([]byte, []int) {
 	return file_data_srv_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *SOrderInfo) GetAccount() string {
+func (x *OrderInfo) GetAccount() string {
 	if x != nil {
 		return x.Account
 	}
 	return ""
 }
 
-func (x *SOrderInfo) GetProductId() int64 {
+func (x *OrderInfo) GetProductId() int64 {
 	if x != nil {
 		return x.ProductId
 	}
 	return 0
 }
 
-func (x *SOrderInfo) GetProductName() string {
+func (x *OrderInfo) GetProductName() string {
 	if x != nil {
 		return x.ProductName
 	}
 	return ""
 }
 
-func (x *SOrderInfo) GetProductDesc() string {
+func (x *OrderInfo) GetProductDesc() string {
 	if x != nil {
 		return x.ProductDesc
 	}
 	return ""
 }
 
-func (x *SOrderInfo) GetBuyNum() int64 {
+func (x *OrderInfo) GetBuyNum() int64 {
 	if x != nil {
 		return x.BuyNum
 	}
 	return 0
 }
 
-func (x *SOrderInfo) GetMoney() int64 {
+func (x *OrderInfo) GetMoney() int64 {
 	if x != nil {
 		return x.Money
 	}
 	return 0
 }
 
-func (x *SOrderInfo) GetRoleId() int64 {
+func (x *OrderInfo) GetRoleId() int64 {
 	if x != nil {
 		return x.RoleId
 	}
 	return 0
 }
 
-func (x *SOrderInfo) GetRoleName() string {
+func (x *OrderInfo) GetRoleName() string {
 	if x != nil {
 		return x.RoleName
 	}
 	return ""
 }
 
-func (x *SOrderInfo) GetRoleLevel() int64 {
+func (x *OrderInfo) GetRoleLevel() int64 {
 	if x != nil {
 		return x.RoleLevel
 	}
 	return 0
 }
 
-func (x *SOrderInfo) GetServerId() int64 {
+func (x *OrderInfo) GetServerId() int64 {
 	if x != nil {
 		return x.ServerId
 	}
 	return 0
 }
 
-func (x *SOrderInfo) GetServerName() string {
+func (x *OrderInfo) GetServerName() string {
 	if x != nil {
 		return x.ServerName
 	}
 	return ""
 }
 
-func (x *SOrderInfo) GetExtension() string {
+func (x *OrderInfo) GetExtension() string {
 	if x != nil {
 		return x.Extension
 	}
 	return ""
 }
 
-func (x *SOrderInfo) GetPid() string {
+func (x *OrderInfo) GetPid() string {
 	if x != nil {
 		return x.Pid
 	}
 	return ""
 }
 
-func (x *SOrderInfo) GetCip() string {
+func (x *OrderInfo) GetCip() string {
 	if x != nil {
 		return x.Cip
 	}
 	return ""
 }
 
-func (x *SOrderInfo) GetCallbackUrl() string {
+func (x *OrderInfo) GetCallbackUrl() string {
 	if x != nil {
 		return x.CallbackUrl
 	}
@@ -182,9 +182,8 @@ var File_data_srv_proto protoreflect.FileDescriptor
 
 const file_data_srv_proto_rawDesc = "" +
 	"\n" +
-	"\x0edata_srv.proto\x12\x02pb\"\xb2\x03\n" +
-	"\n" +
-	"SOrderInfo\x12\x18\n" +
+	"\x0edata_srv.proto\x12\x02pb\"\xb1\x03\n" +
+	"\tOrderInfo\x12\x18\n" +
 	"\aaccount\x18\x01 \x01(\tR\aaccount\x12\x1d\n" +
 	"\n" +
 	"product_id\x18\x02 \x01(\x03R\tproductId\x12!\n" +
@@ -219,7 +218,7 @@ func file_data_srv_proto_rawDescGZIP() []byte {
 
 var file_data_srv_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_data_srv_proto_goTypes = []any{
-	(*SOrderInfo)(nil), // 0: pb.SOrderInfo
+	(*OrderInfo)(nil), // 0: pb.OrderInfo
 }
 var file_data_srv_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type

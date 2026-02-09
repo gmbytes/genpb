@@ -20,10 +20,10 @@ Protocol buffer (protobuf) definitions for a multiplayer game's client-server co
 | `cmd.proto` | Command keys | EKey.T enum (message IDs) |
 | `cmd_req.proto` | Client requests | ReqLogin, ReqCreateRole, ReqPing, ReqEnterScene |
 | `cmd_rsp.proto` | Server responses | RspLogin, RspCreateRole, RspPing, RspEnterScene |
-| `cmd_dsp.proto` | Server dispatches | RspSyncLoginFast, RspSyncLoginData, RspSyncKickRole |
-| `data.proto` | Data structures | SRoleSummaryData, SLoginData, SObject, SItem, SAttr |
-| `data_fwd.proto` | Forward messages | SFwdCheckDistance, SFwdKick |
-| `data_srv.proto` | Server data | SOrderInfo (payment) |
+| `cmd_dsp.proto` | Server dispatches | DspLoginFast, DspLoginData, DspKickRole |
+| `data.proto` | Data structures | RoleSummaryData, LoginData, Object, Item, Attr |
+| `data_fwd.proto` | Forward messages | FwdCheckDistance, FwdKick |
+| `data_srv.proto` | Server data | OrderInfo (payment) |
 
 ## Message ID Ranges
 

@@ -222,7 +222,7 @@ namespace Pb {
         /// </summary>
         [pbr::OriginalName("TestEnter")] EstEnter = 21,
         /// <summary>
-        /// sync
+        /// dsp start
         /// </summary>
         [pbr::OriginalName("LoginFast")] LoginFast = 40000,
         /// <summary>

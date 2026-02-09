@@ -24,18 +24,18 @@ namespace Pb {
     static DataSrvReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Cg5kYXRhX3Nydi5wcm90bxICcGIioAIKClNPcmRlckluZm8SDwoHYWNjb3Vu",
-            "dBgBIAEoCRISCgpwcm9kdWN0X2lkGAIgASgDEhQKDHByb2R1Y3RfbmFtZRgD",
-            "IAEoCRIUCgxwcm9kdWN0X2Rlc2MYBCABKAkSDwoHYnV5X251bRgFIAEoAxIN",
-            "CgVtb25leRgGIAEoAxIPCgdyb2xlX2lkGAcgASgDEhEKCXJvbGVfbmFtZRgI",
-            "IAEoCRISCgpyb2xlX2xldmVsGAkgASgDEhEKCXNlcnZlcl9pZBgKIAEoAxIT",
-            "CgtzZXJ2ZXJfbmFtZRgLIAEoCRIRCglleHRlbnNpb24YDCABKAkSCwoDcGlk",
-            "GA0gASgJEgsKA2NpcBgOIAEoCRIUCgxjYWxsYmFja191cmwYDyABKAlCC1oJ",
-            "c2VydmVyL3BiYgZwcm90bzM="));
+            "Cg5kYXRhX3Nydi5wcm90bxICcGIinwIKCU9yZGVySW5mbxIPCgdhY2NvdW50",
+            "GAEgASgJEhIKCnByb2R1Y3RfaWQYAiABKAMSFAoMcHJvZHVjdF9uYW1lGAMg",
+            "ASgJEhQKDHByb2R1Y3RfZGVzYxgEIAEoCRIPCgdidXlfbnVtGAUgASgDEg0K",
+            "BW1vbmV5GAYgASgDEg8KB3JvbGVfaWQYByABKAMSEQoJcm9sZV9uYW1lGAgg",
+            "ASgJEhIKCnJvbGVfbGV2ZWwYCSABKAMSEQoJc2VydmVyX2lkGAogASgDEhMK",
+            "C3NlcnZlcl9uYW1lGAsgASgJEhEKCWV4dGVuc2lvbhgMIAEoCRILCgNwaWQY",
+            "DSABKAkSCwoDY2lwGA4gASgJEhQKDGNhbGxiYWNrX3VybBgPIAEoCUILWglz",
+            "ZXJ2ZXIvcGJiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.SOrderInfo), global::Pb.SOrderInfo.Parser, new[]{ "Account", "ProductId", "ProductName", "ProductDesc", "BuyNum", "Money", "RoleId", "RoleName", "RoleLevel", "ServerId", "ServerName", "Extension", "Pid", "Cip", "CallbackUrl" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.OrderInfo), global::Pb.OrderInfo.Parser, new[]{ "Account", "ProductId", "ProductName", "ProductDesc", "BuyNum", "Money", "RoleId", "RoleName", "RoleLevel", "ServerId", "ServerName", "Extension", "Pid", "Cip", "CallbackUrl" }, null, null, null, null)
           }));
     }
     #endregion
@@ -45,16 +45,16 @@ namespace Pb {
   /// <summary>
   /// 订单请求
   /// </summary>
-  public sealed partial class SOrderInfo : pb::IMessage<SOrderInfo>
+  public sealed partial class OrderInfo : pb::IMessage<OrderInfo>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<SOrderInfo> _parser = new pb::MessageParser<SOrderInfo>(() => new SOrderInfo());
+    private static readonly pb::MessageParser<OrderInfo> _parser = new pb::MessageParser<OrderInfo>(() => new OrderInfo());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<SOrderInfo> Parser { get { return _parser; } }
+    public static pb::MessageParser<OrderInfo> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -70,7 +70,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SOrderInfo() {
+    public OrderInfo() {
       OnConstruction();
     }
 
@@ -78,7 +78,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SOrderInfo(SOrderInfo other) : this() {
+    public OrderInfo(OrderInfo other) : this() {
       account_ = other.account_;
       productId_ = other.productId_;
       productName_ = other.productName_;
@@ -99,8 +99,8 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SOrderInfo Clone() {
-      return new SOrderInfo(this);
+    public OrderInfo Clone() {
+      return new OrderInfo(this);
     }
 
     /// <summary>Field number for the "account" field.</summary>
@@ -331,12 +331,12 @@ namespace Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as SOrderInfo);
+      return Equals(other as OrderInfo);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(SOrderInfo other) {
+    public bool Equals(OrderInfo other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -591,7 +591,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(SOrderInfo other) {
+    public void MergeFrom(OrderInfo other) {
       if (other == null) {
         return;
       }

@@ -6,7 +6,7 @@ option go_package = "server/pb";
 
 
 // 订单请求
-message SOrderInfo {
+message OrderInfo {
   string                                   account              = 1; // account_id
   int64                                    product_id           = 2; // 商品 ID
   string                                   product_name         = 3; // 当前商品名称

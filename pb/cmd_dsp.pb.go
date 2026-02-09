@@ -92,7 +92,7 @@ func (x *DspLoginFast) GetMagic() int64 {
 
 type DspLoginData struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Data          *SLoginData            `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"` // 登录必要数据
+	Data          *LoginData             `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"` // 登录必要数据
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -127,7 +127,7 @@ func (*DspLoginData) Descriptor() ([]byte, []int) {
 	return file_cmd_dsp_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *DspLoginData) GetData() *SLoginData {
+func (x *DspLoginData) GetData() *LoginData {
 	if x != nil {
 		return x.Data
 	}
@@ -324,9 +324,9 @@ const file_cmd_dsp_proto_rawDesc = "" +
 	"\x02ty\x18\x01 \x01(\x0e2\x15.pb.ESignInFastType.TR\x02ty\x12\x1c\n" +
 	"\ttimestamp\x18\x02 \x01(\x12R\ttimestamp\x12\x14\n" +
 	"\x05token\x18\x03 \x01(\tR\x05token\x12\x14\n" +
-	"\x05magic\x18\x04 \x01(\x12R\x05magic\"2\n" +
-	"\fDspLoginData\x12\"\n" +
-	"\x04data\x18\x01 \x01(\v2\x0e.pb.SLoginDataR\x04data\"Y\n" +
+	"\x05magic\x18\x04 \x01(\x12R\x05magic\"1\n" +
+	"\fDspLoginData\x12!\n" +
+	"\x04data\x18\x01 \x01(\v2\r.pb.LoginDataR\x04data\"Y\n" +
 	"\x11DspServerMaintain\x12\x1f\n" +
 	"\vreboot_time\x18\x01 \x01(\x12R\n" +
 	"rebootTime\x12#\n" +
@@ -358,12 +358,12 @@ var file_cmd_dsp_proto_goTypes = []any{
 	(*DspPreparedEnterScene)(nil), // 4: pb.DspPreparedEnterScene
 	(*DspTest)(nil),               // 5: pb.DspTest
 	(ESignInFastType_T)(0),        // 6: pb.ESignInFastType.T
-	(*SLoginData)(nil),            // 7: pb.SLoginData
+	(*LoginData)(nil),             // 7: pb.LoginData
 	(EKickType_T)(0),              // 8: pb.EKickType.T
 }
 var file_cmd_dsp_proto_depIdxs = []int32{
 	6, // 0: pb.DspLoginFast.ty:type_name -> pb.ESignInFastType.T
-	7, // 1: pb.DspLoginData.data:type_name -> pb.SLoginData
+	7, // 1: pb.DspLoginData.data:type_name -> pb.LoginData
 	8, // 2: pb.DspKickRole.ty:type_name -> pb.EKickType.T
 	3, // [3:3] is the sub-list for method output_type
 	3, // [3:3] is the sub-list for method input_type

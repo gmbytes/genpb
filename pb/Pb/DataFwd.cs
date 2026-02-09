@@ -24,32 +24,32 @@ namespace Pb {
     static DataFwdReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Cg5kYXRhX2Z3ZC5wcm90bxICcGIaCmVudW0ucHJvdG8iNQoRU0Z3ZENoZWNr",
-            "RGlzdGFuY2USEAoIbWFya19jaWQYASABKBISDgoGYXJyaXZlGAIgASgIIg4K",
-            "DFNGd2ROZXdPcmRlciInCghTRndkS2ljaxIbCgJ0eRgBIAEoDjIPLnBiLkVL",
-            "aWNrVHlwZS5UQgtaCXNlcnZlci9wYmIGcHJvdG8z"));
+            "Cg5kYXRhX2Z3ZC5wcm90bxICcGIaCmVudW0ucHJvdG8iNAoQRndkQ2hlY2tE",
+            "aXN0YW5jZRIQCghtYXJrX2NpZBgBIAEoEhIOCgZhcnJpdmUYAiABKAgiDQoL",
+            "RndkTmV3T3JkZXIiJgoHRndkS2ljaxIbCgJ0eRgBIAEoDjIPLnBiLkVLaWNr",
+            "VHlwZS5UQgtaCXNlcnZlci9wYmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Pb.EnumReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.SFwdCheckDistance), global::Pb.SFwdCheckDistance.Parser, new[]{ "MarkCid", "Arrive" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.SFwdNewOrder), global::Pb.SFwdNewOrder.Parser, null, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.SFwdKick), global::Pb.SFwdKick.Parser, new[]{ "Ty" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.FwdCheckDistance), global::Pb.FwdCheckDistance.Parser, new[]{ "MarkCid", "Arrive" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.FwdNewOrder), global::Pb.FwdNewOrder.Parser, null, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.FwdKick), global::Pb.FwdKick.Parser, new[]{ "Ty" }, null, null, null, null)
           }));
     }
     #endregion
 
   }
   #region Messages
-  public sealed partial class SFwdCheckDistance : pb::IMessage<SFwdCheckDistance>
+  public sealed partial class FwdCheckDistance : pb::IMessage<FwdCheckDistance>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<SFwdCheckDistance> _parser = new pb::MessageParser<SFwdCheckDistance>(() => new SFwdCheckDistance());
+    private static readonly pb::MessageParser<FwdCheckDistance> _parser = new pb::MessageParser<FwdCheckDistance>(() => new FwdCheckDistance());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<SFwdCheckDistance> Parser { get { return _parser; } }
+    public static pb::MessageParser<FwdCheckDistance> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -65,7 +65,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SFwdCheckDistance() {
+    public FwdCheckDistance() {
       OnConstruction();
     }
 
@@ -73,7 +73,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SFwdCheckDistance(SFwdCheckDistance other) : this() {
+    public FwdCheckDistance(FwdCheckDistance other) : this() {
       markCid_ = other.markCid_;
       arrive_ = other.arrive_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -81,8 +81,8 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SFwdCheckDistance Clone() {
-      return new SFwdCheckDistance(this);
+    public FwdCheckDistance Clone() {
+      return new FwdCheckDistance(this);
     }
 
     /// <summary>Field number for the "mark_cid" field.</summary>
@@ -112,12 +112,12 @@ namespace Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as SFwdCheckDistance);
+      return Equals(other as FwdCheckDistance);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(SFwdCheckDistance other) {
+    public bool Equals(FwdCheckDistance other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -203,7 +203,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(SFwdCheckDistance other) {
+    public void MergeFrom(FwdCheckDistance other) {
       if (other == null) {
         return;
       }
@@ -266,16 +266,16 @@ namespace Pb {
 
   }
 
-  public sealed partial class SFwdNewOrder : pb::IMessage<SFwdNewOrder>
+  public sealed partial class FwdNewOrder : pb::IMessage<FwdNewOrder>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<SFwdNewOrder> _parser = new pb::MessageParser<SFwdNewOrder>(() => new SFwdNewOrder());
+    private static readonly pb::MessageParser<FwdNewOrder> _parser = new pb::MessageParser<FwdNewOrder>(() => new FwdNewOrder());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<SFwdNewOrder> Parser { get { return _parser; } }
+    public static pb::MessageParser<FwdNewOrder> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -291,7 +291,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SFwdNewOrder() {
+    public FwdNewOrder() {
       OnConstruction();
     }
 
@@ -299,25 +299,25 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SFwdNewOrder(SFwdNewOrder other) : this() {
+    public FwdNewOrder(FwdNewOrder other) : this() {
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SFwdNewOrder Clone() {
-      return new SFwdNewOrder(this);
+    public FwdNewOrder Clone() {
+      return new FwdNewOrder(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as SFwdNewOrder);
+      return Equals(other as FwdNewOrder);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(SFwdNewOrder other) {
+    public bool Equals(FwdNewOrder other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -377,7 +377,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(SFwdNewOrder other) {
+    public void MergeFrom(FwdNewOrder other) {
       if (other == null) {
         return;
       }
@@ -418,16 +418,16 @@ namespace Pb {
 
   }
 
-  public sealed partial class SFwdKick : pb::IMessage<SFwdKick>
+  public sealed partial class FwdKick : pb::IMessage<FwdKick>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<SFwdKick> _parser = new pb::MessageParser<SFwdKick>(() => new SFwdKick());
+    private static readonly pb::MessageParser<FwdKick> _parser = new pb::MessageParser<FwdKick>(() => new FwdKick());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<SFwdKick> Parser { get { return _parser; } }
+    public static pb::MessageParser<FwdKick> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -443,7 +443,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SFwdKick() {
+    public FwdKick() {
       OnConstruction();
     }
 
@@ -451,15 +451,15 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SFwdKick(SFwdKick other) : this() {
+    public FwdKick(FwdKick other) : this() {
       ty_ = other.ty_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SFwdKick Clone() {
-      return new SFwdKick(this);
+    public FwdKick Clone() {
+      return new FwdKick(this);
     }
 
     /// <summary>Field number for the "ty" field.</summary>
@@ -477,12 +477,12 @@ namespace Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as SFwdKick);
+      return Equals(other as FwdKick);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(SFwdKick other) {
+    public bool Equals(FwdKick other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -555,7 +555,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(SFwdKick other) {
+    public void MergeFrom(FwdKick other) {
       if (other == null) {
         return;
       }

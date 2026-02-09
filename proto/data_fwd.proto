@@ -7,13 +7,13 @@ option go_package = "server/pb";
 import    "enum.proto";
 
 
-message SFwdCheckDistance {
+message FwdCheckDistance {
   sint64                                   mark_cid             = 1;
   bool                                     arrive               = 2;
 }
 
-message SFwdNewOrder {}
+message FwdNewOrder {}
 
-message SFwdKick {
+message FwdKick {
   EKickType.T                              ty                   = 1;
 }

@@ -24,50 +24,50 @@ namespace Pb {
     static DataReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgpkYXRhLnByb3RvEgJwYhoKZW51bS5wcm90byJ4ChBTUm9sZVN1bW1hcnlE",
-            "YXRhEgoKAmlkGAEgASgSEgsKA2NpZBgCIAEoEhIKCgJsdhgDIAEoEhIMCgRu",
-            "YW1lGAQgASgJEgwKBGljb24YBSABKBISEAoIeW91bmdfdHMYBiABKBISEQoJ",
-            "Y3JlYXRlX3RzGAcgASgSIjUKClNMb2dpbkRhdGESDgoGcmVnYWluGAEgASgI",
-            "EhcKBHRpbWUYAiABKAsyCS5wYi5TVGltZSJKCgdTT2JqZWN0Eh8KB29ialR5",
-            "cGUYASABKA4yDi5wYi5FT2JqVHlwZS5UEg8KB3N1YlR5cGUYAiABKBISDQoF",
-            "Y291bnQYAyABKBIibAoGU0F3YXJkEg0KBWJhdGNoGAEgASgSEgwKBGJpbmQY",
-            "AiABKBISDgoGd2VpZ2h0GAMgASgSEgsKA2pvYhgEIAEoEhIbCgZvYmplY3QY",
-            "BSABKAsyCy5wYi5TT2JqZWN0EgsKA2R1ZRgGIAEoEiJXCgVTSXRlbRILCgNp",
-            "ZHgYASABKBISCgoCaWQYAiABKBISCwoDY2lkGAMgASgSEg0KBWNvdW50GAQg",
-            "ASgSEgwKBGJpbmQYBSABKBISCwoDZHVlGAYgASgSIoYBCgVTVGltZRIMCgRk",
-            "c2VjGAEgASgSEgwKBHdzZWMYAiABKBISDAoEd2RheRgDIAEoEhILCgNzZWMY",
-            "BCABKBISDQoFeW91bmcYBSABKBISEgoKbG9naW5fdGltZRgGIAEoEhIQCghv",
-            "cGVuX2RheRgHIAEoEhIRCgltZXJnZV9kYXkYCCABKBIiPwoFU0F0dHISGwoC",
-            "dHkYASABKA4yDy5wYi5FQXR0clR5cGUuVBILCgN2YWwYAiABKBISDAoEcmF0",
-            "ZRgDIAEoEiIqCgdTVmVjdG9yEgkKAXgYASABKBISCQoBeRgCIAEoEhIJCgF6",
-            "GAMgASgSQgtaCXNlcnZlci9wYmIGcHJvdG8z"));
+            "CgpkYXRhLnByb3RvEgJwYhoKZW51bS5wcm90byJ3Cg9Sb2xlU3VtbWFyeURh",
+            "dGESCgoCaWQYASABKBISCwoDY2lkGAIgASgSEgoKAmx2GAMgASgSEgwKBG5h",
+            "bWUYBCABKAkSDAoEaWNvbhgFIAEoEhIQCgh5b3VuZ190cxgGIAEoEhIRCglj",
+            "cmVhdGVfdHMYByABKBIiMwoJTG9naW5EYXRhEg4KBnJlZ2FpbhgBIAEoCBIW",
+            "CgR0aW1lGAIgASgLMggucGIuVGltZSJJCgZPYmplY3QSHwoHb2JqVHlwZRgB",
+            "IAEoDjIOLnBiLkVPYmpUeXBlLlQSDwoHc3ViVHlwZRgCIAEoEhINCgVjb3Vu",
+            "dBgDIAEoEiJqCgVBd2FyZBINCgViYXRjaBgBIAEoEhIMCgRiaW5kGAIgASgS",
+            "Eg4KBndlaWdodBgDIAEoEhILCgNqb2IYBCABKBISGgoGb2JqZWN0GAUgASgL",
+            "MgoucGIuT2JqZWN0EgsKA2R1ZRgGIAEoEiJWCgRJdGVtEgsKA2lkeBgBIAEo",
+            "EhIKCgJpZBgCIAEoEhILCgNjaWQYAyABKBISDQoFY291bnQYBCABKBISDAoE",
+            "YmluZBgFIAEoEhILCgNkdWUYBiABKBIihQEKBFRpbWUSDAoEZHNlYxgBIAEo",
+            "EhIMCgR3c2VjGAIgASgSEgwKBHdkYXkYAyABKBISCwoDc2VjGAQgASgSEg0K",
+            "BXlvdW5nGAUgASgSEhIKCmxvZ2luX3RpbWUYBiABKBISEAoIb3Blbl9kYXkY",
+            "ByABKBISEQoJbWVyZ2VfZGF5GAggASgSIj4KBEF0dHISGwoCdHkYASABKA4y",
+            "Dy5wYi5FQXR0clR5cGUuVBILCgN2YWwYAiABKBISDAoEcmF0ZRgDIAEoEiIp",
+            "CgZWZWN0b3ISCQoBeBgBIAEoEhIJCgF5GAIgASgSEgkKAXoYAyABKBJCC1oJ",
+            "c2VydmVyL3BiYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Pb.EnumReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.SRoleSummaryData), global::Pb.SRoleSummaryData.Parser, new[]{ "Id", "Cid", "Lv", "Name", "Icon", "YoungTs", "CreateTs" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.SLoginData), global::Pb.SLoginData.Parser, new[]{ "Regain", "Time" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.SObject), global::Pb.SObject.Parser, new[]{ "ObjType", "SubType", "Count" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.SAward), global::Pb.SAward.Parser, new[]{ "Batch", "Bind", "Weight", "Job", "Object", "Due" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.SItem), global::Pb.SItem.Parser, new[]{ "Idx", "Id", "Cid", "Count", "Bind", "Due" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.STime), global::Pb.STime.Parser, new[]{ "Dsec", "Wsec", "Wday", "Sec", "Young", "LoginTime", "OpenDay", "MergeDay" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.SAttr), global::Pb.SAttr.Parser, new[]{ "Ty", "Val", "Rate" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.SVector), global::Pb.SVector.Parser, new[]{ "X", "Y", "Z" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.RoleSummaryData), global::Pb.RoleSummaryData.Parser, new[]{ "Id", "Cid", "Lv", "Name", "Icon", "YoungTs", "CreateTs" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.LoginData), global::Pb.LoginData.Parser, new[]{ "Regain", "Time" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.Object), global::Pb.Object.Parser, new[]{ "ObjType", "SubType", "Count" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.Award), global::Pb.Award.Parser, new[]{ "Batch", "Bind", "Weight", "Job", "Object", "Due" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.Item), global::Pb.Item.Parser, new[]{ "Idx", "Id", "Cid", "Count", "Bind", "Due" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.Time), global::Pb.Time.Parser, new[]{ "Dsec", "Wsec", "Wday", "Sec", "Young", "LoginTime", "OpenDay", "MergeDay" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.Attr), global::Pb.Attr.Parser, new[]{ "Ty", "Val", "Rate" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.Vector), global::Pb.Vector.Parser, new[]{ "X", "Y", "Z" }, null, null, null, null)
           }));
     }
     #endregion
 
   }
   #region Messages
-  public sealed partial class SRoleSummaryData : pb::IMessage<SRoleSummaryData>
+  public sealed partial class RoleSummaryData : pb::IMessage<RoleSummaryData>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<SRoleSummaryData> _parser = new pb::MessageParser<SRoleSummaryData>(() => new SRoleSummaryData());
+    private static readonly pb::MessageParser<RoleSummaryData> _parser = new pb::MessageParser<RoleSummaryData>(() => new RoleSummaryData());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<SRoleSummaryData> Parser { get { return _parser; } }
+    public static pb::MessageParser<RoleSummaryData> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -83,7 +83,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SRoleSummaryData() {
+    public RoleSummaryData() {
       OnConstruction();
     }
 
@@ -91,7 +91,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SRoleSummaryData(SRoleSummaryData other) : this() {
+    public RoleSummaryData(RoleSummaryData other) : this() {
       id_ = other.id_;
       cid_ = other.cid_;
       lv_ = other.lv_;
@@ -104,8 +104,8 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SRoleSummaryData Clone() {
-      return new SRoleSummaryData(this);
+    public RoleSummaryData Clone() {
+      return new RoleSummaryData(this);
     }
 
     /// <summary>Field number for the "id" field.</summary>
@@ -216,12 +216,12 @@ namespace Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as SRoleSummaryData);
+      return Equals(other as RoleSummaryData);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(SRoleSummaryData other) {
+    public bool Equals(RoleSummaryData other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -372,7 +372,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(SRoleSummaryData other) {
+    public void MergeFrom(RoleSummaryData other) {
       if (other == null) {
         return;
       }
@@ -493,16 +493,16 @@ namespace Pb {
   /// <summary>
   /// 登陆必要数据
   /// </summary>
-  public sealed partial class SLoginData : pb::IMessage<SLoginData>
+  public sealed partial class LoginData : pb::IMessage<LoginData>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<SLoginData> _parser = new pb::MessageParser<SLoginData>(() => new SLoginData());
+    private static readonly pb::MessageParser<LoginData> _parser = new pb::MessageParser<LoginData>(() => new LoginData());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<SLoginData> Parser { get { return _parser; } }
+    public static pb::MessageParser<LoginData> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -518,7 +518,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SLoginData() {
+    public LoginData() {
       OnConstruction();
     }
 
@@ -526,7 +526,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SLoginData(SLoginData other) : this() {
+    public LoginData(LoginData other) : this() {
       regain_ = other.regain_;
       time_ = other.time_ != null ? other.time_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -534,8 +534,8 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SLoginData Clone() {
-      return new SLoginData(this);
+    public LoginData Clone() {
+      return new LoginData(this);
     }
 
     /// <summary>Field number for the "regain" field.</summary>
@@ -555,10 +555,10 @@ namespace Pb {
 
     /// <summary>Field number for the "time" field.</summary>
     public const int TimeFieldNumber = 2;
-    private global::Pb.STime time_;
+    private global::Pb.Time time_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Pb.STime Time {
+    public global::Pb.Time Time {
       get { return time_; }
       set {
         time_ = value;
@@ -568,12 +568,12 @@ namespace Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as SLoginData);
+      return Equals(other as LoginData);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(SLoginData other) {
+    public bool Equals(LoginData other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -659,7 +659,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(SLoginData other) {
+    public void MergeFrom(LoginData other) {
       if (other == null) {
         return;
       }
@@ -668,7 +668,7 @@ namespace Pb {
       }
       if (other.time_ != null) {
         if (time_ == null) {
-          Time = new global::Pb.STime();
+          Time = new global::Pb.Time();
         }
         Time.MergeFrom(other.Time);
       }
@@ -693,7 +693,7 @@ namespace Pb {
           }
           case 18: {
             if (time_ == null) {
-              Time = new global::Pb.STime();
+              Time = new global::Pb.Time();
             }
             input.ReadMessage(Time);
             break;
@@ -719,7 +719,7 @@ namespace Pb {
           }
           case 18: {
             if (time_ == null) {
-              Time = new global::Pb.STime();
+              Time = new global::Pb.Time();
             }
             input.ReadMessage(Time);
             break;
@@ -734,16 +734,16 @@ namespace Pb {
   /// <summary>
   /// 统一对象
   /// </summary>
-  public sealed partial class SObject : pb::IMessage<SObject>
+  public sealed partial class Object : pb::IMessage<Object>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<SObject> _parser = new pb::MessageParser<SObject>(() => new SObject());
+    private static readonly pb::MessageParser<Object> _parser = new pb::MessageParser<Object>(() => new Object());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<SObject> Parser { get { return _parser; } }
+    public static pb::MessageParser<Object> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -759,7 +759,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SObject() {
+    public Object() {
       OnConstruction();
     }
 
@@ -767,7 +767,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SObject(SObject other) : this() {
+    public Object(Object other) : this() {
       objType_ = other.objType_;
       subType_ = other.subType_;
       count_ = other.count_;
@@ -776,8 +776,8 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SObject Clone() {
-      return new SObject(this);
+    public Object Clone() {
+      return new Object(this);
     }
 
     /// <summary>Field number for the "objType" field.</summary>
@@ -828,12 +828,12 @@ namespace Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as SObject);
+      return Equals(other as Object);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(SObject other) {
+    public bool Equals(Object other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -932,7 +932,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(SObject other) {
+    public void MergeFrom(Object other) {
       if (other == null) {
         return;
       }
@@ -1006,16 +1006,16 @@ namespace Pb {
 
   }
 
-  public sealed partial class SAward : pb::IMessage<SAward>
+  public sealed partial class Award : pb::IMessage<Award>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<SAward> _parser = new pb::MessageParser<SAward>(() => new SAward());
+    private static readonly pb::MessageParser<Award> _parser = new pb::MessageParser<Award>(() => new Award());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<SAward> Parser { get { return _parser; } }
+    public static pb::MessageParser<Award> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -1031,7 +1031,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SAward() {
+    public Award() {
       OnConstruction();
     }
 
@@ -1039,7 +1039,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SAward(SAward other) : this() {
+    public Award(Award other) : this() {
       batch_ = other.batch_;
       bind_ = other.bind_;
       weight_ = other.weight_;
@@ -1051,8 +1051,8 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SAward Clone() {
-      return new SAward(this);
+    public Award Clone() {
+      return new Award(this);
     }
 
     /// <summary>Field number for the "batch" field.</summary>
@@ -1105,10 +1105,10 @@ namespace Pb {
 
     /// <summary>Field number for the "object" field.</summary>
     public const int ObjectFieldNumber = 5;
-    private global::Pb.SObject object_;
+    private global::Pb.Object object_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Pb.SObject Object {
+    public global::Pb.Object Object {
       get { return object_; }
       set {
         object_ = value;
@@ -1130,12 +1130,12 @@ namespace Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as SAward);
+      return Equals(other as Award);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(SAward other) {
+    public bool Equals(Award other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -1273,7 +1273,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(SAward other) {
+    public void MergeFrom(Award other) {
       if (other == null) {
         return;
       }
@@ -1291,7 +1291,7 @@ namespace Pb {
       }
       if (other.object_ != null) {
         if (object_ == null) {
-          Object = new global::Pb.SObject();
+          Object = new global::Pb.Object();
         }
         Object.MergeFrom(other.Object);
       }
@@ -1331,7 +1331,7 @@ namespace Pb {
           }
           case 42: {
             if (object_ == null) {
-              Object = new global::Pb.SObject();
+              Object = new global::Pb.Object();
             }
             input.ReadMessage(Object);
             break;
@@ -1373,7 +1373,7 @@ namespace Pb {
           }
           case 42: {
             if (object_ == null) {
-              Object = new global::Pb.SObject();
+              Object = new global::Pb.Object();
             }
             input.ReadMessage(Object);
             break;
@@ -1389,16 +1389,16 @@ namespace Pb {
 
   }
 
-  public sealed partial class SItem : pb::IMessage<SItem>
+  public sealed partial class Item : pb::IMessage<Item>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<SItem> _parser = new pb::MessageParser<SItem>(() => new SItem());
+    private static readonly pb::MessageParser<Item> _parser = new pb::MessageParser<Item>(() => new Item());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<SItem> Parser { get { return _parser; } }
+    public static pb::MessageParser<Item> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -1414,7 +1414,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SItem() {
+    public Item() {
       OnConstruction();
     }
 
@@ -1422,7 +1422,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SItem(SItem other) : this() {
+    public Item(Item other) : this() {
       idx_ = other.idx_;
       id_ = other.id_;
       cid_ = other.cid_;
@@ -1434,8 +1434,8 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SItem Clone() {
-      return new SItem(this);
+    public Item Clone() {
+      return new Item(this);
     }
 
     /// <summary>Field number for the "idx" field.</summary>
@@ -1531,12 +1531,12 @@ namespace Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as SItem);
+      return Equals(other as Item);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(SItem other) {
+    public bool Equals(Item other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -1674,7 +1674,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(SItem other) {
+    public void MergeFrom(Item other) {
       if (other == null) {
         return;
       }
@@ -1781,16 +1781,16 @@ namespace Pb {
 
   }
 
-  public sealed partial class STime : pb::IMessage<STime>
+  public sealed partial class Time : pb::IMessage<Time>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<STime> _parser = new pb::MessageParser<STime>(() => new STime());
+    private static readonly pb::MessageParser<Time> _parser = new pb::MessageParser<Time>(() => new Time());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<STime> Parser { get { return _parser; } }
+    public static pb::MessageParser<Time> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -1806,7 +1806,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public STime() {
+    public Time() {
       OnConstruction();
     }
 
@@ -1814,7 +1814,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public STime(STime other) : this() {
+    public Time(Time other) : this() {
       dsec_ = other.dsec_;
       wsec_ = other.wsec_;
       wday_ = other.wday_;
@@ -1828,8 +1828,8 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public STime Clone() {
-      return new STime(this);
+    public Time Clone() {
+      return new Time(this);
     }
 
     /// <summary>Field number for the "dsec" field.</summary>
@@ -1955,12 +1955,12 @@ namespace Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as STime);
+      return Equals(other as Time);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(STime other) {
+    public bool Equals(Time other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -2124,7 +2124,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(STime other) {
+    public void MergeFrom(Time other) {
       if (other == null) {
         return;
       }
@@ -2253,16 +2253,16 @@ namespace Pb {
 
   }
 
-  public sealed partial class SAttr : pb::IMessage<SAttr>
+  public sealed partial class Attr : pb::IMessage<Attr>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<SAttr> _parser = new pb::MessageParser<SAttr>(() => new SAttr());
+    private static readonly pb::MessageParser<Attr> _parser = new pb::MessageParser<Attr>(() => new Attr());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<SAttr> Parser { get { return _parser; } }
+    public static pb::MessageParser<Attr> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -2278,7 +2278,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SAttr() {
+    public Attr() {
       OnConstruction();
     }
 
@@ -2286,7 +2286,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SAttr(SAttr other) : this() {
+    public Attr(Attr other) : this() {
       ty_ = other.ty_;
       val_ = other.val_;
       rate_ = other.rate_;
@@ -2295,8 +2295,8 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SAttr Clone() {
-      return new SAttr(this);
+    public Attr Clone() {
+      return new Attr(this);
     }
 
     /// <summary>Field number for the "ty" field.</summary>
@@ -2347,12 +2347,12 @@ namespace Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as SAttr);
+      return Equals(other as Attr);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(SAttr other) {
+    public bool Equals(Attr other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -2451,7 +2451,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(SAttr other) {
+    public void MergeFrom(Attr other) {
       if (other == null) {
         return;
       }
@@ -2525,16 +2525,16 @@ namespace Pb {
 
   }
 
-  public sealed partial class SVector : pb::IMessage<SVector>
+  public sealed partial class Vector : pb::IMessage<Vector>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<SVector> _parser = new pb::MessageParser<SVector>(() => new SVector());
+    private static readonly pb::MessageParser<Vector> _parser = new pb::MessageParser<Vector>(() => new Vector());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<SVector> Parser { get { return _parser; } }
+    public static pb::MessageParser<Vector> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -2550,7 +2550,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SVector() {
+    public Vector() {
       OnConstruction();
     }
 
@@ -2558,7 +2558,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SVector(SVector other) : this() {
+    public Vector(Vector other) : this() {
       x_ = other.x_;
       y_ = other.y_;
       z_ = other.z_;
@@ -2567,8 +2567,8 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public SVector Clone() {
-      return new SVector(this);
+    public Vector Clone() {
+      return new Vector(this);
     }
 
     /// <summary>Field number for the "x" field.</summary>
@@ -2610,12 +2610,12 @@ namespace Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as SVector);
+      return Equals(other as Vector);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(SVector other) {
+    public bool Equals(Vector other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -2714,7 +2714,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(SVector other) {
+    public void MergeFrom(Vector other) {
       if (other == null) {
         return;
       }

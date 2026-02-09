@@ -21,7 +21,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type SFwdCheckDistance struct {
+type FwdCheckDistance struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	MarkCid       int64                  `protobuf:"zigzag64,1,opt,name=mark_cid,json=markCid,proto3" json:"mark_cid,omitempty"`
 	Arrive        bool                   `protobuf:"varint,2,opt,name=arrive,proto3" json:"arrive,omitempty"`
@@ -29,20 +29,20 @@ type SFwdCheckDistance struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SFwdCheckDistance) Reset() {
-	*x = SFwdCheckDistance{}
+func (x *FwdCheckDistance) Reset() {
+	*x = FwdCheckDistance{}
 	mi := &file_data_fwd_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SFwdCheckDistance) String() string {
+func (x *FwdCheckDistance) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SFwdCheckDistance) ProtoMessage() {}
+func (*FwdCheckDistance) ProtoMessage() {}
 
-func (x *SFwdCheckDistance) ProtoReflect() protoreflect.Message {
+func (x *FwdCheckDistance) ProtoReflect() protoreflect.Message {
 	mi := &file_data_fwd_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -54,45 +54,45 @@ func (x *SFwdCheckDistance) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SFwdCheckDistance.ProtoReflect.Descriptor instead.
-func (*SFwdCheckDistance) Descriptor() ([]byte, []int) {
+// Deprecated: Use FwdCheckDistance.ProtoReflect.Descriptor instead.
+func (*FwdCheckDistance) Descriptor() ([]byte, []int) {
 	return file_data_fwd_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *SFwdCheckDistance) GetMarkCid() int64 {
+func (x *FwdCheckDistance) GetMarkCid() int64 {
 	if x != nil {
 		return x.MarkCid
 	}
 	return 0
 }
 
-func (x *SFwdCheckDistance) GetArrive() bool {
+func (x *FwdCheckDistance) GetArrive() bool {
 	if x != nil {
 		return x.Arrive
 	}
 	return false
 }
 
-type SFwdNewOrder struct {
+type FwdNewOrder struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SFwdNewOrder) Reset() {
-	*x = SFwdNewOrder{}
+func (x *FwdNewOrder) Reset() {
+	*x = FwdNewOrder{}
 	mi := &file_data_fwd_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SFwdNewOrder) String() string {
+func (x *FwdNewOrder) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SFwdNewOrder) ProtoMessage() {}
+func (*FwdNewOrder) ProtoMessage() {}
 
-func (x *SFwdNewOrder) ProtoReflect() protoreflect.Message {
+func (x *FwdNewOrder) ProtoReflect() protoreflect.Message {
 	mi := &file_data_fwd_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -104,32 +104,32 @@ func (x *SFwdNewOrder) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SFwdNewOrder.ProtoReflect.Descriptor instead.
-func (*SFwdNewOrder) Descriptor() ([]byte, []int) {
+// Deprecated: Use FwdNewOrder.ProtoReflect.Descriptor instead.
+func (*FwdNewOrder) Descriptor() ([]byte, []int) {
 	return file_data_fwd_proto_rawDescGZIP(), []int{1}
 }
 
-type SFwdKick struct {
+type FwdKick struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Ty            EKickType_T            `protobuf:"varint,1,opt,name=ty,proto3,enum=pb.EKickType_T" json:"ty,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *SFwdKick) Reset() {
-	*x = SFwdKick{}
+func (x *FwdKick) Reset() {
+	*x = FwdKick{}
 	mi := &file_data_fwd_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SFwdKick) String() string {
+func (x *FwdKick) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SFwdKick) ProtoMessage() {}
+func (*FwdKick) ProtoMessage() {}
 
-func (x *SFwdKick) ProtoReflect() protoreflect.Message {
+func (x *FwdKick) ProtoReflect() protoreflect.Message {
 	mi := &file_data_fwd_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -141,12 +141,12 @@ func (x *SFwdKick) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SFwdKick.ProtoReflect.Descriptor instead.
-func (*SFwdKick) Descriptor() ([]byte, []int) {
+// Deprecated: Use FwdKick.ProtoReflect.Descriptor instead.
+func (*FwdKick) Descriptor() ([]byte, []int) {
 	return file_data_fwd_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *SFwdKick) GetTy() EKickType_T {
+func (x *FwdKick) GetTy() EKickType_T {
 	if x != nil {
 		return x.Ty
 	}
@@ -158,12 +158,12 @@ var File_data_fwd_proto protoreflect.FileDescriptor
 const file_data_fwd_proto_rawDesc = "" +
 	"\n" +
 	"\x0edata_fwd.proto\x12\x02pb\x1a\n" +
-	"enum.proto\"F\n" +
-	"\x11SFwdCheckDistance\x12\x19\n" +
+	"enum.proto\"E\n" +
+	"\x10FwdCheckDistance\x12\x19\n" +
 	"\bmark_cid\x18\x01 \x01(\x12R\amarkCid\x12\x16\n" +
-	"\x06arrive\x18\x02 \x01(\bR\x06arrive\"\x0e\n" +
-	"\fSFwdNewOrder\"+\n" +
-	"\bSFwdKick\x12\x1f\n" +
+	"\x06arrive\x18\x02 \x01(\bR\x06arrive\"\r\n" +
+	"\vFwdNewOrder\"*\n" +
+	"\aFwdKick\x12\x1f\n" +
 	"\x02ty\x18\x01 \x01(\x0e2\x0f.pb.EKickType.TR\x02tyB\vZ\tserver/pbb\x06proto3"
 
 var (
@@ -180,13 +180,13 @@ func file_data_fwd_proto_rawDescGZIP() []byte {
 
 var file_data_fwd_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_data_fwd_proto_goTypes = []any{
-	(*SFwdCheckDistance)(nil), // 0: pb.SFwdCheckDistance
-	(*SFwdNewOrder)(nil),      // 1: pb.SFwdNewOrder
-	(*SFwdKick)(nil),          // 2: pb.SFwdKick
-	(EKickType_T)(0),          // 3: pb.EKickType.T
+	(*FwdCheckDistance)(nil), // 0: pb.FwdCheckDistance
+	(*FwdNewOrder)(nil),      // 1: pb.FwdNewOrder
+	(*FwdKick)(nil),          // 2: pb.FwdKick
+	(EKickType_T)(0),         // 3: pb.EKickType.T
 }
 var file_data_fwd_proto_depIdxs = []int32{
-	3, // 0: pb.SFwdKick.ty:type_name -> pb.EKickType.T
+	3, // 0: pb.FwdKick.ty:type_name -> pb.EKickType.T
 	1, // [1:1] is the sub-list for method output_type
 	1, // [1:1] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name

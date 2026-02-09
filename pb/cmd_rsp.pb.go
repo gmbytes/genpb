@@ -28,7 +28,7 @@ type RspLogin struct {
 	RebootTime    int64                  `protobuf:"zigzag64,3,opt,name=reboot_time,json=rebootTime,proto3" json:"reboot_time,omitempty"`       // 预计开服时间戳，为 0 代表未知
 	ShutdownTime  int64                  `protobuf:"zigzag64,4,opt,name=shutdown_time,json=shutdownTime,proto3" json:"shutdown_time,omitempty"` // 关服时间戳
 	Devmod        bool                   `protobuf:"varint,5,opt,name=devmod,proto3" json:"devmod,omitempty"`                                   // 是否为开发模式
-	Roles         []*SRoleSummaryData    `protobuf:"bytes,6,rep,name=roles,proto3" json:"roles,omitempty"`                                      // 角色数组
+	Roles         []*RoleSummaryData     `protobuf:"bytes,6,rep,name=roles,proto3" json:"roles,omitempty"`                                      // 角色数组
 	Account       string                 `protobuf:"bytes,7,opt,name=account,proto3" json:"account,omitempty"`                                  // 账号 id
 	ServerTime    int64                  `protobuf:"zigzag64,8,opt,name=server_time,json=serverTime,proto3" json:"server_time,omitempty"`       // 服务器时间（毫秒）
 	unknownFields protoimpl.UnknownFields
@@ -100,7 +100,7 @@ func (x *RspLogin) GetDevmod() bool {
 	return false
 }
 
-func (x *RspLogin) GetRoles() []*SRoleSummaryData {
+func (x *RspLogin) GetRoles() []*RoleSummaryData {
 	if x != nil {
 		return x.Roles
 	}
@@ -124,7 +124,7 @@ func (x *RspLogin) GetServerTime() int64 {
 type RspCreateRole struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Err           EErrorCode_T           `protobuf:"varint,1,opt,name=err,proto3,enum=pb.EErrorCode_T" json:"err,omitempty"`
-	Role          *SRoleSummaryData      `protobuf:"bytes,2,opt,name=role,proto3" json:"role,omitempty"` // 角色
+	Role          *RoleSummaryData       `protobuf:"bytes,2,opt,name=role,proto3" json:"role,omitempty"` // 角色
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -166,7 +166,7 @@ func (x *RspCreateRole) GetErr() EErrorCode_T {
 	return EErrorCode_Ok
 }
 
-func (x *RspCreateRole) GetRole() *SRoleSummaryData {
+func (x *RspCreateRole) GetRole() *RoleSummaryData {
 	if x != nil {
 		return x.Role
 	}
@@ -229,7 +229,7 @@ func (x *RspDeleteRole) GetRoleId() int64 {
 type RspLoginRole struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Err           EErrorCode_T           `protobuf:"varint,1,opt,name=err,proto3,enum=pb.EErrorCode_T" json:"err,omitempty"`
-	Data          *SLoginData            `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"` // 登录必要数据
+	Data          *LoginData             `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"` // 登录必要数据
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -271,7 +271,7 @@ func (x *RspLoginRole) GetErr() EErrorCode_T {
 	return EErrorCode_Ok
 }
 
-func (x *RspLoginRole) GetData() *SLoginData {
+func (x *RspLoginRole) GetData() *LoginData {
 	if x != nil {
 		return x.Data
 	}
@@ -430,27 +430,27 @@ const file_cmd_rsp_proto_rawDesc = "" +
 	"\n" +
 	"\rcmd_rsp.proto\x12\x02pb\x1a\n" +
 	"data.proto\x1a\n" +
-	"enum.proto\"\x87\x02\n" +
+	"enum.proto\"\x86\x02\n" +
 	"\bRspLogin\x12\"\n" +
 	"\x03err\x18\x01 \x01(\x0e2\x10.pb.EErrorCode.TR\x03err\x12\x12\n" +
 	"\x04fast\x18\x02 \x01(\bR\x04fast\x12\x1f\n" +
 	"\vreboot_time\x18\x03 \x01(\x12R\n" +
 	"rebootTime\x12#\n" +
 	"\rshutdown_time\x18\x04 \x01(\x12R\fshutdownTime\x12\x16\n" +
-	"\x06devmod\x18\x05 \x01(\bR\x06devmod\x12*\n" +
-	"\x05roles\x18\x06 \x03(\v2\x14.pb.SRoleSummaryDataR\x05roles\x12\x18\n" +
+	"\x06devmod\x18\x05 \x01(\bR\x06devmod\x12)\n" +
+	"\x05roles\x18\x06 \x03(\v2\x13.pb.RoleSummaryDataR\x05roles\x12\x18\n" +
 	"\aaccount\x18\a \x01(\tR\aaccount\x12\x1f\n" +
 	"\vserver_time\x18\b \x01(\x12R\n" +
-	"serverTime\"]\n" +
+	"serverTime\"\\\n" +
 	"\rRspCreateRole\x12\"\n" +
-	"\x03err\x18\x01 \x01(\x0e2\x10.pb.EErrorCode.TR\x03err\x12(\n" +
-	"\x04role\x18\x02 \x01(\v2\x14.pb.SRoleSummaryDataR\x04role\"L\n" +
+	"\x03err\x18\x01 \x01(\x0e2\x10.pb.EErrorCode.TR\x03err\x12'\n" +
+	"\x04role\x18\x02 \x01(\v2\x13.pb.RoleSummaryDataR\x04role\"L\n" +
 	"\rRspDeleteRole\x12\"\n" +
 	"\x03err\x18\x01 \x01(\x0e2\x10.pb.EErrorCode.TR\x03err\x12\x17\n" +
-	"\arole_id\x18\x02 \x01(\x12R\x06roleId\"V\n" +
+	"\arole_id\x18\x02 \x01(\x12R\x06roleId\"U\n" +
 	"\fRspLoginRole\x12\"\n" +
-	"\x03err\x18\x01 \x01(\x0e2\x10.pb.EErrorCode.TR\x03err\x12\"\n" +
-	"\x04data\x18\x02 \x01(\v2\x0e.pb.SLoginDataR\x04data\"\t\n" +
+	"\x03err\x18\x01 \x01(\x0e2\x10.pb.EErrorCode.TR\x03err\x12!\n" +
+	"\x04data\x18\x02 \x01(\v2\r.pb.LoginDataR\x04data\"\t\n" +
 	"\aRspPing\"\f\n" +
 	"\n" +
 	"RspPingXXX\"\x0f\n" +
@@ -471,26 +471,26 @@ func file_cmd_rsp_proto_rawDescGZIP() []byte {
 
 var file_cmd_rsp_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_cmd_rsp_proto_goTypes = []any{
-	(*RspLogin)(nil),         // 0: pb.RspLogin
-	(*RspCreateRole)(nil),    // 1: pb.RspCreateRole
-	(*RspDeleteRole)(nil),    // 2: pb.RspDeleteRole
-	(*RspLoginRole)(nil),     // 3: pb.RspLoginRole
-	(*RspPing)(nil),          // 4: pb.RspPing
-	(*RspPingXXX)(nil),       // 5: pb.RspPingXXX
-	(*RspEnterScene)(nil),    // 6: pb.RspEnterScene
-	(*RspTestEnter)(nil),     // 7: pb.RspTestEnter
-	(EErrorCode_T)(0),        // 8: pb.EErrorCode.T
-	(*SRoleSummaryData)(nil), // 9: pb.SRoleSummaryData
-	(*SLoginData)(nil),       // 10: pb.SLoginData
+	(*RspLogin)(nil),        // 0: pb.RspLogin
+	(*RspCreateRole)(nil),   // 1: pb.RspCreateRole
+	(*RspDeleteRole)(nil),   // 2: pb.RspDeleteRole
+	(*RspLoginRole)(nil),    // 3: pb.RspLoginRole
+	(*RspPing)(nil),         // 4: pb.RspPing
+	(*RspPingXXX)(nil),      // 5: pb.RspPingXXX
+	(*RspEnterScene)(nil),   // 6: pb.RspEnterScene
+	(*RspTestEnter)(nil),    // 7: pb.RspTestEnter
+	(EErrorCode_T)(0),       // 8: pb.EErrorCode.T
+	(*RoleSummaryData)(nil), // 9: pb.RoleSummaryData
+	(*LoginData)(nil),       // 10: pb.LoginData
 }
 var file_cmd_rsp_proto_depIdxs = []int32{
 	8,  // 0: pb.RspLogin.err:type_name -> pb.EErrorCode.T
-	9,  // 1: pb.RspLogin.roles:type_name -> pb.SRoleSummaryData
+	9,  // 1: pb.RspLogin.roles:type_name -> pb.RoleSummaryData
 	8,  // 2: pb.RspCreateRole.err:type_name -> pb.EErrorCode.T
-	9,  // 3: pb.RspCreateRole.role:type_name -> pb.SRoleSummaryData
+	9,  // 3: pb.RspCreateRole.role:type_name -> pb.RoleSummaryData
 	8,  // 4: pb.RspDeleteRole.err:type_name -> pb.EErrorCode.T
 	8,  // 5: pb.RspLoginRole.err:type_name -> pb.EErrorCode.T
-	10, // 6: pb.RspLoginRole.data:type_name -> pb.SLoginData
+	10, // 6: pb.RspLoginRole.data:type_name -> pb.LoginData
 	7,  // [7:7] is the sub-list for method output_type
 	7,  // [7:7] is the sub-list for method input_type
 	7,  // [7:7] is the sub-list for extension type_name
