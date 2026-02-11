@@ -7,11 +7,12 @@
 package pb
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -174,9 +175,9 @@ func (x *RspCreateRole) GetRole() *RoleSummaryData {
 }
 
 type RspDeleteRole struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Err           EErrorCode_T           `protobuf:"varint,1,opt,name=err,proto3,enum=pb.EErrorCode_T" json:"err,omitempty"`
-	RoleId        int64                  `protobuf:"zigzag64,2,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
+	state  protoimpl.MessageState `protogen:"open.v1"`
+	Err    EErrorCode_T           `protobuf:"varint,1,opt,name=err,proto3,enum=pb.EErrorCode_T" json:"err,omitempty"`
+	RoleId int64                  `protobuf:"zigzag64,2,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

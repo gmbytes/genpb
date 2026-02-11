@@ -39,7 +39,7 @@ namespace Pb {
             "BXlvdW5nGAUgASgSEhIKCmxvZ2luX3RpbWUYBiABKBISEAoIb3Blbl9kYXkY",
             "ByABKBISEQoJbWVyZ2VfZGF5GAggASgSIj4KBEF0dHISGwoCdHkYASABKA4y",
             "Dy5wYi5FQXR0clR5cGUuVBILCgN2YWwYAiABKBISDAoEcmF0ZRgDIAEoEiIp",
-            "CgZWZWN0b3ISCQoBeBgBIAEoEhIJCgF5GAIgASgSEgkKAXoYAyABKBJCC1oJ",
+            "CgZWZWN0b3ISCQoBeBgBIAEoARIJCgF5GAIgASgBEgkKAXoYAyABKAFCC1oJ",
             "c2VydmVyL3BiYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Pb.EnumReflection.Descriptor, },
@@ -2573,10 +2573,10 @@ namespace Pb {
 
     /// <summary>Field number for the "x" field.</summary>
     public const int XFieldNumber = 1;
-    private long x_;
+    private double x_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public long X {
+    public double X {
       get { return x_; }
       set {
         x_ = value;
@@ -2585,10 +2585,10 @@ namespace Pb {
 
     /// <summary>Field number for the "y" field.</summary>
     public const int YFieldNumber = 2;
-    private long y_;
+    private double y_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public long Y {
+    public double Y {
       get { return y_; }
       set {
         y_ = value;
@@ -2597,10 +2597,10 @@ namespace Pb {
 
     /// <summary>Field number for the "z" field.</summary>
     public const int ZFieldNumber = 3;
-    private long z_;
+    private double z_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public long Z {
+    public double Z {
       get { return z_; }
       set {
         z_ = value;
@@ -2622,9 +2622,9 @@ namespace Pb {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (X != other.X) return false;
-      if (Y != other.Y) return false;
-      if (Z != other.Z) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(X, other.X)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(Y, other.Y)) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(Z, other.Z)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -2632,9 +2632,9 @@ namespace Pb {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (X != 0L) hash ^= X.GetHashCode();
-      if (Y != 0L) hash ^= Y.GetHashCode();
-      if (Z != 0L) hash ^= Z.GetHashCode();
+      if (X != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(X);
+      if (Y != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(Y);
+      if (Z != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(Z);
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -2653,17 +2653,17 @@ namespace Pb {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (X != 0L) {
-        output.WriteRawTag(8);
-        output.WriteSInt64(X);
+      if (X != 0D) {
+        output.WriteRawTag(9);
+        output.WriteDouble(X);
       }
-      if (Y != 0L) {
-        output.WriteRawTag(16);
-        output.WriteSInt64(Y);
+      if (Y != 0D) {
+        output.WriteRawTag(17);
+        output.WriteDouble(Y);
       }
-      if (Z != 0L) {
-        output.WriteRawTag(24);
-        output.WriteSInt64(Z);
+      if (Z != 0D) {
+        output.WriteRawTag(25);
+        output.WriteDouble(Z);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -2675,17 +2675,17 @@ namespace Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (X != 0L) {
-        output.WriteRawTag(8);
-        output.WriteSInt64(X);
+      if (X != 0D) {
+        output.WriteRawTag(9);
+        output.WriteDouble(X);
       }
-      if (Y != 0L) {
-        output.WriteRawTag(16);
-        output.WriteSInt64(Y);
+      if (Y != 0D) {
+        output.WriteRawTag(17);
+        output.WriteDouble(Y);
       }
-      if (Z != 0L) {
-        output.WriteRawTag(24);
-        output.WriteSInt64(Z);
+      if (Z != 0D) {
+        output.WriteRawTag(25);
+        output.WriteDouble(Z);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -2697,14 +2697,14 @@ namespace Pb {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (X != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeSInt64Size(X);
+      if (X != 0D) {
+        size += 1 + 8;
       }
-      if (Y != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeSInt64Size(Y);
+      if (Y != 0D) {
+        size += 1 + 8;
       }
-      if (Z != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeSInt64Size(Z);
+      if (Z != 0D) {
+        size += 1 + 8;
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -2718,13 +2718,13 @@ namespace Pb {
       if (other == null) {
         return;
       }
-      if (other.X != 0L) {
+      if (other.X != 0D) {
         X = other.X;
       }
-      if (other.Y != 0L) {
+      if (other.Y != 0D) {
         Y = other.Y;
       }
-      if (other.Z != 0L) {
+      if (other.Z != 0D) {
         Z = other.Z;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -2742,16 +2742,16 @@ namespace Pb {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 8: {
-            X = input.ReadSInt64();
+          case 9: {
+            X = input.ReadDouble();
             break;
           }
-          case 16: {
-            Y = input.ReadSInt64();
+          case 17: {
+            Y = input.ReadDouble();
             break;
           }
-          case 24: {
-            Z = input.ReadSInt64();
+          case 25: {
+            Z = input.ReadDouble();
             break;
           }
         }
@@ -2769,16 +2769,16 @@ namespace Pb {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 8: {
-            X = input.ReadSInt64();
+          case 9: {
+            X = input.ReadDouble();
             break;
           }
-          case 16: {
-            Y = input.ReadSInt64();
+          case 17: {
+            Y = input.ReadDouble();
             break;
           }
-          case 24: {
-            Z = input.ReadSInt64();
+          case 25: {
+            Z = input.ReadDouble();
             break;
           }
         }

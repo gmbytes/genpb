@@ -25,9 +25,9 @@ Generates Go and C# code from `.proto` files for game server client-server commu
 
 ```bash
 # Windows
-gen.bat                    # 全部默认
-gen.bat client             # client 模式
-gen.bat server ./proto ./pb ./pb/Pb go ../proto   # 指定工具目录
+genpb.bat                    # 全部默认
+genpb.bat client             # client 模式
+genpb.bat server ./proto ./pb ./pb/Pb go ../proto   # 指定工具目录
 
 # Linux/macOS
 ./gen.sh
