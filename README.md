@@ -1,106 +1,75 @@
-# genxls
-game config xls to json  cs go
+# genpb
 
-## Usage
+Protocol Buffer 代码生成工具。在 protoc 生成的基础代码之上，额外生成消息解析扩展与 Vector 定点数数学扩展，支持 **Go** 与 **C#**。
+
+## 依赖
+
+- **protoc**：Protocol Buffer 编译器
+- **protoc-gen-go**：Go 语言插件（仅生成 Go 时需要）
+
+默认从 `../proto` 目录查找上述可执行文件，可通过 `--tools_dir` 指定。
+
+## 用法
 
 ```bash
-./run.sh
+go run .
 ```
 
-Or run directly:
+或指定参数：
 
 ```bash
-go run . --in ./xls --out ./out --lang all --pkg config
+go run . --proto_in ./proto --go_out ./pb --cs_out ./pb/Pb --lang all --flag server
 ```
 
-This will generate:
+### 参数说明
 
-- `go.gen.go`
-- `cs.gen.cs`
-- `ts.gen.ts`
-- `all.json` (default, can disable with `--json=false`)
+| 参数 | 默认值 | 说明 |
+|------|--------|------|
+| `--proto_in` | `./proto` | proto 文件所在目录 |
+| `--go_out` | `./pb` | Go 生成输出目录 |
+| `--cs_out` | `./pb/Pb` | C# 生成输出目录 |
+| `--lang` | `all` | 生成语言：`go`、`Pb`、`all` |
+| `--tools_dir` | `../proto` | 存放 protoc、protoc-gen-go 的目录 |
+| `--flag` | `server` | 导出范围：`server`（全部）、`client`（排除 data_srv.proto、data_fwd.proto） |
 
-Notes:
-
-- `--in` can be a file or a directory. If omitted, it defaults to `./xls`.
-- If a file has `.xls/.xlsx` extension but its content is actually tab-separated text, it will still be parsed.
-- Output is aggregated by sheet name (see "Output format").
-
-## Header rules
-
-- **1 row header**
-  - Row1: field definitions
-
-- **2 rows header**
-  - Row1: comment (ignored)
-  - Row2: field definitions (exported)
-  - default: horizontal table
-
-- **3 rows header**
-  - Row1(A1): orientation marker
-    - empty or `1`: horizontal
-    - `2`: vertical
-  - Row2: comment (ignored)
-  - Row3: field definitions (exported)
-
-Field definition format:
-
-`name#type[,s|c]`
-
-- `#comment` / `#common`: ignored (not exported)
-- `,s`: only export for `--flag server`
-- `,c`: only export for `--flag client`
-
-## Supported types
-
-- `int`
-- `float`
-- `bool`
-- `string`
-- `int[]`
-- `int[][]`
-
-## Cell value format
-
-- `int/float/bool/string`: normal cell values
-- `int[]`: use brace-array (string cell) like `"{1,2,3}"` or `{}` for empty
-- `int[][]`: use brace-array like `"{{1,2,3},{4,5,6}}"` or `{}` for empty
-
-The tool converts `{}`/`"{}"` to an empty JSON array.
-
-## Output format
-
-### all.json
-
-The output JSON is an object keyed by sheet name (pluralized, lower camel case):
-
-```json
-{
-  "items": [ ... ],
-  "quests": [ ... ]
-}
-```
+## 生成内容
 
 ### Go
 
-`go.gen.go` contains:
-
-- `type AllConfig struct { Items []Item \`json:"items"\`; Quests []Quest \`json:"quests"\` }`
-- One `type <SheetName> struct { ... }` per sheet
-
-You can deserialize like:
-
-```go
-var cfg config.AllConfig
-_ = json.Unmarshal(data, &cfg)
-```
+1. **protoc 生成**：`*.pb.go`（enum、data、cmd、cmd_req、cmd_rsp、cmd_dsp、data_srv、data_fwd 等）
+2. **pbgen 扩展**：
+   - **cmd.ext.go**：消息解析器（按 EKey 注册/反序列化）、`MarshalToNetBytes` / `Unmarshal`、各消息的 `Key()` / `Marshal()`
+   - **data.pb.vector.go**：Vector 定点数数学扩展（见下方 Vector 定点数）
 
 ### C#
 
-`cs.gen.cs` uses `System.Text.Json.Serialization.JsonPropertyName` so `all.json` can be deserialized into `AllConfig`.
+1. **protoc 生成**：`*.cs`（Data.cs、Enum.cs、Cmd.cs、CmdReq.cs、CmdRsp.cs、CmdDsp.cs 等）
+2. **pbgen 扩展**：
+   - **CmdExt.cs**：`Cmd.EKey` 枚举、`GetMessageType(EKey)`、各消息的 `GetKey()` 扩展方法
+   - **DataVector.cs**：Vector 定点数数学扩展（与 Go 功能一致，见下方 Vector 定点数）
 
-### TypeScript
+## Vector 定点数
 
-`ts.gen.ts` exports `interface AllConfig` with keys matching `all.json` (e.g. `items`, `quests`).
+`data.proto` 中定义：
 
+```protobuf
+message Vector {
+  int64 x = 1;
+  int64 y = 2;
+  int64 z = 3;
+}
+```
 
+Go 与 C# 的扩展均采用**定点数**表示坐标：
+
+- **Scale = 1000**：真实坐标 `0.001` 对应存储值 `1`
+- **常量**：`ZeroVector`、`ForwardVector`（面朝 X）、`OneVector`
+- **构造/转换**：`NewVector(x,y,z)`（浮点→定点）、`NewVectorInt(x,y,z)`（定点）、`FloatToFixed`/`FixedToFloat`、`ToFloat64`/`Xf`/`Yf`/`Zf`
+- **运算**：加减乘除（2D/3D、整数/浮点倍率）、点积/叉积、长度/距离、归一化、旋转、Lerp、MoveTowards、Min/Max/Clamp 等
+
+Go 与 C# 的 Vector API 一一对应，便于服务端与客户端共用同一套坐标语义。
+
+## 脚本
+
+- **gen.bat**：Windows 下执行生成
+- **gen.sh**：Linux/Mac 下执行生成
