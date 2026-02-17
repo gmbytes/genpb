@@ -20,11 +20,7 @@ type Message interface {
 	Key() EKey_T
 }
 
-func MarshalToNetBytes(msg Message, codes ...EErrorCode_T) []byte {
-	if msg == nil {
-		return nil
-	}
-
+func Marshal(msg Message, codes ...EErrorCode_T) ([]byte, error) {
 	bytes := make([]byte, 4, 8)
 
 	err := EErrorCode_Ok
@@ -36,12 +32,12 @@ func MarshalToNetBytes(msg Message, codes ...EErrorCode_T) []byte {
 	binary.LittleEndian.PutUint16(bytes[2:], uint16(err))
 
 	if err != EErrorCode_Ok {
-		return bytes
+		return bytes, nil
 	}
 
 	body, marshalErr := msg.Marshal()
 	if marshalErr != nil {
-		return nil
+		return nil, marshalErr
 	}
 
 	bodyLen := uint32(len(body))
@@ -49,7 +45,7 @@ func MarshalToNetBytes(msg Message, codes ...EErrorCode_T) []byte {
 	binary.LittleEndian.PutUint32(bytes[4:], bodyLen)
 	bytes = append(bytes, body...)
 
-	return bytes
+	return bytes, nil
 }
 
 func Unmarshal(key EKey_T, data []byte) proto.Message {
@@ -295,4 +291,3 @@ func (msg *DspTest) Key() EKey_T {
 func (msg *DspTest) Marshal() ([]byte, error) {
 	return proto.Marshal(msg)
 }
-

@@ -38,7 +38,7 @@ go run . --proto_in ./proto --go_out ./pb --cs_out ./pb/Pb --lang all --flag ser
 
 1. **protoc 生成**：`*.pb.go`（enum、data、cmd、cmd_req、cmd_rsp、cmd_dsp、data_srv、data_fwd 等）
 2. **pbgen 扩展**：
-   - **cmd.ext.go**：消息解析器（按 EKey 注册/反序列化）、`MarshalToNetBytes` / `Unmarshal`、各消息的 `Key()` / `Marshal()`
+   - **cmd.ext.go**：消息解析器（按 EKey 注册/反序列化）、`Marshal` / `Unmarshal`、各消息的 `Key()` / `Marshal()`
    - **data.pb.vector.go**：Vector 定点数数学扩展（见下方 Vector 定点数）
 
 ### C#
