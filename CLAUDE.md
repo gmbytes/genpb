@@ -96,10 +96,18 @@ func init() {
     _parser.Load()
 }
 
+// Package wraps message with error code and cached binary serialization
+// Binary format: [cmd 2B] [errCode 2B] [bodyLen 4B] [body NB]
+type Package struct { ... }
+func NewPackage(msg proto.Message, errs ...EErrorCode_T) *Package
+func (p *Package) Key() EKey_T
+func (p *Package) Marshal() ([]byte, error)
+
 func Unmarshal(key EKey_T, data []byte) proto.Message
 
-// Message.Key() method
-func (msg *ReqLogin) Key() pb.EKey
+// Per-message Key() and Marshal() methods
+func (msg *ReqLogin) Key() EKey_T
+func (msg *ReqLogin) Marshal() ([]byte, error)
 ```
 
 ### C# (`Cmd.cs`)

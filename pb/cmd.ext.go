@@ -5,6 +5,7 @@ package pb
 
 import (
 	"encoding/binary"
+	"errors"
 
 	"google.golang.org/protobuf/proto"
 )
@@ -15,27 +16,52 @@ func init() {
 	_parser.Load()
 }
 
-type Message interface {
-	Marshal() ([]byte, error)
+type message interface {
+	proto.Message
+
 	Key() EKey_T
 }
 
-func Marshal(msg Message, codes ...EErrorCode_T) ([]byte, error) {
-	bytes := make([]byte, 4, 8)
+type Package struct {
+	msg   message
+	err   EErrorCode_T
+	bytes []byte
+}
 
+func NewPackage(msg proto.Message, errs ...EErrorCode_T) *Package {
 	err := EErrorCode_Ok
-	if len(codes) != 0 {
-		err = codes[0]
+	if len(errs) != 0 {
+		err = errs[0]
+	}
+	return &Package{
+		msg: msg.(message),
+		err: err,
+	}
+}
+
+func (p *Package) Key() EKey_T {
+	return p.msg.Key()
+}
+
+func (p *Package) Marshal() ([]byte, error) {
+	if len(p.bytes) != 0 {
+		return p.bytes, nil
 	}
 
-	binary.LittleEndian.PutUint16(bytes[0:], uint16(msg.Key()))
-	binary.LittleEndian.PutUint16(bytes[2:], uint16(err))
+	if p.msg == nil {
+		return nil, errors.New("message is nil")
+	}
 
-	if err != EErrorCode_Ok {
+	bytes := make([]byte, 4, 8)
+
+	binary.LittleEndian.PutUint16(bytes[0:], uint16(p.msg.Key()))
+	binary.LittleEndian.PutUint16(bytes[2:], uint16(p.err))
+
+	if p.err != EErrorCode_Ok {
 		return bytes, nil
 	}
 
-	body, marshalErr := msg.Marshal()
+	body, marshalErr := proto.Marshal(p.msg)
 	if marshalErr != nil {
 		return nil, marshalErr
 	}
@@ -44,6 +70,7 @@ func Marshal(msg Message, codes ...EErrorCode_T) ([]byte, error) {
 	bytes = append(bytes, 0, 0, 0, 0)
 	binary.LittleEndian.PutUint32(bytes[4:], bodyLen)
 	bytes = append(bytes, body...)
+	p.bytes = bytes
 
 	return bytes, nil
 }
@@ -214,80 +241,4 @@ func (msg *RspLoginRole) Marshal() ([]byte, error) {
 
 func (msg *RspPing) Key() EKey_T {
 	return EKey_Ping
-}
-
-func (msg *RspPing) Marshal() ([]byte, error) {
-	return proto.Marshal(msg)
-}
-
-func (msg *RspPingXXX) Key() EKey_T {
-	return EKey_PingXXX
-}
-
-func (msg *RspPingXXX) Marshal() ([]byte, error) {
-	return proto.Marshal(msg)
-}
-
-func (msg *RspEnterScene) Key() EKey_T {
-	return EKey_EnterScene
-}
-
-func (msg *RspEnterScene) Marshal() ([]byte, error) {
-	return proto.Marshal(msg)
-}
-
-func (msg *RspTestEnter) Key() EKey_T {
-	return EKey_TestEnter
-}
-
-func (msg *RspTestEnter) Marshal() ([]byte, error) {
-	return proto.Marshal(msg)
-}
-
-func (msg *DspLoginFast) Key() EKey_T {
-	return EKey_LoginFast
-}
-
-func (msg *DspLoginFast) Marshal() ([]byte, error) {
-	return proto.Marshal(msg)
-}
-
-func (msg *DspLoginData) Key() EKey_T {
-	return EKey_LoginData
-}
-
-func (msg *DspLoginData) Marshal() ([]byte, error) {
-	return proto.Marshal(msg)
-}
-
-func (msg *DspServerMaintain) Key() EKey_T {
-	return EKey_ServerMaintain
-}
-
-func (msg *DspServerMaintain) Marshal() ([]byte, error) {
-	return proto.Marshal(msg)
-}
-
-func (msg *DspKickRole) Key() EKey_T {
-	return EKey_KickRole
-}
-
-func (msg *DspKickRole) Marshal() ([]byte, error) {
-	return proto.Marshal(msg)
-}
-
-func (msg *DspPreparedEnterScene) Key() EKey_T {
-	return EKey_PreparedEnterScene
-}
-
-func (msg *DspPreparedEnterScene) Marshal() ([]byte, error) {
-	return proto.Marshal(msg)
-}
-
-func (msg *DspTest) Key() EKey_T {
-	return EKey_Test
-}
-
-func (msg *DspTest) Marshal() ([]byte, error) {
-	return proto.Marshal(msg)
 }
