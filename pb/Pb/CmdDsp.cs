@@ -24,43 +24,37 @@ namespace Pb {
     static CmdDspReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Cg1jbWRfZHNwLnByb3RvEgJwYhoKZGF0YS5wcm90bxoKZW51bS5wcm90byJi",
-            "CgxEc3BMb2dpbkZhc3QSIQoCdHkYASABKA4yFS5wYi5FU2lnbkluRmFzdFR5",
-            "cGUuVBIRCgl0aW1lc3RhbXAYAiABKBISDQoFdG9rZW4YAyABKAkSDQoFbWFn",
-            "aWMYBCABKBIiKwoMRHNwTG9naW5EYXRhEhsKBGRhdGEYASABKAsyDS5wYi5M",
-            "b2dpbkRhdGEiPwoRRHNwU2VydmVyTWFpbnRhaW4SEwoLcmVib290X3RpbWUY",
-            "ASABKBISFQoNc2h1dGRvd25fdGltZRgCIAEoEiI7CgtEc3BLaWNrUm9sZRIb",
-            "CgJ0eRgBIAEoDjIPLnBiLkVLaWNrVHlwZS5UEg8KB3Nlc3NfaWQYAiABKBIi",
-            "FwoVRHNwUHJlcGFyZWRFbnRlclNjZW5lIgkKB0RzcFRlc3RCC1oJc2VydmVy",
-            "L3BiYgZwcm90bzM="));
+            "Cg1jbWRfZHNwLnByb3RvEgJwYhoKZGF0YS5wcm90bxoKZW51bS5wcm90byIn",
+            "CghEc3BMb2dpbhIbCgRkYXRhGAEgASgLMg0ucGIuTG9naW5EYXRhIjwKDkRz",
+            "cFNydk1haW50YWluEhMKC3JlYm9vdF90aW1lGAEgASgSEhUKDXNodXRkb3du",
+            "X3RpbWUYAiABKBIiOwoLRHNwS2lja1JvbGUSGwoCdHkYASABKA4yDy5wYi5F",
+            "S2lja1R5cGUuVBIPCgdzZXNzX2lkGAIgASgSIhYKFERzcFByZXBhcmVkRW50",
+            "ZXJab25lIjMKB0RzcE1vdmUSDwoHcm9sZV9pZBgBIAEoAxIXCgNwb3MYAiAB",
+            "KAsyCi5wYi5WZWN0b3JCC1oJc2VydmVyL3BiYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Pb.DataReflection.Descriptor, global::Pb.EnumReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.DspLoginFast), global::Pb.DspLoginFast.Parser, new[]{ "Ty", "Timestamp", "Token", "Magic" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.DspLoginData), global::Pb.DspLoginData.Parser, new[]{ "Data" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.DspServerMaintain), global::Pb.DspServerMaintain.Parser, new[]{ "RebootTime", "ShutdownTime" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.DspLogin), global::Pb.DspLogin.Parser, new[]{ "Data" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.DspSrvMaintain), global::Pb.DspSrvMaintain.Parser, new[]{ "RebootTime", "ShutdownTime" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Pb.DspKickRole), global::Pb.DspKickRole.Parser, new[]{ "Ty", "SessId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.DspPreparedEnterScene), global::Pb.DspPreparedEnterScene.Parser, null, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.DspTest), global::Pb.DspTest.Parser, null, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.DspPreparedEnterZone), global::Pb.DspPreparedEnterZone.Parser, null, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Pb.DspMove), global::Pb.DspMove.Parser, new[]{ "RoleId", "Pos" }, null, null, null, null)
           }));
     }
     #endregion
 
   }
   #region Messages
-  /// <summary>
-  /// 同步快速重登 token
-  /// </summary>
-  public sealed partial class DspLoginFast : pb::IMessage<DspLoginFast>
+  public sealed partial class DspLogin : pb::IMessage<DspLogin>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<DspLoginFast> _parser = new pb::MessageParser<DspLoginFast>(() => new DspLoginFast());
+    private static readonly pb::MessageParser<DspLogin> _parser = new pb::MessageParser<DspLogin>(() => new DspLogin());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<DspLoginFast> Parser { get { return _parser; } }
+    public static pb::MessageParser<DspLogin> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -76,7 +70,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public DspLoginFast() {
+    public DspLogin() {
       OnConstruction();
     }
 
@@ -84,327 +78,15 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public DspLoginFast(DspLoginFast other) : this() {
-      ty_ = other.ty_;
-      timestamp_ = other.timestamp_;
-      token_ = other.token_;
-      magic_ = other.magic_;
-      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public DspLoginFast Clone() {
-      return new DspLoginFast(this);
-    }
-
-    /// <summary>Field number for the "ty" field.</summary>
-    public const int TyFieldNumber = 1;
-    private global::Pb.ESignInFastType.Types.T ty_ = global::Pb.ESignInFastType.Types.T.Invalid;
-    /// <summary>
-    /// 可快速重登的类型
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::Pb.ESignInFastType.Types.T Ty {
-      get { return ty_; }
-      set {
-        ty_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "timestamp" field.</summary>
-    public const int TimestampFieldNumber = 2;
-    private long timestamp_;
-    /// <summary>
-    /// 时间戳
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public long Timestamp {
-      get { return timestamp_; }
-      set {
-        timestamp_ = value;
-      }
-    }
-
-    /// <summary>Field number for the "token" field.</summary>
-    public const int TokenFieldNumber = 3;
-    private string token_ = "";
-    /// <summary>
-    /// token
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string Token {
-      get { return token_; }
-      set {
-        token_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "magic" field.</summary>
-    public const int MagicFieldNumber = 4;
-    private long magic_;
-    /// <summary>
-    /// 魔数
-    /// </summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public long Magic {
-      get { return magic_; }
-      set {
-        magic_ = value;
-      }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override bool Equals(object other) {
-      return Equals(other as DspLoginFast);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(DspLoginFast other) {
-      if (ReferenceEquals(other, null)) {
-        return false;
-      }
-      if (ReferenceEquals(other, this)) {
-        return true;
-      }
-      if (Ty != other.Ty) return false;
-      if (Timestamp != other.Timestamp) return false;
-      if (Token != other.Token) return false;
-      if (Magic != other.Magic) return false;
-      return Equals(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override int GetHashCode() {
-      int hash = 1;
-      if (Ty != global::Pb.ESignInFastType.Types.T.Invalid) hash ^= Ty.GetHashCode();
-      if (Timestamp != 0L) hash ^= Timestamp.GetHashCode();
-      if (Token.Length != 0) hash ^= Token.GetHashCode();
-      if (Magic != 0L) hash ^= Magic.GetHashCode();
-      if (_unknownFields != null) {
-        hash ^= _unknownFields.GetHashCode();
-      }
-      return hash;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public override string ToString() {
-      return pb::JsonFormatter.ToDiagnosticString(this);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void WriteTo(pb::CodedOutputStream output) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      output.WriteRawMessage(this);
-    #else
-      if (Ty != global::Pb.ESignInFastType.Types.T.Invalid) {
-        output.WriteRawTag(8);
-        output.WriteEnum((int) Ty);
-      }
-      if (Timestamp != 0L) {
-        output.WriteRawTag(16);
-        output.WriteSInt64(Timestamp);
-      }
-      if (Token.Length != 0) {
-        output.WriteRawTag(26);
-        output.WriteString(Token);
-      }
-      if (Magic != 0L) {
-        output.WriteRawTag(32);
-        output.WriteSInt64(Magic);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(output);
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (Ty != global::Pb.ESignInFastType.Types.T.Invalid) {
-        output.WriteRawTag(8);
-        output.WriteEnum((int) Ty);
-      }
-      if (Timestamp != 0L) {
-        output.WriteRawTag(16);
-        output.WriteSInt64(Timestamp);
-      }
-      if (Token.Length != 0) {
-        output.WriteRawTag(26);
-        output.WriteString(Token);
-      }
-      if (Magic != 0L) {
-        output.WriteRawTag(32);
-        output.WriteSInt64(Magic);
-      }
-      if (_unknownFields != null) {
-        _unknownFields.WriteTo(ref output);
-      }
-    }
-    #endif
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int CalculateSize() {
-      int size = 0;
-      if (Ty != global::Pb.ESignInFastType.Types.T.Invalid) {
-        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Ty);
-      }
-      if (Timestamp != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeSInt64Size(Timestamp);
-      }
-      if (Token.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Token);
-      }
-      if (Magic != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeSInt64Size(Magic);
-      }
-      if (_unknownFields != null) {
-        size += _unknownFields.CalculateSize();
-      }
-      return size;
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(DspLoginFast other) {
-      if (other == null) {
-        return;
-      }
-      if (other.Ty != global::Pb.ESignInFastType.Types.T.Invalid) {
-        Ty = other.Ty;
-      }
-      if (other.Timestamp != 0L) {
-        Timestamp = other.Timestamp;
-      }
-      if (other.Token.Length != 0) {
-        Token = other.Token;
-      }
-      if (other.Magic != 0L) {
-        Magic = other.Magic;
-      }
-      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(pb::CodedInputStream input) {
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      input.ReadRawMessage(this);
-    #else
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
-            break;
-          case 8: {
-            Ty = (global::Pb.ESignInFastType.Types.T) input.ReadEnum();
-            break;
-          }
-          case 16: {
-            Timestamp = input.ReadSInt64();
-            break;
-          }
-          case 26: {
-            Token = input.ReadString();
-            break;
-          }
-          case 32: {
-            Magic = input.ReadSInt64();
-            break;
-          }
-        }
-      }
-    #endif
-    }
-
-    #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {
-      uint tag;
-      while ((tag = input.ReadTag()) != 0) {
-        switch(tag) {
-          default:
-            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
-            break;
-          case 8: {
-            Ty = (global::Pb.ESignInFastType.Types.T) input.ReadEnum();
-            break;
-          }
-          case 16: {
-            Timestamp = input.ReadSInt64();
-            break;
-          }
-          case 26: {
-            Token = input.ReadString();
-            break;
-          }
-          case 32: {
-            Magic = input.ReadSInt64();
-            break;
-          }
-        }
-      }
-    }
-    #endif
-
-  }
-
-  public sealed partial class DspLoginData : pb::IMessage<DspLoginData>
-  #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
-      , pb::IBufferMessage
-  #endif
-  {
-    private static readonly pb::MessageParser<DspLoginData> _parser = new pb::MessageParser<DspLoginData>(() => new DspLoginData());
-    private pb::UnknownFieldSet _unknownFields;
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<DspLoginData> Parser { get { return _parser; } }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pbr::MessageDescriptor Descriptor {
-      get { return global::Pb.CmdDspReflection.Descriptor.MessageTypes[1]; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    pbr::MessageDescriptor pb::IMessage.Descriptor {
-      get { return Descriptor; }
-    }
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public DspLoginData() {
-      OnConstruction();
-    }
-
-    partial void OnConstruction();
-
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public DspLoginData(DspLoginData other) : this() {
+    public DspLogin(DspLogin other) : this() {
       data_ = other.data_ != null ? other.data_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public DspLoginData Clone() {
-      return new DspLoginData(this);
+    public DspLogin Clone() {
+      return new DspLogin(this);
     }
 
     /// <summary>Field number for the "data" field.</summary>
@@ -425,12 +107,12 @@ namespace Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as DspLoginData);
+      return Equals(other as DspLogin);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(DspLoginData other) {
+    public bool Equals(DspLogin other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -503,7 +185,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(DspLoginData other) {
+    public void MergeFrom(DspLogin other) {
       if (other == null) {
         return;
       }
@@ -567,21 +249,21 @@ namespace Pb {
   /// <summary>
   /// 服务器维护
   /// </summary>
-  public sealed partial class DspServerMaintain : pb::IMessage<DspServerMaintain>
+  public sealed partial class DspSrvMaintain : pb::IMessage<DspSrvMaintain>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<DspServerMaintain> _parser = new pb::MessageParser<DspServerMaintain>(() => new DspServerMaintain());
+    private static readonly pb::MessageParser<DspSrvMaintain> _parser = new pb::MessageParser<DspSrvMaintain>(() => new DspSrvMaintain());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<DspServerMaintain> Parser { get { return _parser; } }
+    public static pb::MessageParser<DspSrvMaintain> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Pb.CmdDspReflection.Descriptor.MessageTypes[2]; }
+      get { return global::Pb.CmdDspReflection.Descriptor.MessageTypes[1]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -592,7 +274,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public DspServerMaintain() {
+    public DspSrvMaintain() {
       OnConstruction();
     }
 
@@ -600,7 +282,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public DspServerMaintain(DspServerMaintain other) : this() {
+    public DspSrvMaintain(DspSrvMaintain other) : this() {
       rebootTime_ = other.rebootTime_;
       shutdownTime_ = other.shutdownTime_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -608,8 +290,8 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public DspServerMaintain Clone() {
-      return new DspServerMaintain(this);
+    public DspSrvMaintain Clone() {
+      return new DspSrvMaintain(this);
     }
 
     /// <summary>Field number for the "reboot_time" field.</summary>
@@ -645,12 +327,12 @@ namespace Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as DspServerMaintain);
+      return Equals(other as DspSrvMaintain);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(DspServerMaintain other) {
+    public bool Equals(DspSrvMaintain other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -736,7 +418,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(DspServerMaintain other) {
+    public void MergeFrom(DspSrvMaintain other) {
       if (other == null) {
         return;
       }
@@ -816,7 +498,7 @@ namespace Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Pb.CmdDspReflection.Descriptor.MessageTypes[3]; }
+      get { return global::Pb.CmdDspReflection.Descriptor.MessageTypes[2]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1037,21 +719,21 @@ namespace Pb {
   /// <summary>
   /// 更新邮件
   /// </summary>
-  public sealed partial class DspPreparedEnterScene : pb::IMessage<DspPreparedEnterScene>
+  public sealed partial class DspPreparedEnterZone : pb::IMessage<DspPreparedEnterZone>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<DspPreparedEnterScene> _parser = new pb::MessageParser<DspPreparedEnterScene>(() => new DspPreparedEnterScene());
+    private static readonly pb::MessageParser<DspPreparedEnterZone> _parser = new pb::MessageParser<DspPreparedEnterZone>(() => new DspPreparedEnterZone());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<DspPreparedEnterScene> Parser { get { return _parser; } }
+    public static pb::MessageParser<DspPreparedEnterZone> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Pb.CmdDspReflection.Descriptor.MessageTypes[4]; }
+      get { return global::Pb.CmdDspReflection.Descriptor.MessageTypes[3]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1062,7 +744,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public DspPreparedEnterScene() {
+    public DspPreparedEnterZone() {
       OnConstruction();
     }
 
@@ -1070,25 +752,25 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public DspPreparedEnterScene(DspPreparedEnterScene other) : this() {
+    public DspPreparedEnterZone(DspPreparedEnterZone other) : this() {
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public DspPreparedEnterScene Clone() {
-      return new DspPreparedEnterScene(this);
+    public DspPreparedEnterZone Clone() {
+      return new DspPreparedEnterZone(this);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as DspPreparedEnterScene);
+      return Equals(other as DspPreparedEnterZone);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(DspPreparedEnterScene other) {
+    public bool Equals(DspPreparedEnterZone other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -1148,7 +830,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(DspPreparedEnterScene other) {
+    public void MergeFrom(DspPreparedEnterZone other) {
       if (other == null) {
         return;
       }
@@ -1189,21 +871,21 @@ namespace Pb {
 
   }
 
-  public sealed partial class DspTest : pb::IMessage<DspTest>
+  public sealed partial class DspMove : pb::IMessage<DspMove>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       , pb::IBufferMessage
   #endif
   {
-    private static readonly pb::MessageParser<DspTest> _parser = new pb::MessageParser<DspTest>(() => new DspTest());
+    private static readonly pb::MessageParser<DspMove> _parser = new pb::MessageParser<DspMove>(() => new DspMove());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public static pb::MessageParser<DspTest> Parser { get { return _parser; } }
+    public static pb::MessageParser<DspMove> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Pb.CmdDspReflection.Descriptor.MessageTypes[5]; }
+      get { return global::Pb.CmdDspReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1214,7 +896,7 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public DspTest() {
+    public DspMove() {
       OnConstruction();
     }
 
@@ -1222,31 +904,65 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public DspTest(DspTest other) : this() {
+    public DspMove(DspMove other) : this() {
+      roleId_ = other.roleId_;
+      pos_ = other.pos_ != null ? other.pos_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public DspTest Clone() {
-      return new DspTest(this);
+    public DspMove Clone() {
+      return new DspMove(this);
+    }
+
+    /// <summary>Field number for the "role_id" field.</summary>
+    public const int RoleIdFieldNumber = 1;
+    private long roleId_;
+    /// <summary>
+    /// 角色id
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public long RoleId {
+      get { return roleId_; }
+      set {
+        roleId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "pos" field.</summary>
+    public const int PosFieldNumber = 2;
+    private global::Pb.Vector pos_;
+    /// <summary>
+    /// 位置
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::Pb.Vector Pos {
+      get { return pos_; }
+      set {
+        pos_ = value;
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
-      return Equals(other as DspTest);
+      return Equals(other as DspMove);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool Equals(DspTest other) {
+    public bool Equals(DspMove other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (RoleId != other.RoleId) return false;
+      if (!object.Equals(Pos, other.Pos)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1254,6 +970,8 @@ namespace Pb {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
+      if (RoleId != 0L) hash ^= RoleId.GetHashCode();
+      if (pos_ != null) hash ^= Pos.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1272,6 +990,14 @@ namespace Pb {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
+      if (RoleId != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(RoleId);
+      }
+      if (pos_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(Pos);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1282,6 +1008,14 @@ namespace Pb {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (RoleId != 0L) {
+        output.WriteRawTag(8);
+        output.WriteInt64(RoleId);
+      }
+      if (pos_ != null) {
+        output.WriteRawTag(18);
+        output.WriteMessage(Pos);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1292,6 +1026,12 @@ namespace Pb {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
+      if (RoleId != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(RoleId);
+      }
+      if (pos_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Pos);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -1300,9 +1040,18 @@ namespace Pb {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public void MergeFrom(DspTest other) {
+    public void MergeFrom(DspMove other) {
       if (other == null) {
         return;
+      }
+      if (other.RoleId != 0L) {
+        RoleId = other.RoleId;
+      }
+      if (other.pos_ != null) {
+        if (pos_ == null) {
+          Pos = new global::Pb.Vector();
+        }
+        Pos.MergeFrom(other.Pos);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1319,6 +1068,17 @@ namespace Pb {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
+          case 8: {
+            RoleId = input.ReadInt64();
+            break;
+          }
+          case 18: {
+            if (pos_ == null) {
+              Pos = new global::Pb.Vector();
+            }
+            input.ReadMessage(Pos);
+            break;
+          }
         }
       }
     #endif
@@ -1334,6 +1094,17 @@ namespace Pb {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
+          case 8: {
+            RoleId = input.ReadInt64();
+            break;
+          }
+          case 18: {
+            if (pos_ == null) {
+              Pos = new global::Pb.Vector();
+            }
+            input.ReadMessage(Pos);
+            break;
+          }
         }
       }
     }

@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "server/pb";
+
+
+//    对 [32768, 49151] 里的任意一个数 n，和 intervalMask 做按位与，得到的结果都是同一个数：
+//    n & 0xFFFFC000  ===  32768  （即 intervalBase）
+//    原因很简单：
+//    掩码 0xFFFFC000 把低 14 位清 0，只保留高 18 位。
+//    32768 = 0x8000，二进制高 18 位就是 0x8000 对应的那些位。
+//    [32768, 49151] 正好是「高 18 位等于 0x8000、低 14 位从 0 到 16383」的所有数，所以与上掩码后高 18 位不变、低 14 位变 0，结果就都是 32768。
+//    所以：
+//    从 [32768, 49151] 里任取一个数，和 intervalMask = 0xFFFFC000 做与运算，得到的数值都是 32768。
+
+message EKey {
+  enum T {
+    Invalid = 0;
+    // login
+    ReqLogin      = 1;
+    RspLogin      = 2;
+    ReqCreateRole = 3;
+    RspCreateRole = 4;
+    ReqLoginRole  = 5;
+    RspLoginRole  = 6;    // 登录角色返回
+    ReqPing      =  100;  // 心跳
+    RspPing      =  101;  // 心跳
+    ReqPingZZZ   =  102;  // 心跳(客户端切换后台发送该消息)
+    RspPingZZZ   =  103;  // 心跳(客户端切换后台发送该消息)
+
+
+    ReqEnterZone = 200; // 请求进入场景
+    RspEnterZone = 201; // 响应进入场景
+    ReqMove      = 300; // 移动
+    RspMove      = 301; // 响应移动
+
+    DspLogin               = 10000; // 同步玩家登录数据
+    DspSrvMaintain         = 10001; // 同步服务器维护
+    DspKickRole            = 10002; // 同步玩家踢下线
+    DspEnterZone           = 10003; // 准备进入场景
+    DspMove           = 33005; // 同步玩家移动
+
+
+
+    // 0xF000 及以上为服务器保留用
+    Max = 65535;
+  }
+}
+

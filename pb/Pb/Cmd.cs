@@ -24,13 +24,15 @@ namespace Pb {
     static CmdReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgljbWQucHJvdG8SAnBiIoICCgRFS2V5IvkBCgFUEgsKB0ludmFsaWQQABIJ",
-            "CgVMb2dpbhABEg4KCkNyZWF0ZVJvbGUQAhIOCgpEZWxldGVSb2xlEAMSDQoJ",
-            "TG9naW5Sb2xlEAQSCAoEUGluZxAKEgsKB1BpbmdYWFgQCxIOCgpFbnRlclNj",
-            "ZW5lEBQSDQoJVGVzdEVudGVyEBUSDwoJTG9naW5GYXN0EMC4AhIPCglMb2dp",
-            "bkRhdGEQwbgCEhQKDlNlcnZlck1haW50YWluEMK4AhIOCghLaWNrUm9sZRDD",
-            "uAISGAoSUHJlcGFyZWRFbnRlclNjZW5lEMS4AhIKCgRUZXN0EMW4AhIJCgNN",
-            "YXgQ//8DQgtaCXNlcnZlci9wYmIGcHJvdG8z"));
+            "CgljbWQucHJvdG8SAnBiIt4CCgRFS2V5ItUCCgFUEgsKB0ludmFsaWQQABIM",
+            "CghSZXFMb2dpbhABEgwKCFJzcExvZ2luEAISEQoNUmVxQ3JlYXRlUm9sZRAD",
+            "EhEKDVJzcENyZWF0ZVJvbGUQBBIQCgxSZXFMb2dpblJvbGUQBRIQCgxSc3BM",
+            "b2dpblJvbGUQBhILCgdSZXFQaW5nEGQSCwoHUnNwUGluZxBlEg4KClJlcVBp",
+            "bmdaWloQZhIOCgpSc3BQaW5nWlpaEGcSEQoMUmVxRW50ZXJab25lEMgBEhEK",
+            "DFJzcEVudGVyWm9uZRDJARIMCgdSZXFNb3ZlEKwCEgwKB1JzcE1vdmUQrQIS",
+            "DQoIRHNwTG9naW4QkE4SEwoORHNwU3J2TWFpbnRhaW4QkU4SEAoLRHNwS2lj",
+            "a1JvbGUQkk4SEQoMRHNwRW50ZXJab25lEJNOEg0KB0RzcE1vdmUQ7YECEgkK",
+            "A01heBD//wNCC1oJc2VydmVyL3BiYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -201,50 +203,67 @@ namespace Pb {
         /// <summary>
         /// login
         /// </summary>
-        [pbr::OriginalName("Login")] Login = 1,
-        [pbr::OriginalName("CreateRole")] CreateRole = 2,
-        [pbr::OriginalName("DeleteRole")] DeleteRole = 3,
-        [pbr::OriginalName("LoginRole")] LoginRole = 4,
+        [pbr::OriginalName("ReqLogin")] ReqLogin = 1,
+        [pbr::OriginalName("RspLogin")] RspLogin = 2,
+        [pbr::OriginalName("ReqCreateRole")] ReqCreateRole = 3,
+        [pbr::OriginalName("RspCreateRole")] RspCreateRole = 4,
+        [pbr::OriginalName("ReqLoginRole")] ReqLoginRole = 5,
+        /// <summary>
+        /// 登录角色返回
+        /// </summary>
+        [pbr::OriginalName("RspLoginRole")] RspLoginRole = 6,
         /// <summary>
         /// 心跳
         /// </summary>
-        [pbr::OriginalName("Ping")] Ping = 10,
+        [pbr::OriginalName("ReqPing")] ReqPing = 100,
+        /// <summary>
+        /// 心跳
+        /// </summary>
+        [pbr::OriginalName("RspPing")] RspPing = 101,
         /// <summary>
         /// 心跳(客户端切换后台发送该消息)
         /// </summary>
-        [pbr::OriginalName("PingXXX")] PingXxx = 11,
+        [pbr::OriginalName("ReqPingZZZ")] ReqPingZzz = 102,
         /// <summary>
-        /// 通知服务器已经进入场景
+        /// 心跳(客户端切换后台发送该消息)
         /// </summary>
-        [pbr::OriginalName("EnterScene")] EnterScene = 20,
+        [pbr::OriginalName("RspPingZZZ")] RspPingZzz = 103,
         /// <summary>
-        /// ceshi
+        /// 请求进入场景
         /// </summary>
-        [pbr::OriginalName("TestEnter")] EstEnter = 21,
+        [pbr::OriginalName("ReqEnterZone")] ReqEnterZone = 200,
         /// <summary>
-        /// dsp start
+        /// 响应进入场景
         /// </summary>
-        [pbr::OriginalName("LoginFast")] LoginFast = 40000,
+        [pbr::OriginalName("RspEnterZone")] RspEnterZone = 201,
+        /// <summary>
+        /// 移动
+        /// </summary>
+        [pbr::OriginalName("ReqMove")] ReqMove = 300,
+        /// <summary>
+        /// 响应移动
+        /// </summary>
+        [pbr::OriginalName("RspMove")] RspMove = 301,
         /// <summary>
         /// 同步玩家登录数据
         /// </summary>
-        [pbr::OriginalName("LoginData")] LoginData = 40001,
+        [pbr::OriginalName("DspLogin")] DspLogin = 10000,
         /// <summary>
-        /// 同步玩家登录数据
+        /// 同步服务器维护
         /// </summary>
-        [pbr::OriginalName("ServerMaintain")] ServerMaintain = 40002,
+        [pbr::OriginalName("DspSrvMaintain")] DspSrvMaintain = 10001,
         /// <summary>
-        /// 踢玩家下线
+        /// 同步玩家踢下线
         /// </summary>
-        [pbr::OriginalName("KickRole")] KickRole = 40003,
+        [pbr::OriginalName("DspKickRole")] DspKickRole = 10002,
         /// <summary>
         /// 准备进入场景
         /// </summary>
-        [pbr::OriginalName("PreparedEnterScene")] PreparedEnterScene = 40004,
+        [pbr::OriginalName("DspEnterZone")] DspEnterZone = 10003,
         /// <summary>
-        /// 测试
+        /// 同步玩家移动
         /// </summary>
-        [pbr::OriginalName("Test")] Est = 40005,
+        [pbr::OriginalName("DspMove")] DspMove = 33005,
         /// <summary>
         /// 0xF000 及以上为服务器保留用
         /// </summary>

@@ -138,24 +138,23 @@ public static class CmdExtensions
 
 ## Proto Naming Conventions
 
-| Proto File | Message Prefix | Enum Mapping |
-|------------|---------------|--------------|
-| `cmd_req.proto` | `Req*` | `ReqLogin` → `EKey_Login` |
-| `cmd_rsp.proto` | `Rsp*` | `RspLogin` → `EKey_Login` |
-| `cmd_dsp.proto` | `Dsp*` | `DspLoginFast` → `EKey_LoginFast` |
+| Proto File | Message Prefix | Enum Mapping                     |
+|------------|---------------|----------------------------------|
+| `cmd_req.proto` | `Req*` | `ReqLogin` → `EKey_ReqLogin`     |
+| `cmd_rsp.proto` | `Rsp*` | `RspLogin` → `EKey_RspLogin`     |
+| `cmd_dsp.proto` | `Dsp*` | `DspLogin` → `EKey_DspLogin` |
 
-### Dispatch (Dsp) Keys
+### Key Matching Rules
 
-In `cmd.proto`, keys defined between `// dsp start` and `// dsp end` comments are dispatch keys:
+The generator matches enum names to message names **directly** (no prefix stripping):
 
-```protobuf
-// dsp start
-LoginFast          = 40000; // 同步快速重登 token
-LoginData          = 40001; // 同步玩家登录数据
-// dsp end
-```
+| Message | Enum in cmd.proto | Match |
+|---------|-------------------|-------|
+| `ReqLogin` | `ReqLogin = 1` | `enumName == msgName` |
+| `RspLogin` | `RspLogin = 2` | `enumName == msgName` |
+| `DspLogin` | `DspLogin = 10000` | `enumName == msgName` |
 
-These keys map to `Dsp*` prefixed messages in `cmd_dsp.proto`.
+All three types use the same matching strategy. A message is only registered/extended if its name appears as an enum entry in `cmd.proto`.
 
 ## Related Projects
 

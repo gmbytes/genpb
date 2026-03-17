@@ -10,20 +10,25 @@ namespace Pb
         /// </summary>
         public enum EKey
         {
-            Login = 1,
-            CreateRole = 2,
-            DeleteRole = 3,
-            LoginRole = 4,
-            Ping = 10,
-            PingXXX = 11,
-            EnterScene = 20,
-            TestEnter = 21,
-            LoginFast = 40000,
-            LoginData = 40001,
-            ServerMaintain = 40002,
-            KickRole = 40003,
-            PreparedEnterScene = 40004,
-            Test = 40005,
+            ReqLogin = 1,
+            RspLogin = 2,
+            ReqCreateRole = 3,
+            RspCreateRole = 4,
+            ReqLoginRole = 5,
+            RspLoginRole = 6,
+            ReqPing = 100,
+            RspPing = 101,
+            ReqPingZZZ = 102,
+            RspPingZZZ = 103,
+            ReqEnterZone = 200,
+            RspEnterZone = 201,
+            ReqMove = 300,
+            RspMove = 301,
+            DspLogin = 10000,
+            DspSrvMaintain = 10001,
+            DspKickRole = 10002,
+            DspEnterZone = 10003,
+            DspMove = 33005,
         }
     }
 }
@@ -39,50 +44,42 @@ namespace Pb
         {
             switch (key)
             {
-                case EKey.Login:
+                case EKey.ReqLogin:
                     return typeof(ReqLogin);
-                case EKey.CreateRole:
+                case EKey.ReqCreateRole:
                     return typeof(ReqCreateRole);
-                case EKey.DeleteRole:
-                    return typeof(ReqDeleteRole);
-                case EKey.LoginRole:
+                case EKey.ReqLoginRole:
                     return typeof(ReqLoginRole);
-                case EKey.Ping:
+                case EKey.ReqPing:
                     return typeof(ReqPing);
-                case EKey.PingXXX:
-                    return typeof(ReqPingXXX);
-                case EKey.EnterScene:
-                    return typeof(ReqEnterScene);
-                case EKey.TestEnter:
-                    return typeof(ReqTestEnter);
-                case EKey.Login:
+                case EKey.ReqPingZZZ:
+                    return typeof(ReqPingZZZ);
+                case EKey.ReqEnterZone:
+                    return typeof(ReqEnterZone);
+                case EKey.ReqMove:
+                    return typeof(ReqMove);
+                case EKey.RspLogin:
                     return typeof(RspLogin);
-                case EKey.CreateRole:
+                case EKey.RspCreateRole:
                     return typeof(RspCreateRole);
-                case EKey.DeleteRole:
-                    return typeof(RspDeleteRole);
-                case EKey.LoginRole:
+                case EKey.RspLoginRole:
                     return typeof(RspLoginRole);
-                case EKey.Ping:
+                case EKey.RspPing:
                     return typeof(RspPing);
-                case EKey.PingXXX:
-                    return typeof(RspPingXXX);
-                case EKey.EnterScene:
-                    return typeof(RspEnterScene);
-                case EKey.TestEnter:
-                    return typeof(RspTestEnter);
-                case EKey.LoginFast:
-                    return typeof(DspLoginFast);
-                case EKey.LoginData:
-                    return typeof(DspLoginData);
-                case EKey.ServerMaintain:
-                    return typeof(DspServerMaintain);
-                case EKey.KickRole:
+                case EKey.RspPingZZZ:
+                    return typeof(RspPingZZZ);
+                case EKey.RspEnterZone:
+                    return typeof(RspEnterZone);
+                case EKey.RspMove:
+                    return typeof(RspMove);
+                case EKey.DspLogin:
+                    return typeof(DspLogin);
+                case EKey.DspSrvMaintain:
+                    return typeof(DspSrvMaintain);
+                case EKey.DspKickRole:
                     return typeof(DspKickRole);
-                case EKey.PreparedEnterScene:
-                    return typeof(DspPreparedEnterScene);
-                case EKey.Test:
-                    return typeof(DspTest);
+                case EKey.DspMove:
+                    return typeof(DspMove);
                 default:
                     return null;
             }
@@ -96,112 +93,92 @@ namespace Pb
     {
         public static Cmd.EKey GetKey(this ReqLogin msg)
         {
-            return Cmd.EKey.Login;
+            return Cmd.EKey.ReqLogin;
         }
 
         public static Cmd.EKey GetKey(this ReqCreateRole msg)
         {
-            return Cmd.EKey.CreateRole;
-        }
-
-        public static Cmd.EKey GetKey(this ReqDeleteRole msg)
-        {
-            return Cmd.EKey.DeleteRole;
+            return Cmd.EKey.ReqCreateRole;
         }
 
         public static Cmd.EKey GetKey(this ReqLoginRole msg)
         {
-            return Cmd.EKey.LoginRole;
+            return Cmd.EKey.ReqLoginRole;
         }
 
         public static Cmd.EKey GetKey(this ReqPing msg)
         {
-            return Cmd.EKey.Ping;
+            return Cmd.EKey.ReqPing;
         }
 
-        public static Cmd.EKey GetKey(this ReqPingXXX msg)
+        public static Cmd.EKey GetKey(this ReqPingZZZ msg)
         {
-            return Cmd.EKey.PingXXX;
+            return Cmd.EKey.ReqPingZZZ;
         }
 
-        public static Cmd.EKey GetKey(this ReqEnterScene msg)
+        public static Cmd.EKey GetKey(this ReqEnterZone msg)
         {
-            return Cmd.EKey.EnterScene;
+            return Cmd.EKey.ReqEnterZone;
         }
 
-        public static Cmd.EKey GetKey(this ReqTestEnter msg)
+        public static Cmd.EKey GetKey(this ReqMove msg)
         {
-            return Cmd.EKey.TestEnter;
+            return Cmd.EKey.ReqMove;
         }
 
         public static Cmd.EKey GetKey(this RspLogin msg)
         {
-            return Cmd.EKey.Login;
+            return Cmd.EKey.RspLogin;
         }
 
         public static Cmd.EKey GetKey(this RspCreateRole msg)
         {
-            return Cmd.EKey.CreateRole;
-        }
-
-        public static Cmd.EKey GetKey(this RspDeleteRole msg)
-        {
-            return Cmd.EKey.DeleteRole;
+            return Cmd.EKey.RspCreateRole;
         }
 
         public static Cmd.EKey GetKey(this RspLoginRole msg)
         {
-            return Cmd.EKey.LoginRole;
+            return Cmd.EKey.RspLoginRole;
         }
 
         public static Cmd.EKey GetKey(this RspPing msg)
         {
-            return Cmd.EKey.Ping;
+            return Cmd.EKey.RspPing;
         }
 
-        public static Cmd.EKey GetKey(this RspPingXXX msg)
+        public static Cmd.EKey GetKey(this RspPingZZZ msg)
         {
-            return Cmd.EKey.PingXXX;
+            return Cmd.EKey.RspPingZZZ;
         }
 
-        public static Cmd.EKey GetKey(this RspEnterScene msg)
+        public static Cmd.EKey GetKey(this RspEnterZone msg)
         {
-            return Cmd.EKey.EnterScene;
+            return Cmd.EKey.RspEnterZone;
         }
 
-        public static Cmd.EKey GetKey(this RspTestEnter msg)
+        public static Cmd.EKey GetKey(this RspMove msg)
         {
-            return Cmd.EKey.TestEnter;
+            return Cmd.EKey.RspMove;
         }
 
-        public static Cmd.EKey GetKey(this DspLoginFast msg)
+        public static Cmd.EKey GetKey(this DspLogin msg)
         {
-            return Cmd.EKey.LoginFast;
+            return Cmd.EKey.DspLogin;
         }
 
-        public static Cmd.EKey GetKey(this DspLoginData msg)
+        public static Cmd.EKey GetKey(this DspSrvMaintain msg)
         {
-            return Cmd.EKey.LoginData;
-        }
-
-        public static Cmd.EKey GetKey(this DspServerMaintain msg)
-        {
-            return Cmd.EKey.ServerMaintain;
+            return Cmd.EKey.DspSrvMaintain;
         }
 
         public static Cmd.EKey GetKey(this DspKickRole msg)
         {
-            return Cmd.EKey.KickRole;
+            return Cmd.EKey.DspKickRole;
         }
 
-        public static Cmd.EKey GetKey(this DspPreparedEnterScene msg)
+        public static Cmd.EKey GetKey(this DspMove msg)
         {
-            return Cmd.EKey.PreparedEnterScene;
-        }
-
-        public static Cmd.EKey GetKey(this DspTest msg)
-        {
-            return Cmd.EKey.Test;
+            return Cmd.EKey.DspMove;
         }
 
     }

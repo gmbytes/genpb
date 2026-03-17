@@ -16,7 +16,7 @@ set PROTO_IN=./proto
 set GO_OUT=./pb
 set CS_OUT=./pb/Pb
 set LANG=all
-set TOOLS_DIR=../proto
+set TOOLS_DIR=.
 
 if not "%~1"=="" set FLAG=%~1
 if not "%~2"=="" set PROTO_IN=%~2
