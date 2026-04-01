@@ -13,31 +13,30 @@ type Config struct {
 	ProtoDir    string // Input proto directory
 	GoOutDir    string // Output directory for Go generated files
 	CsOutDir    string // Output directory for C# generated files
+	RustOutDir  string // Output directory for Rust generated files
 	GoPkg       string // Go package name for generated files
 	ProtocPath  string // Path to protoc executable
 	ProtocGenGo string // Path to protoc-gen-go executable
-	Language    string // Output language: go, Pb, all
+	Language    string // Output language: go, Pb, rust, all
 	Flag        string // Export flag: server (all files), client (exclude data_srv.proto, data_fwd.proto)
 }
 
 func main() {
-	// Parse command line flags
-	lang := flag.String("lang", "all", "Language: go, Pb, all")
+	lang := flag.String("lang", "all", "Language: go, Pb, rust, all")
 	goOut := flag.String("go_out", "./pb", "Go output directory")
 	csOut := flag.String("cs_out", "./pb/Pb", "C# output directory")
+	rustOut := flag.String("rust_out", "", "Rust output directory (for cmd_ext.rs, protocol.desc, protocol_meta.json)")
 	protoIn := flag.String("proto_in", "./proto", "Proto input directory")
 	toolsDir := flag.String("tools_dir", "", "Directory containing protoc and protoc-gen-go (default: ../proto)")
 	flagType := flag.String("flag", "server", "Export flag: server (all files), client (exclude data_srv.proto, data_fwd.proto)")
 	flag.Parse()
 
-	// Resolve tools directory
 	toolsPath := *toolsDir
 	if toolsPath == "" {
 		toolsPath = "../proto"
 	}
 	toolsPath, _ = filepath.Abs(toolsPath)
 
-	// Protoc executable name by platform
 	protocExe := "protoc"
 	protocGenGoExe := "protoc-gen-go"
 	if runtime.GOOS == "windows" {
@@ -51,6 +50,7 @@ func main() {
 		ProtoDir:    protoDir,
 		GoOutDir:    *goOut,
 		CsOutDir:    *csOut,
+		RustOutDir:  *rustOut,
 		GoPkg:       "server/pb",
 		ProtocPath:  filepath.Join(toolsPath, protocExe),
 		ProtocGenGo: filepath.Join(toolsPath, protocGenGoExe),
@@ -66,9 +66,7 @@ func main() {
 
 // Run executes the code generation process
 func Run(cfg *Config) error {
-	// Generate Go code
 	if cfg.Language == "go" || cfg.Language == "all" {
-		// Ensure Go output directory exists
 		goOutDir, _ := filepath.Abs(cfg.GoOutDir)
 		if err := os.MkdirAll(goOutDir, 0755); err != nil {
 			return fmt.Errorf("create Go output directory: %w", err)
@@ -80,9 +78,7 @@ func Run(cfg *Config) error {
 		}
 	}
 
-	// Generate C# code
 	if cfg.Language == "Pb" || cfg.Language == "all" {
-		// Ensure C# output directory exists
 		csOutDir, _ := filepath.Abs(cfg.CsOutDir)
 		if err := os.MkdirAll(csOutDir, 0755); err != nil {
 			return fmt.Errorf("create C# output directory: %w", err)
@@ -91,6 +87,24 @@ func Run(cfg *Config) error {
 
 		if err := GenerateCSharp(cfg); err != nil {
 			return fmt.Errorf("generate C#: %w", err)
+		}
+	}
+
+	if cfg.Language == "rust" || cfg.Language == "all" {
+		if cfg.RustOutDir == "" {
+			if cfg.Language == "rust" {
+				return fmt.Errorf("--rust_out is required when --lang=rust")
+			}
+		} else {
+			rustOutDir, _ := filepath.Abs(cfg.RustOutDir)
+			if err := os.MkdirAll(rustOutDir, 0755); err != nil {
+				return fmt.Errorf("create Rust output directory: %w", err)
+			}
+			cfg.RustOutDir = rustOutDir
+
+			if err := GenerateRust(cfg); err != nil {
+				return fmt.Errorf("generate Rust: %w", err)
+			}
 		}
 	}
 

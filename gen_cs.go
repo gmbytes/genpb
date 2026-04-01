@@ -213,11 +213,14 @@ func writeCSCmd(path string, enumMap map[string]CSEnumInfo, reqMessages, rspMess
 	buf.WriteString("            switch (key)\n")
 	buf.WriteString("            {\n")
 
-	// GetMessageType cases: enum name == message name for all Req/Rsp/Dsp types
 	allMessages := [][]string{reqMessages, rspMessages, dspMessages}
 	for _, group := range allMessages {
 		for _, msgName := range group {
-			if info, ok := enumMap[msgName]; ok {
+			info, ok := enumMap[msgName]
+			if !ok {
+				info, ok = fuzzyMatchEnum(enumMap, msgName)
+			}
+			if ok {
 				buf.WriteString(fmt.Sprintf("                case EKey.%s:\n", info.Name))
 				buf.WriteString(fmt.Sprintf("                    return typeof(%s);\n", msgName))
 			}
@@ -231,16 +234,18 @@ func writeCSCmd(path string, enumMap map[string]CSEnumInfo, reqMessages, rspMess
 	buf.WriteString("    }\n")
 	buf.WriteString("}\n\n")
 
-	// Generate message extension methods with Key property
 	buf.WriteString("namespace Pb\n")
 	buf.WriteString("{\n")
 	buf.WriteString("    public static class CmdExtensions\n")
 	buf.WriteString("    {\n")
 
-	// GetKey extension for all Req/Rsp/Dsp messages
 	for _, group := range allMessages {
 		for _, msgName := range group {
-			if info, ok := enumMap[msgName]; ok {
+			info, ok := enumMap[msgName]
+			if !ok {
+				info, ok = fuzzyMatchEnum(enumMap, msgName)
+			}
+			if ok {
 				buf.WriteString(fmt.Sprintf("        public static Cmd.EKey GetKey(this %s msg)\n", msgName))
 				buf.WriteString("        {\n")
 				buf.WriteString(fmt.Sprintf("            return Cmd.EKey.%s;\n", info.Name))
@@ -253,6 +258,29 @@ func writeCSCmd(path string, enumMap map[string]CSEnumInfo, reqMessages, rspMess
 	buf.WriteString("}\n")
 
 	return os.WriteFile(path, buf.Bytes(), 0644)
+}
+
+// fuzzyMatchEnum tries to find an EKey match when the message name doesn't match exactly.
+// For example, message "DspPreparedEnterZone" matches EKey "DspEnterZone" because they share
+// the same prefix (Dsp) and the EKey name is a suffix of the message name.
+func fuzzyMatchEnum(enumMap map[string]CSEnumInfo, msgName string) (CSEnumInfo, bool) {
+	prefixes := []string{"Req", "Rsp", "Dsp"}
+	for _, prefix := range prefixes {
+		if !strings.HasPrefix(msgName, prefix) {
+			continue
+		}
+		msgSuffix := msgName[len(prefix):]
+		for _, info := range enumMap {
+			if !strings.HasPrefix(info.Name, prefix) {
+				continue
+			}
+			enumSuffix := info.Name[len(prefix):]
+			if strings.HasSuffix(msgSuffix, enumSuffix) || strings.HasSuffix(enumSuffix, msgSuffix) {
+				return info, true
+			}
+		}
+	}
+	return CSEnumInfo{}, false
 }
 
 func writeCSVectorExt(path string) error {

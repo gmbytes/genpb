@@ -27,8 +27,8 @@ message DspKickRole {
   sint64      sess_id = 2; // sess id，服务器使用
 }
 
-// 更新邮件
-message DspPreparedEnterZone {}
+// 准备进入场景
+message DspEnterZone {}
 
 message DspMove {
   int64  role_id = 1; // 角色id
