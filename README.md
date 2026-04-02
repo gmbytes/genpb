@@ -1,94 +1,93 @@
 # genpb
 
-Protocol Buffer 代码生成工具。在 protoc 生成的基础代码之上，额外生成消息解析扩展与 Vector 定点数数学扩展，支持 **Go**、**C#** 与 **Rust**。
+Protocol Buffer 代码生成工具。在 `protoc` 生成的基础代码之上，额外生成消息解析扩展，支持 **Go** 与 **Rust/Godot**。  
+（C# 已废弃，相关代码已移除。）
+
+## 架构概览
+
+```
+proto files
+  │
+  ├──► protoc (gen_go.go)         ──► Go pb / cmd.ext.go    (server 侧，保持不变)
+  │
+  └──► protoc (gen_rust.go)
+         │  --descriptor_set_out  ──► protocol.desc          (热更 fallback 通道)
+         │  --prost_out           ──► pb.rs                  (prost 类型)
+         │  buildProtocolManifest ──► protocol_manifest.json (协议索引)
+         │  writeTypedProtocol    ──► typed_protocol.rs      (EKey / ServerMessage / ClientMessage)
+         └──► writeGodotBridgeGen ──► godot_bridge_gen.rs    (GodotClass + mapper，需 --godot_out)
+```
+
+- `genpb` 的 Rust 侧以 **`ProtocolManifest`** 为单一真源，来自 `FileDescriptorSet`（descriptor），取代了之前的正则解析。
+- `protocol.desc` 保留，退为热更/fallback 旁路通道（不再是主数据源）。
+- Go 侧 `gen_go.go` 完全不动。
 
 ## 依赖
 
 - **protoc**：Protocol Buffer 编译器
-- **protoc-gen-go**：Go 语言插件（仅生成 Go 时需要）
+- **protoc-gen-go**：Go 语言插件（仅 Go 生成需要）
+- **protoc-gen-prost**：Rust 语言插件（仅 Rust 生成需要）
+  ```bash
+  cargo install protoc-gen-prost
+  ```
 
 默认从 `../proto` 目录查找上述可执行文件，可通过 `--tools_dir` 指定。
 
 ## 快速开始
 
-先编译可执行文件：
-
 ```bash
-go build -buildvcs=false -o genpb        # Linux/macOS
-go build -buildvcs=false -o genpb.exe    # Windows
+go build -buildvcs=false -o genpb       # Linux/macOS
+go build -buildvcs=false -o genpb.exe   # Windows
 ```
 
-然后通过脚本或直接运行：
+或直接用 `go run`：
 
 ```bash
-# Windows
-gen.bat
+# 生成 Go（服务端）
+go run -buildvcs=false . --lang go --flag server --go_out ./pb
 
-# Linux/macOS
-./gen.sh
+# 生成 Rust + Godot bridge（客户端）
+go run -buildvcs=false . --lang rust --flag client \
+    --rust_out  ../../gclient/rust/lib/gnet/src/gen \
+    --godot_out ../../gclient/rust/gdbridge/src/gen
 ```
 
-或使用 `go run`：
-
-```bash
-go run .
-```
-
-## 用法
-
-```bash
-go run . --proto_in ./proto --go_out ./pb --cs_out ./pb/Pb --lang all --flag server
-```
-
-生成 Rust 客户端协议代码：
-
-```bash
-go run . --lang rust --flag client --rust_out ../../gclient/rust/netcore/src/gen
-```
-
-### 参数说明
+## 参数说明
 
 | 参数 | 默认值 | 说明 |
 |------|--------|------|
-| `--proto_in` | `./proto` | proto 文件所在目录 |
-| `--go_out` | `./pb` | Go 生成输出目录 |
-| `--cs_out` | `./pb/Pb` | C# 生成输出目录 |
-| `--rust_out` | _(空)_ | Rust 生成输出目录（`--lang rust` 时必填，否则跳过 Rust 生成） |
-| `--lang` | `all` | 生成语言：`go`、`Pb`、`rust`、`all` |
-| `--tools_dir` | `../proto` | 存放 protoc、protoc-gen-go 的目录 |
-| `--flag` | `server` | 导出范围：`server`（全部）、`client`（排除 data_srv.proto、data_fwd.proto） |
+| `--proto_in`  | `./proto` | proto 文件所在目录 |
+| `--go_out`    | `./pb`    | Go 生成输出目录 |
+| `--rust_out`  | _(空)_    | Rust 生成输出目录（`pb.rs`、`typed_protocol.rs`、`protocol_manifest.json`、`protocol.desc`） |
+| `--godot_out` | _(空)_    | Godot bridge 输出目录（`godot_bridge_gen.rs`）；与 `--rust_out` 搭配使用 |
+| `--lang`      | `all`     | 生成语言：`go`、`rust`、`all` |
+| `--tools_dir` | `../proto`| 存放 `protoc`、`protoc-gen-go`、`protoc-gen-prost` 的目录（或确保它们在 `PATH` 中） |
+| `--flag`      | `server`  | 导出范围：`server`（全部）、`client`（排除 data_srv.proto、data_fwd.proto） |
 
-> 注意：`--lang rust` 时若未指定 `--rust_out` 会报错退出。
+> `--lang rust` 时若未指定 `--rust_out` 会报错退出。  
+> `--godot_out` 可选；不设则跳过 `godot_bridge_gen.rs` 生成。  
+> **C# 已废弃**：不再支持 `--lang Pb`、`--cs_out`。
 
-## 脚本
+### 批处理 / Shell 脚本
 
-- **gen.bat**：Windows 下执行生成（调用编译好的 `genpb.exe`）
-- **gen.sh**：Linux/macOS 下执行生成（调用编译好的 `genpb`）
+本目录 `gen.bat`、`gen.sh` 已与 `main.go` 对齐（无 `--cs_out`，支持 `--rust_out` / `--godot_out`）。
 
-脚本参数顺序：`[flag] [proto_in] [go_out] [cs_out] [lang] [tools_dir] [rust_out]`
+参数顺序：`[flag] [proto_in] [go_out] [lang] [tools_dir] [rust_out] [godot_out]`（后两项可省略）。
 
-| 位置 | 参数 | 默认值 | 说明 |
-|------|------|--------|------|
-| 1 | `flag` | `server` | `server` \| `client` |
-| 2 | `proto_in` | `./proto` | 输入 proto 目录 |
-| 3 | `go_out` | `./pb` | Go 输出目录（bat 默认指向 server/pb） |
-| 4 | `cs_out` | `./pb/Pb` | C# 输出目录（bat 默认指向 client src） |
-| 5 | `lang` | `all` | `go` \| `Pb` \| `rust` \| `all` |
-| 6 | `tools_dir` | `../proto` | 存放 protoc 的目录 |
-| 7 | `rust_out` | _(空)_ | Rust 输出目录（不设则跳过） |
+Windows 示例（在 `comm/tools/genpb` 下，且已 `go build -o genpb.exe`）：
 
-示例：
+```bat
+gen.bat server .\proto ..\..\..\server\server\internal\pb all . ..\..\..\gclient\rust\lib\gnet\src\gen ..\..\..\gclient\rust\gdbridge\src\gen
+```
+
+仓库根上级的 `comm/genpb.bat` 从 `comm/` 调用 `tools/genpb/genpb.exe`，参数顺序相同；默认只生成 Go，需要 Rust/Godot 时传入第 6、7 项路径。
+
+等价 `go run` 示例：
 
 ```bash
-# Windows
-gen.bat                                             # 全部默认
-gen.bat client                                      # client 模式
-gen.bat server ./proto ./pb ./pb/Pb go ../proto     # 指定工具目录
-
-# Linux/macOS
-./gen.sh
-./gen.sh client
-./gen.sh server ./proto ./pb ./pb/Pb rust /opt/proto-tools ../../gclient/src/gen
+go run -buildvcs=false . --lang rust --flag client \
+  --rust_out  ../../gclient/rust/lib/gnet/src/gen \
+  --godot_out ../../gclient/rust/gdbridge/src/gen
 ```
 
 ## 文件结构
@@ -96,80 +95,39 @@ gen.bat server ./proto ./pb ./pb/Pb go ../proto     # 指定工具目录
 ```
 genpb/
 ├── main.go       # 入口 + 配置
-├── gen_go.go     # Go 代码生成
-├── gen_cs.go     # C# 代码生成
-├── gen_rust.go   # Rust 代码生成
+├── manifest.go   # ProtocolManifest 数据模型 + FileDescriptorSet 解析
+├── gen_go.go     # Go 代码生成（服务端，不变）
+├── gen_rust.go   # Rust/Godot 代码生成（manifest 驱动）
 ├── gen.bat       # Windows 生成脚本
 ├── gen.sh        # Linux/macOS 生成脚本
 ├── CLAUDE.md     # AI 辅助说明
 ├── proto/        # Proto 定义
-└── pb/           # 生成文件（Go/C#）
+└── pb/           # Go 生成文件
 ```
 
 ## 生成内容
 
-### Go
+### Go（服务端，不变）
 
-1. **protoc 生成**：`*.pb.go`（enum、data、cmd、cmd_req、cmd_rsp、cmd_dsp、data_srv、data_fwd 等）
-2. **pbgen 扩展**：
-   - **cmd.ext.go**：
-     - `Package` 结构体：封装消息 + 错误码 + 缓存字节，二进制格式为 `[cmd 2B][errCode 2B][bodyLen 4B][body NB]`
-     - `NewPackage(msg, errs...)` / `Key()` / `Marshal()`
-     - `Unmarshal(key, data)` 全局反序列化入口
-     - `parser`：按 EKey 注册/反序列化消息，全局 `_parser` 在 `init()` 中自动加载
-     - 各消息的 `Key() EKey_T` 与 `Marshal() ([]byte, error)` 方法
-   - **data.pb.vector.go**：Vector 定点数数学扩展（见下方 Vector 定点数）
+1. **protoc 生成**：`*.pb.go`
+2. **cmd.ext.go**：`Package` 结构体、`Unmarshal`、消息 `Key()` / `Marshal()` 扩展
 
-### C#
+### Rust（`--rust_out`）
 
-1. **protoc 生成**：`*.cs`（Data.cs、Enum.cs、Cmd.cs、CmdReq.cs、CmdRsp.cs、CmdDsp.cs 等）
-2. **pbgen 扩展**：
-   - **CmdExt.cs**：`Cmd.EKey` 枚举、`GetMessageType(EKey)`、各消息的 `GetKey()` 扩展方法
-   - **DataVector.cs**：Vector 定点数数学扩展（与 Go 功能一致，见下方 Vector 定点数）
+| 文件 | 说明 |
+|------|------|
+| `pb.rs` | `protoc-gen-prost` 生成的 prost 类型，静态 `include!` 到 gnet |
+| `typed_protocol.rs` | `EKey` 枚举（`#[repr(u16)]`）、`ServerMessage` / `ClientMessage` 枚举、`encode_client_message` / `decode_server_message`、`event_name()` 方法、`COMPILED_FINGERPRINTS`（递归 FNV-1a 指纹）|
+| `protocol_manifest.json` | 协议索引（替代旧 `protocol_meta.json`）：每条 EKey 的方向、kind、event_name、字段 schema、fingerprint 等 |
+| `protocol.desc` | 二进制 `FileDescriptorSet`，供热更 fallback 通道（`prost-reflect`）使用 |
 
-### Rust
+### Godot bridge（`--godot_out`，可选）
 
-1. **cmd_ext.rs**：`EKey` 枚举（`#[repr(u16)]`）及其 `from_u16` / `as_u16`；`ClientMessage` / `ServerMessage` 枚举；`encode_client_message()` / `decode_server_message()`
-2. **protocol.desc**：二进制 `FileDescriptorSet`，包含所有 proto message 定义，供运行时 descriptor 动态解码使用
-3. **protocol_meta.json**：EKey 数值 → `{ ekey, message, event_name }` 的 JSON 映射表，供运行时通用通道查找消息类型
+| 文件 | 说明 |
+|------|------|
+| `godot_bridge_gen.rs` | 数据类 GodotClass（`VectorGd`、`TimeGd` 等）、服务端消息 GodotClass（`RspLoginGd`、`DspMoveGd` 等）、`NetEventGd` 统一事件包装、`server_message_to_event()` dispatch 函数、`hotfix_to_event()` fallback 函数 |
 
 ## Vector 定点数
 
-`data.proto` 中定义：
-
-```protobuf
-message Vector {
-  int64 x = 1;
-  int64 y = 2;
-  int64 z = 3;
-}
-```
-
-Go 与 C# 的扩展均采用**定点数**表示坐标（X 轴为角色面朝方向，左手坐标系）：
-
-- **Scale = 1000**：真实坐标 `0.001` 对应存储值 `1`
-- **常量**：`ZeroVector`、`ForwardVector`（面朝 X 轴）、`OneVector`
-
-### API 分类
-
-| 类别 | 方法 |
-|------|------|
-| **构造/转换** | `NewVector(x,y,z)`（浮点→定点）、`NewVectorInt(x,y,z)`（定点）、`FloatToFixed` / `FixedToFloat`、`ToFloat64` / `Xf` / `Yf` / `Zf` |
-| **字符串** | `StringF()`（真实浮点坐标字符串，格式 `(x.xxx, y.xxx, z.xxx)`） |
-| **拷贝/反转** | `Copy()`、`CopyNewZ(z)`（替换 Z，浮点入参）、`CopyNewZInt(z)`（替换 Z，定点入参）、`CopyTo(dst)`、`Reverse2D()`、`Reverse()` |
-| **加减** | `Add2D` / `Add`、`Sub2D` / `Sub`（2D 版本 Z 保持自身值） |
-| **乘除** | `Mul2D` / `Mul`（整数倍率）、`MulFloat2D` / `MulFloat`（浮点倍率）、`Div2D` / `Div`（整数除，除零返回拷贝）、`DivFloat2D` / `DivFloat` |
-| **点积/叉积** | `Dot2D` / `Dot`（定点数结果 = 真实值 × Scale²）、`Dot2DFloat` / `DotFloat`（真实浮点值）、`Cross`（三维叉积，自动 ÷Scale） |
-| **长度** | `LengthSq2D` / `LengthSq`（定点数域平方）、`LengthSq2DFloat` / `LengthSqFloat`（真实浮点平方）、`Length2D` / `Length`（真实浮点长度） |
-| **距离** | `DistanceSq2D` / `DistanceSq`、`DistanceSq2DFloat` / `DistanceSqFloat`、`Distance2D` / `Distance` |
-| **比较** | `Equal2D` / `Equal`（精确比较）、`ApproximatelyEqual2D` / `ApproximatelyEqual`（容差 1 个定点单位，即真实 0.001） |
-| **归一化** | `Norm2D()`（XOY 单位向量，保留 Z）、`Norm()`（三维单位向量） |
-| **正交** | `Orthogonal2D()`（XOY 平面逆时针旋转 90°） |
-| **角度/弧度** | `ToAngle2D()` / `Angle2D(v)`、`ToRadian2D()` / `Radian2D(v)` |
-| **旋转** | `Rotate2D(rad)`（弧度，绕 Z 轴）、`RotateAngle2D(deg)`（角度） |
-| **插值** | `Lerp(v, t)` / `Lerp2D(v, t)`（t ∈ [0,1]） |
-| **移动** | `MoveTowards(target, maxDist)` / `MoveTowards2D(target, maxDist)`（maxDist 为真实浮点距离） |
-| **随机** | `GenerateRandomVector(min, max)`（定点数范围内均匀随机） |
-| **便捷** | `IsZero()` / `IsZero2D()`、`SetFromFloat64(x,y,z)`（就地修改）、`Min(v)` / `Max(v)` / `Clamp(min,max)`（分量操作） |
-
-Go 与 C# 的 Vector API 一一对应，便于服务端与客户端共用同一套坐标语义。
+`data.proto` 中定义 `Vector { int64 x, y, z }`，Go 侧有完整定点数扩展（Scale = 1000）。
+详见 `gen_go.go` 生成的 `data.pb.vector.go`。

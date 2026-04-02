@@ -1,163 +1,118 @@
 # CLAUDE.md
 
-This file provides guidance for the protobuf code generator.
+This file provides guidance for the protobuf code generator **genpb**.
 
 ## Project Overview
 
-Generates Go and C# code from `.proto` files for game server client-server communication.
+Generates **Go** (server) and **Rust / Godot** (client) code from `.proto` files.  
+**C# generation was removed** (`gen_cs.go` deleted); do not reference `--lang Pb` or `--cs_out`.
+
+Rust output is driven by a **`ProtocolManifest`** built from `FileDescriptorSet` (`protocol.desc`), not regex on `.proto` sources.
 
 ## Commands
 
-### Scripts (recommended)
-
-脚本会调用**已编译的** `genpb.exe`（Windows）或 `genpb`（Linux/macOS），优先使用脚本同目录下的可执行文件。需先编译：`go build -buildvcs=false -o genpb`（或 `genpb.exe`）。
-
-参数顺序：`[flag] [proto_in] [go_out] [cs_out] [lang] [tools_dir]`
-
-| 参数 | 默认值 | 说明 |
-|------|--------|------|
-| flag | server | server \| client（client 不导出 data_srv/data_fwd） |
-| proto_in | ./proto | 输入 proto 目录 |
-| go_out | ./pb | Go 输出目录 |
-| cs_out | ./pb/Pb | C# 输出目录 |
-| lang | all | go \| Pb \| all |
-| tools_dir | ../proto | 存放 protoc、protoc-gen-go 的目录 |
+### Build the tool
 
 ```bash
-# Windows
-genpb.bat                    # 全部默认
-genpb.bat client             # client 模式
-genpb.bat server ./proto ./pb ./pb/Pb go ../proto   # 指定工具目录
-
-# Linux/macOS
-./gen.sh
-./gen.sh client
-./gen.sh server ./proto ./pb ./pb/Pb go /opt/proto-tools
+go build -buildvcs=false -o genpb      # Unix
+go build -buildvcs=false -o genpb.exe  # Windows
 ```
 
-### Direct run
+If the repo has mixed VCS roots, always pass `-buildvcs=false` to `go build` / `go run`.
+
+### Scripts (`gen.bat` / `gen.sh`)
+
+Wrapper scripts match `main.go`. Args: `flag proto_in go_out lang tools_dir [rust_out] [godot_out]`.  
+**No** `--cs_out`, **no** `Pb` language.
+
+Typical Rust + Godot client generation:
 
 ```bash
-# Generate all (Go + C#)
-go run main.go --proto_in ./proto
-
-# Generate Go only
-go run main.go --lang go --proto_in ./proto
-
-# Generate C# only
-go run main.go --lang Pb --proto_in ./proto
+go run -buildvcs=false . --lang rust --flag client \
+  --rust_out  ../../gclient/rust/lib/gnet/src/gen \
+  --godot_out ../../gclient/rust/gdbridge/src/gen
 ```
 
-### Command Line Options
+Go server only:
+
+```bash
+go run -buildvcs=false . --lang go --flag server --go_out ./pb
+```
+
+### Command-line options
 
 | Flag | Default | Description |
 |------|---------|-------------|
-| `--lang` | `all` | Language: `go`, `Pb`, `all` |
+| `--lang` | `all` | `go`, `rust`, or `all` |
 | `--proto_in` | `./proto` | Proto input directory |
 | `--go_out` | `./pb` | Go output directory |
-| `--cs_out` | `./pb/Pb` | C# output directory |
-| `--flag` | `server` | Export flag: `server` (all files), `client` (exclude `data_srv.proto`, `data_fwd.proto`) |
-| `--tools_dir` | `../proto` | 存放 protoc、protoc-gen-go 的目录（空则用默认） |
+| `--rust_out` | _(empty)_ | Rust outputs: `pb.rs`, `typed_protocol.rs`, `protocol_manifest.json`, `protocol.desc` |
+| `--godot_out` | _(empty)_ | Writes `godot_bridge_gen.rs` (optional; use with `--rust_out`) |
+| `--flag` | `server` | `server` (all protos) or `client` (excludes `data_srv.proto`, `data_fwd.proto`) |
+| `--tools_dir` | `../proto` | Directory with `protoc`, `protoc-gen-go`, `protoc-gen-prost` |
 
-## File Structure
+`--lang rust` requires `--rust_out`.
+
+## File structure
 
 ```
 genpb/
-├── main.go      # Entry point + config
-├── gen_go.go    # Go code generation
-├── gen_cs.go    # C# code generation
-├── gen.bat      # Windows 生成脚本
-├── gen.sh       # Linux/macOS 生成脚本
-├── CLAUDE.md    # This file
-├── proto/       # Proto 定义
-└── pb/          # Generated files
+├── main.go       # Entry + config
+├── manifest.go   # ProtocolManifest + descriptor parsing + recursive fingerprints
+├── gen_go.go     # Go generation (unchanged contract for server)
+├── gen_rust.go   # prost + manifest + typed_protocol.rs + optional godot_bridge_gen.rs
+├── gen.bat
+├── gen.sh
+├── CLAUDE.md
+├── proto/
+└── pb/           # Default Go output (local)
 ```
 
-## Generated Files
+## Generated files
 
-| Language | File | Purpose |
-|----------|------|---------|
-| Go | `pb/cmd.pb.go` | Command/Message ID definitions |
-| Go | `pb/cmd.ext.go` | Parser + message helpers |
-| Go | `pb/cmd_req.pb.go` | Request messages |
-| Go | `pb/cmd_rsp.pb.go` | Response messages |
-| Go | `pb/cmd_dsp.pb.go` | Dispatch messages |
-| Go | `pb/enum.pb.go` | Enumeration types |
-| C# | `pb/Cmd.cs` | Command keys + helpers |
+### Go (server)
 
-## Generated Code Features
+| Output | Purpose |
+|--------|---------|
+| `*.pb.go` | Messages / enums from protoc |
+| `cmd.ext.go` | `Package`, `Unmarshal`, per-message `Key()` / `Marshal()` |
 
-### Go (`cmd.ext.go`)
+### Rust (`--rust_out`)
+
+| File | Purpose |
+|------|---------|
+| `pb.rs` | Prost types from `protoc-gen-prost` |
+| `typed_protocol.rs` | `EKey`, `ClientMessage`, `ServerMessage`, encode/decode, `COMPILED_FINGERPRINTS` |
+| `protocol_manifest.json` | Full manifest (replaces legacy `protocol_meta.json`) |
+| `protocol.desc` | Binary `FileDescriptorSet` for `prost-reflect` / hotfix |
+
+### Godot (`--godot_out`)
+
+| File | Purpose |
+|------|---------|
+| `godot_bridge_gen.rs` | `*Gd` classes, `NetEventGd`, `server_message_to_event`, `hotfix_to_event` |
+
+## Go `cmd.ext.go` pattern (reference)
+
 ```go
-// Global parser with auto-init
 var _parser = NewParser()
+func init() { _parser.Load() }
 
-func init() {
-    _parser.Load()
-}
-
-// Package wraps message with error code and cached binary serialization
-// Binary format: [cmd 2B] [errCode 2B] [bodyLen 4B] [body NB]
 type Package struct { ... }
 func NewPackage(msg proto.Message, errs ...EErrorCode_T) *Package
 func (p *Package) Key() EKey_T
 func (p *Package) Marshal() ([]byte, error)
-
 func Unmarshal(key EKey_T, data []byte) proto.Message
-
-// Per-message Key() and Marshal() methods
-func (msg *ReqLogin) Key() EKey_T
-func (msg *ReqLogin) Marshal() ([]byte, error)
 ```
 
-### C# (`Cmd.cs`)
-```csharp
-// Command keys enum
-public enum EKey
-{
-    Login = 1,
-    CreateRole = 2,
-    // ...
-}
+## EKey / proto layout
 
-// Message helper extension
-public static class CmdExtensions
-{
-    public static Cmd.EKey GetKey(this ReqLogin msg);
-}
-```
+Defined in `proto/cmd.proto` (`message EKey { enum T { ... } }`).  
+`manifest.go` reads enum values from the descriptor for `cmd.proto`.  
+Request/response/dispatch messages live in `cmd_req.proto`, `cmd_rsp.proto`, `cmd_dsp.proto`; direction is inferred from file + naming (`Req*` / `Rsp*` / `Dsp*`).
 
-## Message ID Ranges (EKey)
+## Related paths
 
-| Range | Category |
-|-------|----------|
-| 1-9 | Login flow |
-| 10-19 | Heartbeat |
-| 20-29 | Scene management |
-| 40000+ | Server sync/push |
-
-## Proto Naming Conventions
-
-| Proto File | Message Prefix | Enum Mapping                     |
-|------------|---------------|----------------------------------|
-| `cmd_req.proto` | `Req*` | `ReqLogin` → `EKey_ReqLogin`     |
-| `cmd_rsp.proto` | `Rsp*` | `RspLogin` → `EKey_RspLogin`     |
-| `cmd_dsp.proto` | `Dsp*` | `DspLogin` → `EKey_DspLogin` |
-
-### Key Matching Rules
-
-The generator matches enum names to message names **directly** (no prefix stripping):
-
-| Message | Enum in cmd.proto | Match |
-|---------|-------------------|-------|
-| `ReqLogin` | `ReqLogin = 1` | `enumName == msgName` |
-| `RspLogin` | `RspLogin = 2` | `enumName == msgName` |
-| `DspLogin` | `DspLogin = 10000` | `enumName == msgName` |
-
-All three types use the same matching strategy. A message is only registered/extended if its name appears as an enum entry in `cmd.proto`.
-
-## Related Projects
-
-- `E:/tools/proto` - Protobuf source definitions
-- `E:/tools/server` - Game server using generated types
-- `E:/tools/client/sgame` - C# client
+- `gclient/rust/lib/gnet` – consumes `gen/pb.rs` + `gen/typed_protocol.rs`
+- `gclient/rust/gdbridge` – `include!("gen/godot_bridge_gen.rs")`
+- Server Go code – generated under configured `--go_out`

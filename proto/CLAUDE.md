@@ -1,60 +1,50 @@
 # CLAUDE.md
 
-This file provides guidance for the protobuf source definitions.
+This file provides guidance for the protobuf source definitions in this directory.
 
 ## Project Overview
 
-Protocol buffer (protobuf) definitions for a multiplayer game's client-server communication. Proto3 syntax generates both Go and C# code.
+Protocol buffer (protobuf) definitions for client–server communication. **Do not run raw `protoc` for game pipelines** unless you know what you are doing: the supported entry point is **`../` (genpb)**, which generates Go (server) and Rust/Godot (client) and builds **`ProtocolManifest`** from descriptors.
+
+**genpb no longer generates C#**; legacy `protoc --csharp_out` snippets below are not part of the maintained workflow.
 
 ## Tool Versions
 
-- protoc: 3.20.3
-- protoc-gen-go: v1.36.11+
-- protoc-gen-go-grpc: v1.3+
+- protoc: 3.20.x+ (project-tested)
+- protoc-gen-go: v1.36+
+- protoc-gen-prost: install via `cargo install protoc-gen-prost` (Rust client)
 
 ## Proto Files
 
 | File | Purpose | Key Definitions |
 |------|---------|-----------------|
-| `enum.proto` | Enumerations | EErrorCode, EKickType, ERoleType, EEntityType, ESceneType |
-| `cmd.proto` | Command keys | EKey.T enum (message IDs) |
-| `cmd_req.proto` | Client requests | ReqLogin, ReqCreateRole, ReqPing, ReqEnterScene |
-| `cmd_rsp.proto` | Server responses | RspLogin, RspCreateRole, RspPing, RspEnterScene |
-| `cmd_dsp.proto` | Server dispatches | DspLoginFast, DspLoginData, DspKickRole |
-| `data.proto` | Data structures | RoleSummaryData, LoginData, Object, Item, Attr |
-| `data_fwd.proto` | Forward messages | FwdCheckDistance, FwdKick |
-| `data_srv.proto` | Server data | OrderInfo (payment) |
-
-## Message ID Ranges
-
-| Range | Category |
-|-------|----------|
-| 1-9 | Login flow |
-| 10-19 | Heartbeat |
-| 20-29 | Scene management |
-| 40000+ | Server sync/push |
+| `enum.proto` | Enumerations | EErrorCode, EKickType, … |
+| `cmd.proto` | Command keys | `message EKey { enum T { … } }` |
+| `cmd_req.proto` | Client → server | `Req*` messages |
+| `cmd_rsp.proto` | Server → client (RPC 响应) | `Rsp*` messages |
+| `cmd_dsp.proto` | Server push | `Dsp*` messages |
+| `data.proto` | Shared structs | RoleSummaryData, LoginData, Vector, … |
+| `data_fwd.proto` | Forward messages | (server export) |
+| `data_srv.proto` | Server-only data | (server export) |
 
 ## Regenerating Code
 
-```bash
-# Generate Go code
-./gen_proto.sh  # Linux/Mac
-gen_proto.bat   # Windows
+From **`comm/tools/genpb`** (parent of `proto/`):
 
-# Or manually:
-protoc --go_out=. --go_opt=paths=source_relative \
-       --go-grpc_out=. --go-grpc_opt=paths=source_relative \
-       --csharp_out=gen/Pb/ \
-       *.proto
+```bash
+# Server Go
+go run -buildvcs=false . --lang go --flag server --go_out <path/to/server/pb>
+
+# Client Rust + optional Godot bridge
+go run -buildvcs=false . --lang rust --flag client \
+  --rust_out  ../../gclient/rust/lib/gnet/src/gen \
+  --godot_out ../../gclient/rust/gdbridge/src/gen
 ```
 
-## Output Directories
+See **`../README.md`** for full flags and outputs (`pb.rs`, `typed_protocol.rs`, `protocol_manifest.json`, `protocol.desc`, `godot_bridge_gen.rs`).
 
-- `gen/pb/` - Generated Go code (imported by `E:/tools/genpb/`)
-- `gen/cs/` - Generated C# code (imported by `E:/tools/client/sgame/`)
+## Related Paths
 
-## Related Projects
-
-- `E:/tools/genpb` - Generated Go protobuf library
-- `E:/tools/client/sgame` - C# client using generated code
-- `E:/tools/server` - Go server using generated code
+- `../` — genpb tool (`main.go`, `manifest.go`, `gen_rust.go`, …)
+- `../../gclient/rust/lib/gnet` — includes generated `gen/pb.rs` and `gen/typed_protocol.rs`
+- `../../gclient/rust/gdbridge` — includes generated `gen/godot_bridge_gen.rs`
