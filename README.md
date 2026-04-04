@@ -1,7 +1,7 @@
 # genpb
 
 Protocol Buffer 代码生成工具。在 `protoc` 生成的基础代码之上，额外生成消息解析扩展，支持 **Go** 与 **Rust/Godot**。  
-（C# 已废弃，相关代码已移除。）
+
 
 ## 架构概览
 
@@ -66,7 +66,6 @@ go run -buildvcs=false . --lang rust --flag client \
 
 > `--lang rust` 时若未指定 `--rust_out` 会报错退出。  
 > `--godot_out` 可选；不设则跳过 `godot_bridge_gen.rs` 生成。  
-> **C# 已废弃**：不再支持 `--lang Pb`、`--cs_out`。
 
 ### 批处理 / Shell 脚本
 

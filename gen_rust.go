@@ -249,9 +249,9 @@ func writeTypedProtocol(path string, m *ProtocolManifest) error {
 	buf.WriteString("#[derive(Clone, Debug)]\n")
 	buf.WriteString("pub enum ServerMessage {\n")
 	for _, e := range serverMsgs {
-		// variant name uses toUpperCamelCase; inner type uses exact proto message name
-		buf.WriteString(fmt.Sprintf("    %s(crate::pb::%s),\n",
-			toUpperCamelCase(e.MessageName), e.MessageName))
+		// variant name and pb type: prost Rust structs match toUpperCamelCase(proto MessageName)
+		rustTy := toUpperCamelCase(e.MessageName)
+		buf.WriteString(fmt.Sprintf("    %s(crate::pb::%s),\n", rustTy, rustTy))
 	}
 	buf.WriteString("}\n\n")
 
@@ -277,8 +277,8 @@ func writeTypedProtocol(path string, m *ProtocolManifest) error {
 	buf.WriteString("#[derive(Clone, Debug)]\n")
 	buf.WriteString("pub enum ClientMessage {\n")
 	for _, e := range clientMsgs {
-		buf.WriteString(fmt.Sprintf("    %s(crate::pb::%s),\n",
-			toUpperCamelCase(e.MessageName), e.MessageName))
+		rustTy := toUpperCamelCase(e.MessageName)
+		buf.WriteString(fmt.Sprintf("    %s(crate::pb::%s),\n", rustTy, rustTy))
 	}
 	buf.WriteString("}\n\n")
 
@@ -296,11 +296,15 @@ func writeTypedProtocol(path string, m *ProtocolManifest) error {
 	buf.WriteString("pub fn decode_server_message(key: EKey, data: &[u8]) -> Result<ServerMessage, prost::DecodeError> {\n")
 	buf.WriteString("    match key {\n")
 	for _, e := range serverMsgs {
+		rustTy := toUpperCamelCase(e.MessageName)
 		buf.WriteString(fmt.Sprintf("        EKey::%s => Ok(ServerMessage::%s(crate::pb::%s::decode(data)?)),\n",
-			toUpperCamelCase(e.EKeyName), toUpperCamelCase(e.MessageName), e.MessageName))
+			toUpperCamelCase(e.EKeyName), rustTy, rustTy))
 	}
-	// client keys fall through to error
-	buf.WriteString("        _ => Err(prost::DecodeError::new(format!(\"no server decoder for key {:?}\", key))),\n")
+	// client keys fall through to error (DecodeError::new is deprecated but no stable user-facing replacement yet)
+	buf.WriteString("        _ => Err({\n")
+	buf.WriteString("            #[allow(deprecated)]\n")
+	buf.WriteString("            prost::DecodeError::new(format!(\"no server decoder for key {:?}\", key))\n")
+	buf.WriteString("        }),\n")
 	buf.WriteString("    }\n")
 	buf.WriteString("}\n\n")
 
@@ -389,17 +393,17 @@ func collectRequiredDataTypes(m *ProtocolManifest) []DataTypeEntry {
 }
 
 func writeGodotDataClass(buf *bytes.Buffer, dt DataTypeEntry) {
-	gName := dt.MessageName + "Gd"
+	gName := toUpperCamelCase(dt.MessageName) + "Gd"
 	writeGodotClassStruct(buf, gName, dt.Fields)
 	writeGodotClassInit(buf, gName, dt.Fields)
-	writeFromPb(buf, gName, dt.MessageName, dt.Fields, false)
+	writeFromPb(buf, gName, dt.MessageName, dt.Fields)
 }
 
 func writeGodotMsgClass(buf *bytes.Buffer, e ManifestEntry) {
 	gName := toUpperCamelCase(e.MessageName) + "Gd"
 	writeGodotClassStruct(buf, gName, e.Fields)
 	writeGodotClassInit(buf, gName, e.Fields)
-	writeFromPb(buf, gName, e.MessageName, e.Fields, true)
+	writeFromPb(buf, gName, e.MessageName, e.Fields)
 }
 
 func writeGodotClassStruct(buf *bytes.Buffer, gName string, fields []FieldSchema) {
@@ -427,18 +431,15 @@ func writeGodotClassInit(buf *bytes.Buffer, gName string, fields []FieldSchema) 
 	buf.WriteString("}\n\n")
 }
 
-func writeFromPb(buf *bytes.Buffer, gName string, protoName string, fields []FieldSchema, useExactProtoName bool) {
-	pbRef := protoName
-	if useExactProtoName {
-		pbRef = protoName // use exact proto message name for pb:: reference
-	}
+func writeFromPb(buf *bytes.Buffer, gName string, protoName string, fields []FieldSchema) {
+	pbRef := toUpperCamelCase(protoName)
 	buf.WriteString(fmt.Sprintf("impl %s {\n", gName))
 	buf.WriteString(fmt.Sprintf("    pub fn from_pb(msg: &gnet::pb::%s) -> Gd<Self> {\n", pbRef))
 	// pre-compute repeated/message fields
 	for _, f := range fields {
 		if f.Repeated && strings.HasPrefix(f.TypeName, "m.") {
 			innerName := strings.TrimPrefix(f.TypeName, "m.")
-			innerGd := innerName + "Gd"
+			innerGd := toUpperCamelCase(innerName) + "Gd"
 			buf.WriteString(fmt.Sprintf("        let mut _%s: Array<Gd<%s>> = Array::new();\n", f.Name, innerGd))
 			buf.WriteString(fmt.Sprintf("        for item in &msg.%s { _%s.push(&%s::from_pb(item)); }\n", f.Name, f.Name, innerGd))
 		}
@@ -541,13 +542,13 @@ func godotFieldType(typeName string, repeated bool) string {
 	if repeated {
 		if strings.HasPrefix(typeName, "m.") {
 			msgName := strings.TrimPrefix(typeName, "m.")
-			return fmt.Sprintf("Array<Gd<%sGd>>", msgName)
+			return fmt.Sprintf("Array<Gd<%sGd>>", toUpperCamelCase(msgName))
 		}
 		return fmt.Sprintf("Array<%s>", godotBaseType(typeName))
 	}
 	if strings.HasPrefix(typeName, "m.") {
 		msgName := strings.TrimPrefix(typeName, "m.")
-		return fmt.Sprintf("Option<Gd<%sGd>>", msgName)
+		return fmt.Sprintf("Option<Gd<%sGd>>", toUpperCamelCase(msgName))
 	}
 	return godotBaseType(typeName)
 }
@@ -618,7 +619,7 @@ func godotFieldInit(f FieldSchema) string {
 	default:
 		if strings.HasPrefix(f.TypeName, "m.") {
 			msgName := strings.TrimPrefix(f.TypeName, "m.")
-			return fmt.Sprintf("msg.%s.as_ref().map(|inner| %sGd::from_pb(inner))", name, msgName)
+			return fmt.Sprintf("msg.%s.as_ref().map(|inner| %sGd::from_pb(inner))", name, toUpperCamelCase(msgName))
 		}
 		// scalar or enum: direct copy (prost stores enums as i32)
 		return fmt.Sprintf("msg.%s", name)
